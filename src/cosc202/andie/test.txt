@@ -1,11 +1,4 @@
-
-Sharpen filter
-Gaussian blur filter
-Median filter
-
-
-Brightness adjustment
-Contrast adjustment
+Part one requirements: Easiest to hardest
 
 
 Image resize
@@ -13,8 +6,17 @@ Image rotations: 90◦, left; 90◦, right; 180◦
 Image flip: Horizontal; Vertical
 
 
+Brightness adjustment
+Contrast adjustment
+
+
 Image export
 Multilingual support
+
+
+Sharpen filter
+Gaussian blur filter
+Median filter
 
 
 Exception handling
