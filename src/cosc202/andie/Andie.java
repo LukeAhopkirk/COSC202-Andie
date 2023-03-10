@@ -1,10 +1,10 @@
 package cosc202.andie;
 
-sup
-
 import java.awt.*;
 import javax.swing.*;
 import javax.imageio.*;
+
+// Ricahrd
 
 /**
  * <p>
