@@ -1,1 +1,21 @@
-is this working?
+
+Sharpen filter
+Gaussian blur filter
+Median filter
+
+
+Brightness adjustment
+Contrast adjustment
+
+
+Image resize
+Image rotations: 90◦, left; 90◦, right; 180◦
+Image flip: Horizontal; Vertical
+
+
+Image export
+Multilingual support
+
+
+Exception handling
+Other error avoidance/prevention
