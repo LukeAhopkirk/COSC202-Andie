@@ -37,6 +37,7 @@ public class FilterActions {
         actions.add(new MeanFilterAction("Mean filter", null, "Apply a mean filter", Integer.valueOf(KeyEvent.VK_M)));
         actions.add(new SoftBlurAction("Soft blur", null, "Apply a soft blur",Integer.valueOf(KeyEvent.VK_B)));
         // adds an action to the UI list of filters
+        actions.add(new SharpenAction("Sharpen", null, "Apply a sharpen filter",Integer.valueOf(KeyEvent.VK_V)));
 
 
     }
@@ -131,4 +132,18 @@ public class FilterActions {
         target.getParent().revalidate();
         }
         }
+        
+        //Nested class within filter acttions for Sharpen
+        public class SharpenAction extends ImageAction {
+            SharpenAction(String name, ImageIcon icon,
+            String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+            }
+            public void actionPerformed(ActionEvent e) {
+            // Create and apply the filter
+            target.getImage().apply(new Sharpen());
+            target.repaint();
+            target.getParent().revalidate();
+            }
+            }
 }
