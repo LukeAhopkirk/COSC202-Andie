@@ -6,7 +6,6 @@ import javax.imageio.*;
 
 // Ricahrd
 // jasper
-//Luke
 /**
  * <p>
  * Main class for A Non-Destructive Image Editor (ANDIE).
