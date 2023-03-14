@@ -36,9 +36,9 @@ public class FilterActions {
         actions = new ArrayList<Action>();
         actions.add(new MeanFilterAction("Mean filter", null, "Apply a mean filter", Integer.valueOf(KeyEvent.VK_M)));
         actions.add(new SoftBlurAction("Soft blur", null, "Apply a soft blur",Integer.valueOf(KeyEvent.VK_B)));
-        // adds an action to the UI list of filters
+        // adds an action to the UI list of filters for SoftBlur
         actions.add(new SharpenAction("Sharpen", null, "Apply a sharpen filter",Integer.valueOf(KeyEvent.VK_V)));
-
+        // adds an action to the UI list of filters for Sharpen
 
     }
 
