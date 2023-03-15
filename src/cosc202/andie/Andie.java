@@ -73,6 +73,12 @@ public class Andie {
         EditActions editActions = new EditActions();
         menuBar.add(editActions.createMenu());
 
+        //------------------------------------------------
+        // Adjust image tab for rotate, resize and flip
+        AdjustImageT adjustActions = new AdjustImageT();
+        menuBar.add(adjustActions.createMenu());
+        //------------------------------------------------
+
         // View actions control how the image is displayed, but do not alter its actual content
         ViewActions viewActions = new ViewActions();
         menuBar.add(viewActions.createMenu());

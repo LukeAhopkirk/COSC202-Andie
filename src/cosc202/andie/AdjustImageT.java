@@ -4,6 +4,8 @@ import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+// Added adjust image tab - WORKING
+
 //Adjust image tab for resize, flip and rotate
 public class AdjustImageT {
     // Different options under the tab
@@ -12,7 +14,8 @@ public class AdjustImageT {
     public AdjustImageT() {
         actions = new ArrayList<Action>();
 
-
+        actions.add(new ResizeIAction("Resize (+50%)", null, "Increase image by 50%", Integer.valueOf(KeyEvent.VK_M)));
+        actions.add(new ResizeDAction("Resize (-50%)", null, "Decrease image by 50%", Integer.valueOf(KeyEvent.VK_M)));
         // Template for adding new action
         // actions.add(new MeanFilterAction("Mean filter", null, "Apply a mean filter", Integer.valueOf(KeyEvent.VK_M)));
         
@@ -30,10 +33,10 @@ public class AdjustImageT {
         return fileMenu;
     }
 
-    //Nested class for resizing action
-    public class ResizeAction extends ImageAction {
+    //Nested class for resizing increase action
+    public class ResizeIAction extends ImageAction {
         // don't really know what this does atm
-        ResizeAction(String name, ImageIcon icon,
+        ResizeIAction(String name, ImageIcon icon,
         String desc, Integer mnemonic) {
         super(name, icon, desc, mnemonic);
         }
@@ -42,9 +45,27 @@ public class AdjustImageT {
         public void actionPerformed(ActionEvent e) {
         // Create and apply the filter
         // idk why this is wrong yet might be problem with editable image
-        target.getImage().apply(new Resize());
+        target.getImage().apply(new ResizeI());
         target.repaint();
         target.getParent().revalidate();
         }
+    }
+
+    //Nested class for resizing increase action
+    public class ResizeDAction extends ImageAction {
+        // don't really know what this does atm
+        ResizeDAction(String name, ImageIcon icon,
+        String desc, Integer mnemonic) {
+        super(name, icon, desc, mnemonic);
         }
+
+        //Calls the resize class
+        public void actionPerformed(ActionEvent e) {
+        // Create and apply the filter
+        // idk why this is wrong yet might be problem with editable image
+        target.getImage().apply(new ResizeD());
+        target.repaint();
+        target.getParent().revalidate();
+        }
+    }
 }

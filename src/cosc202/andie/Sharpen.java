@@ -22,8 +22,8 @@ public class Sharpen implements ImageOperation, java.io.Serializable{
     
         // Applying stuff idk
         BufferedImage output = new BufferedImage(input.getColorModel(),
-        input.copyData(null),
-        input.isAlphaPremultiplied(), null);
+            input.copyData(null),
+            input.isAlphaPremultiplied(), null);
         convOp.filter(input, output);
 
         return output;
