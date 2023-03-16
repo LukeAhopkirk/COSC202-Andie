@@ -1,12 +1,12 @@
-Part one requirements: Easiest to hardest
+Part one requirements:
 
 
-Image resize
+COMPLETED - Image resize
 Image rotations: 90◦, left; 90◦, right; 180◦
 Image flip: Horizontal; Vertical
 
 
-Brightness adjustment
+Brightness adjustment - Working on now (Richard)
 Contrast adjustment
 
 
@@ -14,7 +14,7 @@ Image export
 Multilingual support
 
 
-Sharpen filter
+COMPLETED - Sharpen filter
 Gaussian blur filter
 Median filter
 
