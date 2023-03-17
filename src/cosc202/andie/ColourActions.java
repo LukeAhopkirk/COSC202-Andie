@@ -35,6 +35,8 @@ public class ColourActions {
     public ColourActions() {
         actions = new ArrayList<Action>();
         actions.add(new ConvertToGreyAction("Greyscale", null, "Convert to greyscale", Integer.valueOf(KeyEvent.VK_G)));
+        actions.add(new BrightnessIAction("Brightness (+25%)", null, "Increase Brightness", Integer.valueOf(KeyEvent.VK_G)));
+        actions.add(new BrightnessDAction("Brightness (-25%)", null, "Decrease Brightness", Integer.valueOf(KeyEvent.VK_G)));
     }
 
     /**
@@ -91,6 +93,34 @@ public class ColourActions {
          */
         public void actionPerformed(ActionEvent e) {
             target.getImage().apply(new ConvertToGrey());
+            target.repaint();
+            target.getParent().revalidate();
+        }
+
+    }
+
+    public class BrightnessIAction extends ImageAction {
+
+        BrightnessIAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            target.getImage().apply(new BrightnessI());
+            target.repaint();
+            target.getParent().revalidate();
+        }
+
+    }
+
+    public class BrightnessDAction extends ImageAction {
+
+        BrightnessDAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            target.getImage().apply(new BrightnessD());
             target.repaint();
             target.getParent().revalidate();
         }
