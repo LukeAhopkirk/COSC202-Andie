@@ -13,9 +13,12 @@ public class AdjustImageT {
 
     public AdjustImageT() {
         actions = new ArrayList<Action>();
-
+        //Resize
         actions.add(new ResizeIAction("Resize (+50%)", null, "Increase image by 50%", Integer.valueOf(KeyEvent.VK_M)));
         actions.add(new ResizeDAction("Resize (-50%)", null, "Decrease image by 50%", Integer.valueOf(KeyEvent.VK_M)));
+        //Flip
+        actions.add(new FlipVAction("Flip (Vertial)", null, "Flip image vertically", Integer.valueOf(KeyEvent.VK_M)));
+        actions.add(new FlipHAction("Flip (Horizontal)", null, "Flip image horizontally", Integer.valueOf(KeyEvent.VK_M)));
         // Template for adding new action
         // actions.add(new MeanFilterAction("Mean filter", null, "Apply a mean filter", Integer.valueOf(KeyEvent.VK_M)));
         
@@ -35,7 +38,6 @@ public class AdjustImageT {
 
     //Nested class for resizing increase action
     public class ResizeIAction extends ImageAction {
-        // don't really know what this does atm
         ResizeIAction(String name, ImageIcon icon,
         String desc, Integer mnemonic) {
         super(name, icon, desc, mnemonic);
@@ -44,16 +46,14 @@ public class AdjustImageT {
         //Calls the resize class
         public void actionPerformed(ActionEvent e) {
         // Create and apply the filter
-        // idk why this is wrong yet might be problem with editable image
         target.getImage().apply(new ResizeI());
         target.repaint();
         target.getParent().revalidate();
         }
     }
 
-    //Nested class for resizing increase action
+    //Nested class for resizing decrease action
     public class ResizeDAction extends ImageAction {
-        // don't really know what this does atm
         ResizeDAction(String name, ImageIcon icon,
         String desc, Integer mnemonic) {
         super(name, icon, desc, mnemonic);
@@ -61,9 +61,39 @@ public class AdjustImageT {
 
         //Calls the resize class
         public void actionPerformed(ActionEvent e) {
-        // Create and apply the filter
-        // idk why this is wrong yet might be problem with editable image
         target.getImage().apply(new ResizeD());
+        target.repaint();
+        target.getParent().revalidate();
+        }
+    }
+
+    //Nested class for flipping vertically action
+    public class FlipVAction extends ImageAction {
+
+        FlipVAction(String name, ImageIcon icon,
+        String desc, Integer mnemonic) {
+        super(name, icon, desc, mnemonic);
+        }
+
+        public void actionPerformed(ActionEvent e) {
+
+        target.getImage().apply(new FlipV());
+        target.repaint();
+        target.getParent().revalidate();
+        }
+    }
+
+    //Nested class for flipping horizontally action
+    public class FlipHAction extends ImageAction {
+
+        FlipHAction(String name, ImageIcon icon,
+        String desc, Integer mnemonic) {
+        super(name, icon, desc, mnemonic);
+        }
+
+        public void actionPerformed(ActionEvent e) {
+
+        target.getImage().apply(new FlipH());
         target.repaint();
         target.getParent().revalidate();
         }
