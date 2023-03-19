@@ -1,15 +1,15 @@
 Part one requirements:
 
 COMPLETED - Image resize
-WORKING ON (Richard) Image rotations: 90◦, left; 90◦, right; 180◦
+Image rotations: 90◦, left; 90◦, right; 180◦
 COMPLETED - Image flip: Horizontal; Vertical
 
 
 COMPLETED - Brightness adjustment
-Contrast adjustment
+WORKING ON (Richard) - Contrast adjustment
 
 
-Image export
+COMPLETED - Image export
 Multilingual support
 
 

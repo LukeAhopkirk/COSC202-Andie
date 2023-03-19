@@ -191,6 +191,21 @@ class EditableImage {
         fileOut.close();
     }
 
+    public void exportS() throws Exception {
+        if (this.opsFilename == null) {
+            this.opsFilename = this.imageFilename + ".ops";
+        }
+        // Write image file based on file extension
+        String extension = imageFilename.substring(1+imageFilename.lastIndexOf(".")).toLowerCase();
+        ImageIO.write(current, extension, new File(imageFilename));
+    }
+
+    public void export(String fileName) throws Exception{
+        imageFilename = fileName + ".png";
+
+        exportS();
+    }
+
 
     /**
      * <p>
