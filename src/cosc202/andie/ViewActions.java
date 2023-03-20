@@ -27,7 +27,7 @@ public class ViewActions {
      * A list of actions for the View menu.
      */
     protected ArrayList<Action> actions;
-
+    ResourceBundle bundle = ResourceBundle.getBundle("MessageBundle");
     /**
      * <p>
      * Create a set of View menu actions.
@@ -35,9 +35,9 @@ public class ViewActions {
      */
     public ViewActions() {
         actions = new ArrayList<Action>();
-        actions.add(new ZoomInAction("Zoom In", null, "Zoom In", Integer.valueOf(KeyEvent.VK_PLUS)));
-        actions.add(new ZoomOutAction("Zoom Out", null, "Zoom Out", Integer.valueOf(KeyEvent.VK_MINUS)));
-        actions.add(new ZoomFullAction("Zoom Full", null, "Zoom Full", Integer.valueOf(KeyEvent.VK_1)));
+        actions.add(new ZoomInAction(bundle.getString("ZoomI"), null, "Zoom In", Integer.valueOf(KeyEvent.VK_PLUS)));
+        actions.add(new ZoomOutAction(bundle.getString("ZoomO"), null, "Zoom Out", Integer.valueOf(KeyEvent.VK_MINUS)));
+        actions.add(new ZoomFullAction(bundle.getString("ZoomF"), null, "Zoom Full", Integer.valueOf(KeyEvent.VK_1)));
     }
 
     /**
@@ -48,7 +48,7 @@ public class ViewActions {
      * @return The view menu UI element.
      */
     public JMenu createMenu() {
-        JMenu viewMenu = new JMenu("View");
+        JMenu viewMenu = new JMenu(bundle.getString("View"));
 
         for (Action action: actions) {
             viewMenu.add(new JMenuItem(action));

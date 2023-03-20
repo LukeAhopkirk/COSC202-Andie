@@ -26,6 +26,7 @@ public class ColourActions {
     
     /** A list of actions for the Colour menu. */
     protected ArrayList<Action> actions;
+    ResourceBundle bundle = ResourceBundle.getBundle("MessageBundle");
 
     /**
      * <p>
@@ -34,9 +35,9 @@ public class ColourActions {
      */
     public ColourActions() {
         actions = new ArrayList<Action>();
-        actions.add(new ConvertToGreyAction("Greyscale", null, "Convert to greyscale", Integer.valueOf(KeyEvent.VK_G)));
-        actions.add(new BrightnessIAction("Brightness (+25%)", null, "Increase Brightness", Integer.valueOf(KeyEvent.VK_G)));
-        actions.add(new BrightnessDAction("Brightness (-25%)", null, "Decrease Brightness", Integer.valueOf(KeyEvent.VK_G)));
+        actions.add(new ConvertToGreyAction(bundle.getString("Greyscale"), null, "Convert to greyscale", Integer.valueOf(KeyEvent.VK_G)));
+        actions.add(new BrightnessIAction(bundle.getString("BrightnessPlus")+"(+25%)", null, "Increase Brightness", Integer.valueOf(KeyEvent.VK_G)));
+        actions.add(new BrightnessDAction(bundle.getString("BrightnessMinus")+"(-25%)", null, "Decrease Brightness", Integer.valueOf(KeyEvent.VK_G)));
     }
 
     /**
@@ -47,7 +48,7 @@ public class ColourActions {
      * @return The colour menu UI element.
      */
     public JMenu createMenu() {
-        JMenu fileMenu = new JMenu("Colour");
+        JMenu fileMenu = new JMenu(bundle.getString("Colour"));
 
         for(Action action: actions) {
             fileMenu.add(new JMenuItem(action));

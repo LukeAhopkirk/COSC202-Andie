@@ -10,7 +10,7 @@ WORKING ON (Richard) - Contrast adjustment
 
 
 COMPLETED - Image export
-Multilingual support
+Multilingual support - WORKING ON (Aidan)
 
 
 COMPLETED (Jasper) - Sharpen filter

@@ -1,11 +1,15 @@
 package cosc202.andie;
 
 import java.awt.*;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import java.util.prefs.Preferences;
+
 import javax.swing.*;
 import javax.imageio.*;
 
-// Ricahrd
-// jasper
+
+
 /**
  * <p>
  * Main class for A Non-Destructive Image Editor (ANDIE).
@@ -48,7 +52,7 @@ public class Andie {
      * 
      * @throws Exception if something goes wrong.
      */
-    private static void createAndShowGUI() throws Exception {
+     private static void createAndShowGUI() throws Exception {
         // Set up the main GUI frame
         JFrame frame = new JFrame("ANDIE");
 
@@ -90,6 +94,9 @@ public class Andie {
         // Actions that affect the representation of colour in the image
         ColourActions colourActions = new ColourActions();
         menuBar.add(colourActions.createMenu());
+
+        LanguageActions languageActions = new LanguageActions();
+        menuBar.add(languageActions.createMenu());
         
         frame.setJMenuBar(menuBar);
         frame.pack();
@@ -110,7 +117,21 @@ public class Andie {
      * @throws Exception If something goes awry
      * @see #createAndShowGUI()
      */
+    
+     
     public static void main(String[] args) throws Exception {
+
+
+        ResourceBundle.clearCache();
+        Preferences prefs = Preferences.userNodeForPackage(Andie.class);
+
+        Locale.setDefault(new Locale(prefs.get("language", "en"), 
+                prefs.get("country", "NZ")));
+        
+                ResourceBundle.clearCache();
+            prefs.remove("language");
+            prefs.remove("country");
+
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 try {

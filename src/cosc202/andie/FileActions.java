@@ -1,6 +1,7 @@
 package cosc202.andie;
 
 import java.util.*;
+import java.util.prefs.Preferences;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -26,19 +27,25 @@ public class FileActions {
     
     /** A list of actions for the File menu. */
     protected ArrayList<Action> actions;
-
+    ResourceBundle bundle = ResourceBundle.getBundle("MessageBundle");
+    
+    
     /**
      * <p>
      * Create a set of File menu actions.
      * </p>
      */
     public FileActions() {
+
         actions = new ArrayList<Action>();
-        actions.add(new FileOpenAction("Open", null, "Open a file", Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new FileSaveAction("Save", null, "Save the file", Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(new FileSaveAsAction("Save As", null, "Save a copy", Integer.valueOf(KeyEvent.VK_A)));
-        actions.add(new ExportAction("Export", null, "Export current image", Integer.valueOf(KeyEvent.VK_A)));
-        actions.add(new FileExitAction("Exit", null, "Exit the program", Integer.valueOf(0)));
+        actions.add(new FileOpenAction(bundle.getString("Open"), null, "Open a file", Integer.valueOf(KeyEvent.VK_O)));
+        actions.add(new FileSaveAction(bundle.getString("Save"), null, "Save the file", Integer.valueOf(KeyEvent.VK_S)));
+        actions.add(new FileSaveAsAction(bundle.getString("SaveAs"), null, "Save a copy", Integer.valueOf(KeyEvent.VK_A)));
+        actions.add(new ExportAction(bundle.getString("Export"), null, "Export current image", Integer.valueOf(KeyEvent.VK_A)));
+        actions.add(new FileExitAction(bundle.getString("Exit"), null, "Exit the program", Integer.valueOf(0)));
+
+        
+        
     }
 
     /**
@@ -49,10 +56,12 @@ public class FileActions {
      * @return The File menu UI element.
      */
     public JMenu createMenu() {
-        JMenu fileMenu = new JMenu("File");
-
-        for(Action action: actions) {
-            fileMenu.add(new JMenuItem(action));
+        
+        
+        JMenu fileMenu = new JMenu(bundle.getString("File"));
+        
+       for(Action action: actions) {
+           fileMenu.add(new JMenuItem(action));
         }
 
         return fileMenu;
