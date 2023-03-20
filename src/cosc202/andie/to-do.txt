@@ -1,5 +1,5 @@
 Part one requirements:
-
+laptop
 COMPLETED (Richard) - Image resize
 Image rotations: 90◦, left; 90◦, right; 180◦
 COMPLETED (Richard) - Image flip: Horizontal; Vertical
