@@ -13,9 +13,9 @@ COMPLETED - Image export
 Multilingual support
 
 
-COMPLETED - Sharpen filter
-Gaussian blur filter
-Median filter
+COMPLETED (Jasper) - Sharpen filter
+COMPLETED (Jasper) - Gaussian blur filter
+COMPLETED maybe? (Jasper) - Median filter
 
 
 Exception handling
