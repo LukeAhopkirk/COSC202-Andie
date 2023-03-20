@@ -40,6 +40,11 @@ public class FilterActions {
         actions.add(new SharpenAction("Sharpen", null, "Apply a sharpen filter",Integer.valueOf(KeyEvent.VK_V)));
         // adds an action to the UI list of filters for Sharpen
 
+        actions.add(new GaussianAction("Gaussian blur", null, "Apply a Gaussian Blur filter",Integer.valueOf(KeyEvent.VK_Y)));
+        // adds an action to the UI list of filters for Gaussian blur
+    
+        actions.add(new MedianAction("Median Filter", null, "Apply a Median filter",Integer.valueOf(KeyEvent.VK_L)));
+        // adds an action to the UI list of filters for Median Filter
     }
 
     /**
@@ -119,6 +124,68 @@ public class FilterActions {
 
     }
 
+    //Nested class within filter acttions for Gaussian Filter
+    public class GaussianAction extends ImageAction {
+        
+        //Calling constructor
+        GaussianAction(String name, ImageIcon icon,
+        String desc, Integer mnemonic) {
+        super(name, icon, desc, mnemonic);
+        }
+
+        public void actionPerformed(ActionEvent e) {
+        int radius = 1;
+        
+        // Pop-up dialog box to ask for the radius value.
+        SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 10, 1);
+        JSpinner radiusSpinner = new JSpinner(radiusModel);
+        int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter filter radius", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+        // Check the return value from the dialog box.
+        if (option == JOptionPane.CANCEL_OPTION) {
+            return;
+        } else if (option == JOptionPane.OK_OPTION) {
+            radius = radiusModel.getNumber().intValue();
+        }
+
+        // Create and apply the filter
+        target.getImage().apply(new GaussianB(radius,radius/3)); //TRY MAKE USER ENTER A NUMBER HERE
+        target.repaint();
+        target.getParent().revalidate();
+        }
+ }  
+
+ //Nested class within filter acttions for Median Filter
+ public class MedianAction extends ImageAction {
+        
+    //Calling constructor
+    MedianAction(String name, ImageIcon icon,
+    String desc, Integer mnemonic) {
+    super(name, icon, desc, mnemonic);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+    int kernel = 1;
+    
+    // Pop-up dialog box to ask for the radius value.
+    SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 10, 1);
+    JSpinner radiusSpinner = new JSpinner(radiusModel);
+    int option = JOptionPane.showOptionDialog(null, radiusSpinner, "Enter number of kernels", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+    // Check the return value from the dialog box.
+    if (option == JOptionPane.CANCEL_OPTION) {
+        return;
+    } else if (option == JOptionPane.OK_OPTION) {
+        kernel = radiusModel.getNumber().intValue();
+    }
+
+    // Create and apply the filter
+    target.getImage().apply(new MedianFilter(kernel)); //TRY MAKE USER ENTER A NUMBER HERE
+    target.repaint();
+    target.getParent().revalidate();
+    }
+}  
+
     // Nested class within filter actions for soft blur
     public class SoftBlurAction extends ImageAction {
         SoftBlurAction(String name, ImageIcon icon,
@@ -145,5 +212,5 @@ public class FilterActions {
             target.repaint();
             target.getParent().revalidate();
             }
-            }
+            }      
 }

@@ -2,14 +2,13 @@ package cosc202.andie;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
-import java.awt.image.Raster;
+//import java.awt.image.Raster;
 import java.util.Arrays;
 
 public class MedianFilter implements ImageOperation, java.io.Serializable {
 
     private int kernelSize;
 
-    //Constructor
     public MedianFilter(int kernelSize) {
         this.kernelSize = kernelSize;
     }
@@ -38,11 +37,21 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
                             int xx = x + wx;
                             int yy = y + wy;
 
-                            if (xx >= 0 && xx < width && yy >= 0 && yy < height) {
-                                int windowPixelIndex = yy * width * numBands + xx * numBands + b;
-                                window[windowIndex] = pixels[windowPixelIndex];
-                                windowIndex++;
+                            if (xx < 0) {
+                                xx = -xx;
+                            } else if (xx >= width) {
+                                xx = width - (xx - width + 2);
                             }
+
+                            if (yy < 0) {
+                                yy = -yy;
+                            } else if (yy >= height) {
+                                yy = height - (yy - height + 2);
+                            }
+
+                            int windowPixelIndex = yy * width * numBands + xx * numBands + b;
+                            window[windowIndex] = pixels[windowPixelIndex];
+                            windowIndex++;
                         }
                     }
 
