@@ -36,8 +36,8 @@ public class ColourActions {
     public ColourActions() {
         actions = new ArrayList<Action>();
         actions.add(new ConvertToGreyAction(bundle.getString("Greyscale"), null, "Convert to greyscale", Integer.valueOf(KeyEvent.VK_G)));
-        actions.add(new BrightnessIAction(bundle.getString("BrightnessPlus")+"(+25%)", null, "Increase Brightness", Integer.valueOf(KeyEvent.VK_G)));
-        actions.add(new BrightnessDAction(bundle.getString("BrightnessMinus")+"(-25%)", null, "Decrease Brightness", Integer.valueOf(KeyEvent.VK_G)));
+        actions.add(new BrightnessAction("Brightness", null, "Apply brightness", Integer.valueOf(KeyEvent.VK_B)));
+        actions.add(new ContrastAction("Contrast", null, "Apply contrast", Integer.valueOf(KeyEvent.VK_C)));
     }
 
     /**
@@ -100,28 +100,56 @@ public class ColourActions {
 
     }
 
-    public class BrightnessIAction extends ImageAction {
+    public class BrightnessAction extends ImageAction {
 
-        BrightnessIAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+        BrightnessAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
         }
 
         public void actionPerformed(ActionEvent e) {
-            target.getImage().apply(new BrightnessI());
+            int brightness = 1;
+
+            // Pop-up dialog box to ask for the brightness value.
+            SpinnerNumberModel brightnessModel = new SpinnerNumberModel(1, -100, 100, 1);
+            JSpinner brightnessSpinner = new JSpinner(brightnessModel);
+            int option = JOptionPane.showOptionDialog(null, brightnessSpinner, "Enter brightness value", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+            // Check the return value from the dialog box.
+            if (option == JOptionPane.CANCEL_OPTION) {
+                return;
+            } else if (option == JOptionPane.OK_OPTION) {
+                brightness = brightnessModel.getNumber().intValue();
+            }
+
+            target.getImage().apply(new Brightness(brightness));
             target.repaint();
             target.getParent().revalidate();
         }
 
     }
 
-    public class BrightnessDAction extends ImageAction {
+    public class ContrastAction extends ImageAction {
 
-        BrightnessDAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+        ContrastAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
         }
 
         public void actionPerformed(ActionEvent e) {
-            target.getImage().apply(new BrightnessD());
+            int contrast = 1;
+
+            // Pop-up dialog box to ask for the contrast value.
+            SpinnerNumberModel contrastModel = new SpinnerNumberModel(1, -100, 100, 1);
+            JSpinner contrastSpinner = new JSpinner(contrastModel);
+            int option = JOptionPane.showOptionDialog(null, contrastSpinner, "Enter contrast value", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+            // Check the return value from the dialog box.
+            if (option == JOptionPane.CANCEL_OPTION) {
+                return;
+            } else if (option == JOptionPane.OK_OPTION) {
+                contrast = contrastModel.getNumber().intValue();
+            }
+
+            target.getImage().apply(new Contrast(contrast));
             target.repaint();
             target.getParent().revalidate();
         }

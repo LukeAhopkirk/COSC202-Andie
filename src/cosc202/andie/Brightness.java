@@ -5,12 +5,15 @@ package cosc202.andie;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
-public class BrightnessD implements ImageOperation {
+public class Brightness implements ImageOperation {
+    private int multiplier = 1;
 
-    private double contrastD = 0;
-
-    BrightnessD(){}
+    Brightness(){}
     //Constructor
+
+    Brightness(int multiplier){
+        this.multiplier = multiplier;
+    }
 
     //Method to decrease image brightness by 25%
     public BufferedImage apply(BufferedImage input){
@@ -23,9 +26,9 @@ public class BrightnessD implements ImageOperation {
                 int oldGreen = col.getGreen();
                 int oldBlue = col.getBlue();
 
-                int newRed = pixelConverter(oldRed, -25);
-                int newGreen = pixelConverter(oldGreen, -25);
-                int newBlue = pixelConverter(oldBlue, -25);
+                int newRed = pixelConverter(oldRed, multiplier);
+                int newGreen = pixelConverter(oldGreen, multiplier);
+                int newBlue = pixelConverter(oldBlue, multiplier);
 
                 int newPix = new Color(newRed, newGreen, newBlue).getRGB();
 
@@ -36,14 +39,10 @@ public class BrightnessD implements ImageOperation {
         return input;
 
     }
-    // Mutator for contrast
-    public void setContast(double contrast){
-        this.contrastD = contrast;
-    }
 
     // Method to apply equation to pixel colour
     private int pixelConverter(int oldColour, double brightness){
-        int v_dash = (int) ((1+(contrastD/100))*(oldColour - 127.5) + 127.5 * (1 + (brightness/100)));
+        int v_dash = (int) ((1+(0/100))*(oldColour - 127.5) + 127.5 * (1 + (brightness/100)));
         if(v_dash > 255){
             v_dash = 255;
         }else if(v_dash < 0){

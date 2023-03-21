@@ -17,10 +17,10 @@ public class LanguageActions {
 /** a list of actions for the language menu */
         actions = new ArrayList<Action>();
 
-        actions.add(new chineseAction("Mandarin", null, "Change language to Mandarin", null));
-        actions.add(new frenchAction("French", null, "Change language to French", null));
-        actions.add(new spanishAction("Spanish", null, "Change language to Spanish", null));
-        actions.add(new englishAction("English", null,"Change language to English",null));
+        actions.add(new chineseAction("Mandarin", null, "Change language to Mandarin", Integer.valueOf(KeyEvent.VK_M)));
+        actions.add(new frenchAction("French", null, "Change language to French", Integer.valueOf(KeyEvent.VK_F)));
+        actions.add(new spanishAction("Spanish", null, "Change language to Spanish", Integer.valueOf(KeyEvent.VK_S)));
+        actions.add(new englishAction("English", null,"Change language to English",Integer.valueOf(KeyEvent.VK_E)));
     }
 /** create a menu containing all actions in list */
 public JMenu createMenu() {

@@ -17,11 +17,11 @@ public class AdjustImageT {
     public AdjustImageT() {
         actions = new ArrayList<Action>();
         //Resize
-        actions.add(new ResizeIAction(bundle.getString("Resize")+"(+50%)", null, "Increase image by 50%", Integer.valueOf(KeyEvent.VK_M)));
-        actions.add(new ResizeDAction(bundle.getString("Resize")+"(-50%)", null, "Decrease image by 50%", Integer.valueOf(KeyEvent.VK_M)));
+        actions.add(new ResizeIAction(bundle.getString("Resize")+"(+50%)", null, "Increase image by 50%", Integer.valueOf(KeyEvent.VK_R)));
+        actions.add(new ResizeDAction(bundle.getString("Resize")+"(-50%)", null, "Decrease image by 50%", Integer.valueOf(KeyEvent.VK_E)));
         //Flip
-        actions.add(new FlipVAction(bundle.getString("FlipV"), null, "Flip image vertically", Integer.valueOf(KeyEvent.VK_M)));
-        actions.add(new FlipHAction(bundle.getString("FlipH"), null, "Flip image horizontally", Integer.valueOf(KeyEvent.VK_M)));
+        actions.add(new FlipVAction("Flip Vertical", null, "Flip image vertically", Integer.valueOf(KeyEvent.VK_V)));
+        actions.add(new FlipHAction("Flip Horizontal", null, "Flip image horizontally", Integer.valueOf(KeyEvent.VK_H)));
         // Template for adding new action
         // actions.add(new MeanFilterAction("Mean filter", null, "Apply a mean filter", Integer.valueOf(KeyEvent.VK_M)));
         

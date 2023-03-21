@@ -6,10 +6,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 public class Contrast implements ImageOperation {
-
-    private double brightness = 0;
-
-    private int multiplier = 25;
+    private int multiplier = 1;
 
     //Default constructor
     Contrast(){}
@@ -44,14 +41,10 @@ public class Contrast implements ImageOperation {
         return input;
 
     }
-    // Mutator for contrast
-    public void setBrightness(double brightness){
-        this.brightness = brightness;
-    }
 
     // Method to apply equation to pixel colour
     private int pixelConverter(int oldColour, double contrast){
-        int v_dash = (int) ((1+(contrast/100))*(oldColour - 127.5) + 127.5 * (1 + (brightness/100)));
+        int v_dash = (int) ((1+(contrast/100))*(oldColour - 127.5) + 127.5 * (1 + (0/100)));
         if(v_dash > 255){
             v_dash = 255;
         }else if(v_dash < 0){
