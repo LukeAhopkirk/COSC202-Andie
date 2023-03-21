@@ -17,10 +17,10 @@ public class LanguageActions {
 /** a list of actions for the language menu */
         actions = new ArrayList<Action>();
 
-        actions.add(new chineseAction("Mandarin", null, "Change language to Mandarin", Integer.valueOf(KeyEvent.VK_M)));
-        actions.add(new frenchAction("French", null, "Change language to French", Integer.valueOf(KeyEvent.VK_F)));
-        actions.add(new spanishAction("Spanish", null, "Change language to Spanish", Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(new englishAction("English", null,"Change language to English",Integer.valueOf(KeyEvent.VK_E)));
+        actions.add(new chineseAction(bundle.getString("Mandarin"), null, "Change language to Mandarin", Integer.valueOf(KeyEvent.VK_M)));
+        actions.add(new frenchAction(bundle.getString("French"), null, "Change language to French", Integer.valueOf(KeyEvent.VK_F)));
+        actions.add(new spanishAction(bundle.getString("Spanish"),null, "Change language to Spanish", Integer.valueOf(KeyEvent.VK_S)));
+        actions.add(new englishAction(bundle.getString("English"), null,"Change language to English",Integer.valueOf(KeyEvent.VK_E)));
     }
 /** create a menu containing all actions in list */
 public JMenu createMenu() {
@@ -48,7 +48,7 @@ public void actionPerformed(ActionEvent e) {
         ResourceBundle.clearCache();
         prefs.put("language", "es");
         prefs.put("country", "ESP");
-        System.out.println("SPANISH");
+        
 
     
 }
@@ -67,7 +67,7 @@ public class englishAction extends ImageAction{
             ResourceBundle.clearCache();
             prefs.put("language", "en");
             prefs.put("country", "NZ");
-            System.out.println("ENGLISH");
+            
 
 
         }  
@@ -90,7 +90,7 @@ public class chineseAction extends ImageAction{
             ResourceBundle.clearCache();
             prefs.put("language", "cn");
             prefs.put("country", "CHI");
-            System.out.println("CHINESE");
+            
 
 
         }  
@@ -113,7 +113,7 @@ public class frenchAction extends ImageAction{
             Locale.setDefault(new Locale("fr", "FRA"));
             prefs.put("language", "fr");
             prefs.put("country", "FRA");
-            System.out.println("FRENCH");
+            
 
 
         }  
