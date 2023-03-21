@@ -129,8 +129,6 @@ public class Andie {
                 prefs.get("country", "NZ")));
         
                 ResourceBundle.clearCache();
-            prefs.remove("language");
-            prefs.remove("country");
 
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
