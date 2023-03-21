@@ -6,7 +6,7 @@ COMPLETED (Richard) - Image flip: Horizontal; Vertical
 
 
 COMPLETED (Richard) - Brightness adjustment
-WORKING ON (Richard) - Contrast adjustment
+COMPLETED (Richard) - Contrast adjustment
 
 
 COMPLETED (Richard) - Image export
@@ -20,3 +20,18 @@ COMPLETED maybe? (Jasper) - Median filter
 
 Exception handling
 Other error avoidance/prevention
+
+
+
+Part two requirements:
+
+Extended filters
+Filters with negative results
+Emboss and edge detection filters
+Toolbar for common operations
+Keyboard shortcuts
+Mouse selection of rectangular regions
+Crop to selection
+Drawing functions – rectangle, ellipse, line
+Macros for record and replay of operations
+Show us something. . .
