@@ -35,9 +35,9 @@ public class ColourActions {
      */
     public ColourActions() {
         actions = new ArrayList<Action>();
-        actions.add(new ConvertToGreyAction(bundle.getString("Greyscale"), null, "Convert to greyscale", Integer.valueOf(KeyEvent.VK_G)));
-        actions.add(new BrightnessAction(bundle.getString("Brightness"), null, "Apply brightness", Integer.valueOf(KeyEvent.VK_B)));
-        actions.add(new ContrastAction(bundle.getString("Contrast"), null, "Apply contrast", Integer.valueOf(KeyEvent.VK_C)));
+        actions.add(new ConvertToGreyAction(bundle.getString("Greyscale"), null, bundle.getString("GreyscaleDesc"), Integer.valueOf(KeyEvent.VK_G)));
+        actions.add(new BrightnessAction(bundle.getString("Brightness"), null, bundle.getString("BrightnessDesc"), Integer.valueOf(KeyEvent.VK_B)));
+        actions.add(new ContrastAction(bundle.getString("Contrast"), null, bundle.getString("ContrastDesc"), Integer.valueOf(KeyEvent.VK_C)));
     }
 
     /**

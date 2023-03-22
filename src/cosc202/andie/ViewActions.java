@@ -35,9 +35,9 @@ public class ViewActions {
      */
     public ViewActions() {
         actions = new ArrayList<Action>();
-        actions.add(new ZoomInAction(bundle.getString("ZoomI"), null, "Zoom In", Integer.valueOf(KeyEvent.VK_PLUS)));
-        actions.add(new ZoomOutAction(bundle.getString("ZoomO"), null, "Zoom Out", Integer.valueOf(KeyEvent.VK_MINUS)));
-        actions.add(new ZoomFullAction(bundle.getString("ZoomF"), null, "Zoom Full", Integer.valueOf(KeyEvent.VK_1)));
+        actions.add(new ZoomInAction(bundle.getString("ZoomI"), null, bundle.getString("ZoomIDesc"), Integer.valueOf(KeyEvent.VK_PLUS)));
+        actions.add(new ZoomOutAction(bundle.getString("ZoomO"), null, bundle.getString("ZoomODesc"), Integer.valueOf(KeyEvent.VK_MINUS)));
+        actions.add(new ZoomFullAction(bundle.getString("ZoomF"), null, bundle.getString("ZoomFDesc"), Integer.valueOf(KeyEvent.VK_1)));
     }
 
     /**

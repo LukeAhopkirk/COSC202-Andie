@@ -17,10 +17,10 @@ public class LanguageActions {
 /** a list of actions for the language menu */
         actions = new ArrayList<Action>();
 
-        actions.add(new chineseAction(bundle.getString("Mandarin"), null, "Change language to Mandarin", Integer.valueOf(KeyEvent.VK_M)));
-        actions.add(new frenchAction(bundle.getString("French"), null, "Change language to French", Integer.valueOf(KeyEvent.VK_F)));
-        actions.add(new spanishAction(bundle.getString("Spanish"),null, "Change language to Spanish", Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(new englishAction(bundle.getString("English"), null,"Change language to English",Integer.valueOf(KeyEvent.VK_E)));
+        actions.add(new chineseAction(bundle.getString("Mandarin"), null, bundle.getString("ChineseDesc"), Integer.valueOf(KeyEvent.VK_M)));
+        actions.add(new frenchAction(bundle.getString("French"), null, bundle.getString("FrenchDesc"), Integer.valueOf(KeyEvent.VK_F)));
+        actions.add(new spanishAction(bundle.getString("Spanish"),null, bundle.getString("SpanishDesc"), Integer.valueOf(KeyEvent.VK_S)));
+        actions.add(new englishAction(bundle.getString("English"), null,bundle.getString("EnglishDesc"),Integer.valueOf(KeyEvent.VK_E)));
     }
 /** create a menu containing all actions in list */
 public JMenu createMenu() {

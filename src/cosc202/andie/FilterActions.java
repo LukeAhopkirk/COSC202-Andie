@@ -35,16 +35,16 @@ public class FilterActions {
      */
     public FilterActions() {
         actions = new ArrayList<Action>();
-        actions.add(new MeanFilterAction(bundle.getString("Mean"), null, "Apply a mean filter", Integer.valueOf(KeyEvent.VK_M)));
-        actions.add(new SoftBlurAction(bundle.getString("Soft"), null, "Apply a soft blur",Integer.valueOf(KeyEvent.VK_S)));
+        actions.add(new MeanFilterAction(bundle.getString("Mean"), null, bundle.getString("MeanDesc"), Integer.valueOf(KeyEvent.VK_M)));
+        actions.add(new SoftBlurAction(bundle.getString("Soft"), null, bundle.getString("SoftDesc"),Integer.valueOf(KeyEvent.VK_S)));
         // adds an action to the UI list of filters for SoftBlur
-        actions.add(new SharpenAction(bundle.getString("Sharpen"), null, "Apply a sharpen filter",Integer.valueOf(KeyEvent.VK_H)));
+        actions.add(new SharpenAction(bundle.getString("Sharpen"), null, bundle.getString("SharpenDesc"),Integer.valueOf(KeyEvent.VK_H)));
         // adds an action to the UI list of filters for Sharpen
 
-        actions.add(new GaussianAction(bundle.getString("Gaussian"), null, "Apply a Gaussian Blur filter",Integer.valueOf(KeyEvent.VK_G)));
+        actions.add(new GaussianAction(bundle.getString("Gaussian"), null, bundle.getString("GaussianDesc"),Integer.valueOf(KeyEvent.VK_G)));
         // adds an action to the UI list of filters for Gaussian blur
     
-        actions.add(new MedianAction(bundle.getString("Median"), null, "Apply a Median filter",Integer.valueOf(KeyEvent.VK_M)));
+        actions.add(new MedianAction(bundle.getString("Median"), null, bundle.getString("MedianDesc"),Integer.valueOf(KeyEvent.VK_M)));
         // adds an action to the UI list of filters for Median Filter
     }
 

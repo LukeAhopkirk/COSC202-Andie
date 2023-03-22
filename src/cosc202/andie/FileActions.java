@@ -37,11 +37,11 @@ public class FileActions {
     public FileActions() {
 
         actions = new ArrayList<Action>();
-        actions.add(new FileOpenAction(bundle.getString("Open"), null, "Open a file", Integer.valueOf(KeyEvent.VK_O)));
-        actions.add(new FileSaveAction(bundle.getString("Save"), null, "Save the file", Integer.valueOf(KeyEvent.VK_S)));
-        actions.add(new FileSaveAsAction(bundle.getString("SaveAs"), null, "Save a copy", Integer.valueOf(KeyEvent.VK_A)));
-        actions.add(new ExportAction(bundle.getString("Export"), null, "Export current image", Integer.valueOf(KeyEvent.VK_E)));
-        actions.add(new FileExitAction(bundle.getString("Exit"), null, "Exit the program", Integer.valueOf(0)));
+        actions.add(new FileOpenAction(bundle.getString("Open"), null, bundle.getString("OpenDesc"), Integer.valueOf(KeyEvent.VK_O)));
+        actions.add(new FileSaveAction(bundle.getString("Save"), null, bundle.getString("SaveDesc"), Integer.valueOf(KeyEvent.VK_S)));
+        actions.add(new FileSaveAsAction(bundle.getString("SaveAs"), null, bundle.getString("SaveAsDesc"), Integer.valueOf(KeyEvent.VK_A)));
+        actions.add(new ExportAction(bundle.getString("Export"), null, bundle.getString("ExportDesc"), Integer.valueOf(KeyEvent.VK_E)));
+        actions.add(new FileExitAction(bundle.getString("Exit"), null, bundle.getString("ExitDesc"), Integer.valueOf(0)));
 
         
         
