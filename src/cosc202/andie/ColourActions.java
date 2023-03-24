@@ -101,31 +101,36 @@ public class ColourActions {
     }
 
     public class BrightnessAction extends ImageAction {
-
+        
+        //Calling constructor
         BrightnessAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
         }
 
         public void actionPerformed(ActionEvent e) {
             int brightness = 1;
-
-            // Pop-up dialog box to ask for the brightness value.
-            SpinnerNumberModel brightnessModel = new SpinnerNumberModel(1, -100, 100, 1);
-            JSpinner brightnessSpinner = new JSpinner(brightnessModel);
-            int option = JOptionPane.showOptionDialog(null, brightnessSpinner, bundle.getString("BrightnessValueDesc"), JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-
+            
+            // Pop-up dialog box to ask for the brightness value using a JSlider.
+            JSlider brightnessSlider = new JSlider(-100, 100, 1);
+            brightnessSlider.setMajorTickSpacing(50);
+            brightnessSlider.setMinorTickSpacing(10);
+            brightnessSlider.setPaintTicks(true);
+            brightnessSlider.setPaintLabels(true);
+            brightnessSlider.setSnapToTicks(true);
+            int option = JOptionPane.showOptionDialog(null, brightnessSlider, bundle.getString("BrightnessValueDesc"), JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+            
             // Check the return value from the dialog box.
             if (option == JOptionPane.CANCEL_OPTION) {
                 return;
             } else if (option == JOptionPane.OK_OPTION) {
-                brightness = brightnessModel.getNumber().intValue();
+                brightness = brightnessSlider.getValue();
             }
-
+            
+            // Create and apply the filter
             target.getImage().apply(new Brightness(brightness));
             target.repaint();
             target.getParent().revalidate();
         }
-
     }
 
     public class ContrastAction extends ImageAction {
