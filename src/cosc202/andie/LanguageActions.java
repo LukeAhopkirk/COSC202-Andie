@@ -43,11 +43,12 @@ public class spanishAction extends ImageAction{
 /** sets locale to spanish */
 public void actionPerformed(ActionEvent e) {
 
-        
+        JOptionPane.showMessageDialog(null, bundle.getString("LangChangeMsg"));
         Locale.setDefault(new Locale("es", "ESP"));
         ResourceBundle.clearCache();
         prefs.put("language", "es");
         prefs.put("country", "ESP");
+        
         
 
     
@@ -68,8 +69,7 @@ public class englishAction extends ImageAction{
             prefs.put("language", "en");
             prefs.put("country", "NZ");
             
-
-
+            JOptionPane.showMessageDialog(null, bundle.getString("LangChangeMsg"));
         }  
 
 
@@ -91,6 +91,7 @@ public class chineseAction extends ImageAction{
             prefs.put("language", "cn");
             prefs.put("country", "CHI");
             
+            JOptionPane.showMessageDialog(null, bundle.getString("LangChangeMsg"));
 
 
         }  
@@ -113,6 +114,8 @@ public class frenchAction extends ImageAction{
             Locale.setDefault(new Locale("fr", "FRA"));
             prefs.put("language", "fr");
             prefs.put("country", "FRA");
+
+            JOptionPane.showMessageDialog(null, bundle.getString("LangChangeMsg"));
             
 
 
