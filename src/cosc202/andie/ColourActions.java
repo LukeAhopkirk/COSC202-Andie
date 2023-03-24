@@ -142,19 +142,24 @@ public class ColourActions {
         public void actionPerformed(ActionEvent e) {
             int contrast = 1;
 
-            // Pop-up dialog box to ask for the contrast value.
-            SpinnerNumberModel contrastModel = new SpinnerNumberModel(1, -100, 100, 1);
-            JSpinner contrastSpinner = new JSpinner(contrastModel);
-            int option = JOptionPane.showOptionDialog(null, contrastSpinner, bundle.getString("ContrastValueDesc"), JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-
+            // Pop-up dialog box to ask for the brightness value using a JSlider.
+            JSlider contrastSlider = new JSlider(-100, 100, 1);
+            contrastSlider.setMajorTickSpacing(50);
+            contrastSlider.setMinorTickSpacing(10);
+            contrastSlider.setPaintTicks(true);
+            contrastSlider.setPaintLabels(true);
+            contrastSlider.setSnapToTicks(true);
+            int option = JOptionPane.showOptionDialog(null, contrastSlider, bundle.getString("ContrastValueDesc"), JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+            
             // Check the return value from the dialog box.
             if (option == JOptionPane.CANCEL_OPTION) {
                 return;
             } else if (option == JOptionPane.OK_OPTION) {
-                contrast = contrastModel.getNumber().intValue();
+                contrast = contrastSlider.getValue();
             }
-
-            target.getImage().apply(new Contrast(contrast));
+            
+            // Create and apply the filter
+            target.getImage().apply(new Brightness(contrast));
             target.repaint();
             target.getParent().revalidate();
         }
