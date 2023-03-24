@@ -174,7 +174,7 @@ public class FilterActions {
     
     // Pop-up dialog box to ask for the radius value.
     int min = 1;
-    int max = 10;
+    int max = 8;
     int initialValue = 1;
     DefaultBoundedRangeModel radiusModel = new DefaultBoundedRangeModel(initialValue, 0, min, max);
     JSlider radiusSlider = new JSlider(radiusModel);
