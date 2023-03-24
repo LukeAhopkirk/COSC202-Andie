@@ -21,6 +21,8 @@ public class AdjustImageT {
         //Flip
         actions.add(new FlipVAction(bundle.getString("FlipV"), null, bundle.getString("FlipVDesc"), Integer.valueOf(KeyEvent.VK_V)));
         actions.add(new FlipHAction(bundle.getString("FlipH"), null, bundle.getString("FlipHDesc"), Integer.valueOf(KeyEvent.VK_H)));
+        //Flips Image 90 Degrees
+        actions.add(new Flip90Action("Flip 90\u00B0", null, "Flip image 90\u00B0", Integer.valueOf(KeyEvent.VK_F)));
         // Template for adding new action
         // actions.add(new MeanFilterAction(bundle.getString("Mean"), null, bundle.getString("MeanDesc"), Integer.valueOf(KeyEvent.VK_M)));
         
@@ -96,6 +98,21 @@ public class AdjustImageT {
         public void actionPerformed(ActionEvent e) {
 
         target.getImage().apply(new FlipH());
+        target.repaint();
+        target.getParent().revalidate();
+        }
+    }
+
+    public class Flip90Action extends ImageAction {
+
+        Flip90Action(String name, ImageIcon icon,
+        String desc, Integer mnemonic) {
+        super(name, icon, desc, mnemonic);
+        }
+
+        public void actionPerformed(ActionEvent e) {
+
+        target.getImage().apply(new Flip90());
         target.repaint();
         target.getParent().revalidate();
         }
