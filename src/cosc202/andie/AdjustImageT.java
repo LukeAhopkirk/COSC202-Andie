@@ -17,14 +17,12 @@ public class AdjustImageT {
     public AdjustImageT() {
         actions = new ArrayList<Action>();
         //Resize
-        actions.add(new ResizeIAction(bundle.getString("Resize")+"(+50%)", null, "Increase image by 50%", Integer.valueOf(KeyEvent.VK_M)));
-        actions.add(new ResizeDAction(bundle.getString("Resize")+"(-50%)", null, "Decrease image by 50%", Integer.valueOf(KeyEvent.VK_M)));
+        actions.add(new ResizeAction(bundle.getString("Resize"), null, bundle.getString("ResizeDesc"), Integer.valueOf(KeyEvent.VK_R)));
         //Flip
-        actions.add(new FlipVAction(bundle.getString("FlipV"), null, "Flip image vertically", Integer.valueOf(KeyEvent.VK_M)));
-        actions.add(new FlipHAction(bundle.getString("FlipH"), null, "Flip image horizontally", Integer.valueOf(KeyEvent.VK_M)));
-        //Flips Image 90 Degrees
-        actions.add(new Flip90Action("Flip 90\u00B0", null, "Flip image 90\u00B0", Integer.valueOf(KeyEvent.VK_F)));
-        // Template for adding new action   
+        actions.add(new FlipVAction(bundle.getString("FlipV"), null, bundle.getString("FlipVDesc"), Integer.valueOf(KeyEvent.VK_V)));
+        actions.add(new FlipHAction(bundle.getString("FlipH"), null, bundle.getString("FlipHDesc"), Integer.valueOf(KeyEvent.VK_H)));
+        // Template for adding new action
+        // actions.add(new MeanFilterAction(bundle.getString("Mean"), null, bundle.getString("MeanDesc"), Integer.valueOf(KeyEvent.VK_M)));
         
 
     }
@@ -40,32 +38,32 @@ public class AdjustImageT {
         return fileMenu;
     }
 
-    //Nested class for resizing increase action
-    public class ResizeIAction extends ImageAction {
-        ResizeIAction(String name, ImageIcon icon,
-        String desc, Integer mnemonic) {
-        super(name, icon, desc, mnemonic);
-        }
-
-        //Calls the resize class
-        public void actionPerformed(ActionEvent e) {
-        // Create and apply the filter
-        target.getImage().apply(new ResizeI());
-        target.repaint();
-        target.getParent().revalidate();
-        }
-    }
-
     //Nested class for resizing decrease action
-    public class ResizeDAction extends ImageAction {
-        ResizeDAction(String name, ImageIcon icon,
+    public class ResizeAction extends ImageAction {
+        ResizeAction(String name, ImageIcon icon,
         String desc, Integer mnemonic) {
         super(name, icon, desc, mnemonic);
         }
 
         //Calls the resize class
         public void actionPerformed(ActionEvent e) {
-        target.getImage().apply(new ResizeD());
+
+            int multiplier = 100;
+        
+            // Pop-up dialog box to ask for the multiplier value.
+            SpinnerNumberModel multiplierModel = new SpinnerNumberModel(100, 0, 200, 1);
+            JSpinner multiplierSpinner = new JSpinner(multiplierModel);
+            int option = JOptionPane.showOptionDialog(null, multiplierSpinner, "Enter resize %", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+    
+            // Check the return value from the dialog box.
+            if (option == JOptionPane.CANCEL_OPTION) {
+                return;
+            } else if (option == JOptionPane.OK_OPTION) {
+                multiplier = multiplierModel.getNumber().intValue();
+            }
+
+
+        target.getImage().apply(new Resize(multiplier));
         target.repaint();
         target.getParent().revalidate();
         }
@@ -102,21 +100,4 @@ public class AdjustImageT {
         target.getParent().revalidate();
         }
     }
-    //Nested class for flipping 90 action
-    
-    public class Flip90Action extends ImageAction {
-
-        Flip90Action(String name, ImageIcon icon,
-        String desc, Integer mnemonic) {
-        super(name, icon, desc, mnemonic);
-        }
-
-        public void actionPerformed(ActionEvent e) {
-
-        target.getImage().apply(new Flip90());
-        target.repaint();
-        target.getParent().revalidate();
-        }
-    }
 }
-    
