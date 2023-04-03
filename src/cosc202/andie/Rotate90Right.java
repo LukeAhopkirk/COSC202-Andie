@@ -1,12 +1,10 @@
 package cosc202.andie;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Flip90 implements ImageOperation{
-    
-    Flip90(){
-        //default contructor
+public class Rotate90Right implements ImageOperation{
+    Rotate90Right(){
+        //Default contructor
     }
 
 
@@ -26,7 +24,7 @@ public class Flip90 implements ImageOperation{
 
         for(int y = 0; y < (input.getHeight()); y++){
             for(int x = 0; x < input.getWidth(); x++){
-                int xFlip = height - y - 1  ;
+                int xFlip = height - y - 1 ;
                 int yFlip = x;
                 int pixel = inputImage.getRGB(x,y);
 
@@ -38,3 +36,5 @@ public class Flip90 implements ImageOperation{
     }
     
 }
+
+    
