@@ -4,6 +4,7 @@ import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+
 // Added adjust image tab - WORKING
 
 //Adjust image tab for resize, flip and rotate
@@ -51,29 +52,35 @@ public class AdjustImageT {
         super(name, icon, desc, mnemonic);
         }
 
-        //Calls the resize class
-        public void actionPerformed(ActionEvent e) {
+       //Calls the resize class
+public void actionPerformed(ActionEvent e) {
 
-            int multiplier = 100;
+        int multiplier = 100;
+
+        // Pop-up dialog box to ask for the multiplier value.
+        int min = 1;
+        int max = 200;
+        int initialValue = 100;
+        DefaultBoundedRangeModel multiplierModel = new DefaultBoundedRangeModel(initialValue, 0, min, max);
+        JSlider multiplierSlider = new JSlider(multiplierModel);
+        multiplierSlider.setMajorTickSpacing(199);
+        multiplierSlider.setMinorTickSpacing(10);
+        multiplierSlider.setPaintTicks(true);
+        multiplierSlider.setPaintLabels(true);
+        int option = JOptionPane.showOptionDialog(null, multiplierSlider, bundle.getString("FilterValueDesc"), JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
         
-            // Pop-up dialog box to ask for the multiplier value.
-            SpinnerNumberModel multiplierModel = new SpinnerNumberModel(100, 0, 200, 1);
-            JSpinner multiplierSpinner = new JSpinner(multiplierModel);
-            int option = JOptionPane.showOptionDialog(null, multiplierSpinner, "Enter resize %", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-    
-            // Check the return value from the dialog box.
-            if (option == JOptionPane.CANCEL_OPTION) {
-                return;
-            } else if (option == JOptionPane.OK_OPTION) {
-                multiplier = multiplierModel.getNumber().intValue();
-            }
-
+        // Check the return value from the dialog box.
+        if (option == JOptionPane.CANCEL_OPTION) {
+            return;
+        } else if (option == JOptionPane.OK_OPTION) {
+            multiplier = multiplierSlider.getValue();
+        }
 
         target.getImage().apply(new Resize(multiplier));
         target.repaint();
         target.getParent().revalidate();
-        }
     }
+}
 
     //Nested class for flipping vertically action
     public class FlipVAction extends ImageAction {
@@ -152,3 +159,5 @@ public class AdjustImageT {
         }
     }
 }
+
+
