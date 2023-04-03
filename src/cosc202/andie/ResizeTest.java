@@ -14,7 +14,6 @@ public class ResizeTest {
     
     @Test
     void testApplyWithValidInputImage() {
-        // Arrange
         BufferedImage input = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
         Resize resize = new Resize(50);
 
@@ -28,7 +27,6 @@ public class ResizeTest {
 
     @Test
     void testApplyWithNullInputImage() {
-        // Arrange
         BufferedImage input = null;
         Resize resize = new Resize(50);
 

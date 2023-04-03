@@ -106,15 +106,22 @@ public class FilterActions {
             int radius = 1;
 
             // Pop-up dialog box to ask for the radius value.
-            SpinnerNumberModel radiusModel = new SpinnerNumberModel(1, 1, 10, 1);
-            JSpinner radiusSpinner = new JSpinner(radiusModel);
-            int option = JOptionPane.showOptionDialog(null, radiusSpinner, bundle.getString("FilterValueDesc"), JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-
-            // Check the return value from the dialog box.
+            // Pop-up dialog box to ask for the radius value.
+            int min = 1;
+            int max = 10;
+            int initialValue = 1;
+            DefaultBoundedRangeModel radiusModel = new DefaultBoundedRangeModel(initialValue, 0, min, max);
+            JSlider radiusSlider = new JSlider(radiusModel);
+            radiusSlider.setMajorTickSpacing(1);
+            radiusSlider.setPaintTicks(true);
+            radiusSlider.setPaintLabels(true);
+            int option = JOptionPane.showOptionDialog(null, radiusSlider, bundle.getString("FilterValueDesc"), JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+                
+        // Check the return value from the dialog box.
             if (option == JOptionPane.CANCEL_OPTION) {
                 return;
             } else if (option == JOptionPane.OK_OPTION) {
-                radius = radiusModel.getNumber().intValue();
+                radius = radiusModel.getValue();
             }
 
             // Create and apply the filter
