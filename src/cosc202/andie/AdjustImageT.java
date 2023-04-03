@@ -22,7 +22,11 @@ public class AdjustImageT {
         actions.add(new FlipVAction(bundle.getString("FlipV"), null, bundle.getString("FlipVDesc"), Integer.valueOf(KeyEvent.VK_V)));
         actions.add(new FlipHAction(bundle.getString("FlipH"), null, bundle.getString("FlipHDesc"), Integer.valueOf(KeyEvent.VK_H)));
         //Flips Image 90 Degrees
-        actions.add(new Flip90Action("Flip 90\u00B0", null, "Flip image 90\u00B0", Integer.valueOf(KeyEvent.VK_F)));
+        actions.add(new RotateLeftAction("Rotate 90\u00B0 Left", null, "Rotate image 90\u00B0 Left", Integer.valueOf(KeyEvent.VK_F)));
+        //Rotates Image 90 Degrees Right
+        actions.add(new RotateRightAction("Rotate 90\u00B0 Right", null, "Rotate image 90\u00B0 Right", Integer.valueOf(KeyEvent.VK_F)));
+        //Rotates image 180 degrees
+        actions.add(new Rotate180Action("Rotate 180\u00B0", null, "Rotate image 180\u00B0", Integer.valueOf(KeyEvent.VK_F)));
         // Template for adding new action
         // actions.add(new MeanFilterAction(bundle.getString("Mean"), null, bundle.getString("MeanDesc"), Integer.valueOf(KeyEvent.VK_M)));
         
@@ -103,16 +107,46 @@ public class AdjustImageT {
         }
     }
 
-    public class Flip90Action extends ImageAction {
+    public class RotateLeftAction extends ImageAction {
 
-        Flip90Action(String name, ImageIcon icon,
+        RotateLeftAction(String name, ImageIcon icon,
         String desc, Integer mnemonic) {
         super(name, icon, desc, mnemonic);
         }
 
         public void actionPerformed(ActionEvent e) {
 
-        target.getImage().apply(new Flip90());
+        target.getImage().apply(new Rotate90Left());
+        target.repaint();
+        target.getParent().revalidate();
+        }
+    }
+
+    public class RotateRightAction extends ImageAction {
+
+        RotateRightAction(String name, ImageIcon icon,
+        String desc, Integer mnemonic) {
+        super(name, icon, desc, mnemonic);
+        }
+
+        public void actionPerformed(ActionEvent e) {
+
+        target.getImage().apply(new Rotate90Right());
+        target.repaint();
+        target.getParent().revalidate();
+        }
+    }
+
+    public class Rotate180Action extends ImageAction {
+
+        Rotate180Action(String name, ImageIcon icon,
+        String desc, Integer mnemonic) {
+        super(name, icon, desc, mnemonic);
+        }
+
+        public void actionPerformed(ActionEvent e) {
+
+        target.getImage().apply(new Rotate180());
         target.repaint();
         target.getParent().revalidate();
         }
