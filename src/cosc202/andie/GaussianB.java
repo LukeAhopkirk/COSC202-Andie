@@ -13,9 +13,7 @@ public class GaussianB implements ImageOperation, java.io.Serializable {
         if (kernelSize < 0) {
             throw new IllegalArgumentException("Kernel Size cannot be negative.");
         }
-        if (sigma< 0) {
-            throw new IllegalArgumentException("Kernel Size cannot be negative.");
-        }
+        
         this.kernelSize = kernelSize;
         this.sigma = sigma;
     }
