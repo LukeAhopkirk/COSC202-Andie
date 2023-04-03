@@ -104,16 +104,21 @@ public class FileActions {
         public void actionPerformed(ActionEvent e) {
             JFileChooser fileChooser = new JFileChooser();
             int result = fileChooser.showOpenDialog(target);
-
+        
             if (result == JFileChooser.APPROVE_OPTION) {
                 try {
                     String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
+                    // Check if selected file is an image file
+                    String extension = imageFilepath.substring(imageFilepath.lastIndexOf(".") + 1).toLowerCase();
+                    if (!extension.equals("jpg") && !extension.equals("jpeg") && !extension.equals("png") && !extension.equals("gif")) {
+                        throw new IllegalArgumentException("Selected file is not an image file");
+                    }
                     target.getImage().open(imageFilepath);
                 } catch (Exception ex) {
-                    System.exit(1);
+                    JOptionPane.showMessageDialog(target, "Error opening image file: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
-
+        
             target.repaint();
             target.getParent().revalidate();
         }

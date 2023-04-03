@@ -10,6 +10,9 @@ public class Resize implements ImageOperation {
     //Constructor
 
     Resize(double multiplier){
+        if (multiplier < 0) {
+            throw new IllegalArgumentException("Multiplier cannot be negative.");
+        }
         this.multiplier = multiplier;
     }
 
@@ -35,7 +38,4 @@ public class Resize implements ImageOperation {
         return output;
 
     }
-
-
-
 }
