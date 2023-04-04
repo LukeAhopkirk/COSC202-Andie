@@ -27,7 +27,7 @@ public class FileActions {
     /** A list of actions for the File menu. */
     protected ArrayList<Action> actions;
     ResourceBundle bundle = ResourceBundle.getBundle("MessageBundle");
-    
+    private boolean imageInUse = false;
     
     /**
      * <p>
@@ -106,7 +106,14 @@ public class FileActions {
             int result = fileChooser.showOpenDialog(target);
         
             if (result == JFileChooser.APPROVE_OPTION) {
-                try {
+                try {   
+                        if(imageInUse){
+                        Object[] options = {"Save As", "Cancel"};
+                        int choice = JOptionPane.showOptionDialog(target, "Remember to save any current pictures!", "Save Reminder", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+                          if (choice == JOptionPane.YES_OPTION) {
+                            // call the save method here (not sure how atm)
+                          }
+                        }
                     String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
                     // Check if selected file is an image file
                     String extension = imageFilepath.substring(imageFilepath.lastIndexOf(".") + 1).toLowerCase();
@@ -118,7 +125,7 @@ public class FileActions {
                     JOptionPane.showMessageDialog(target, "Error opening image file: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
-        
+            imageInUse = true;
             target.repaint();
             target.getParent().revalidate();
         }

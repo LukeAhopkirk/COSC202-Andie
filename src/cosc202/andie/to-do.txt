@@ -15,7 +15,7 @@ Multilingual support - WORKING ON (Aidan)
 
 COMPLETED (Jasper) - Sharpen filter
 COMPLETED (Jasper) - Gaussian blur filter
-COMPLETED maybe? (Jasper) - Median filter
+COMPLETED (Jasper) - Median filter
 
 
 Exception handling

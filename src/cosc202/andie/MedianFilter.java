@@ -1,18 +1,51 @@
 package cosc202.andie;
 
-//import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
 import java.awt.image.*;
 
+/**
+ * <p>
+ * ImageOperation to apply a Median filter.
+ * </p>
+ * 
+ * <p>
+ * It is a type of nonlinear filter that replaces the value of each pixel in 
+ * an image with the median value of the pixels in its surrounding neighborhood.
+ * 
+ */
 public class MedianFilter implements ImageOperation, java.io.Serializable {
 
     private int kernelSize;
 
+    /**
+     * <p>
+     * Construct a Median filter with the given kernel size.
+     * </p>
+     * 
+     * <p>
+     * Higher kernelsizes produce more noise reduction
+     * </p>
+     * 
+     * @param kernelSize Size of the square matrix used to perform convolution on the image.
+     */
     public MedianFilter(int kernelSize) {
         this.kernelSize = kernelSize;
     }
 
+    /**
+     * <p>
+     * Apply a Median filter to an image.
+     * </p>
+     * 
+     * <p>
+     * The code loops over each pixel in the image, and for each pixel 
+     * it extracts a square window of pixel values from the surrounding neighborhood.
+     * </p>
+     * 
+     * @param input The image to apply the Median filter to.
+     * @return The resulting image (with reduced noise).
+     */
     public BufferedImage apply(BufferedImage input) {
         int width = input.getWidth();
         int height = input.getHeight();
