@@ -1,7 +1,7 @@
 Part one requirements:
 
 COMPLETED (Richard) - Image resize
-WORKING ON (Luke)Image rotations: 90◦, left; 90◦, right; 180◦
+COMPLETED (Luke)Image rotations: 90◦, left; 90◦, right; 180◦
 COMPLETED (Richard) - Image flip: Horizontal; Vertical
 
 

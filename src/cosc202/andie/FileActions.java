@@ -106,23 +106,23 @@ public class FileActions {
             int result = fileChooser.showOpenDialog(target);
         
             if (result == JFileChooser.APPROVE_OPTION) {
-                try {   
-                        if(imageInUse){
-                        Object[] options = {"Save As", "Cancel"};
-                        int choice = JOptionPane.showOptionDialog(target, "Remember to save any current pictures!", "Save Reminder", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-                          if (choice == JOptionPane.YES_OPTION) {
-                            // call the save method here (not sure how atm)
-                          }
-                        }
+                try {
                     String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
-                    // Check if selected file is an image file
-                    String extension = imageFilepath.substring(imageFilepath.lastIndexOf(".") + 1).toLowerCase();
-                    if (!extension.equals("jpg") && !extension.equals("jpeg") && !extension.equals("png") && !extension.equals("gif")) {
-                        throw new IllegalArgumentException("Selected file is not an image file");
+                    if(target.getImage().hasImage() == true){
+                       int userSelection =  JOptionPane.showConfirmDialog(target, "Do you wish to save before opening a new file? Unsaved changes will be lost!" , "Are you sure you want to overide this image", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                        if(userSelection == JOptionPane.YES_OPTION){
+                            try {
+                                target.getImage().save();           
+                            } catch (Exception ex) {
+                                System.exit(1);
+                            }
+                        }else if(userSelection == JOptionPane.CANCEL_OPTION){
+                            return;
+                        }
                     }
                     target.getImage().open(imageFilepath);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(target, "Error opening image file: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    System.exit(1);
                 }
             }
             imageInUse = true;
