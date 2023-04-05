@@ -185,7 +185,7 @@ public class FileActions {
             try {
                 target.getImage().save();
             } catch (Exception ex) {
-                System.exit(1);
+                JOptionPane.showMessageDialog(null, "Please open an image to save.");
             }
         }
 
@@ -235,7 +235,7 @@ public class FileActions {
                     String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
                     target.getImage().saveAs(imageFilepath);
                 } catch (Exception ex) {
-                    System.exit(1);
+                    JOptionPane.showMessageDialog(null, "Please open an image to save.");
                 }
             }
         }
@@ -257,7 +257,7 @@ public class FileActions {
                     String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
                     target.getImage().export(imageFilepath);
                 } catch (Exception ex) {
-                    System.exit(1);
+                    JOptionPane.showMessageDialog(null, "Please open an image to export.");
                 }
             }
         }
