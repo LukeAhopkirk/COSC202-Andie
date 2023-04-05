@@ -111,9 +111,11 @@ public class FileActions {
                 try {
                     String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
                     if (target.getImage().hasImage() == true) {
+
+                        // Ask user if they want to save their current picture
                         int userSelection = JOptionPane.showConfirmDialog(target,
                                 "Do you wish to save before opening a new file? Unsaved changes will be lost!",
-                                "Are you sure you want to overide this image", JOptionPane.YES_NO_CANCEL_OPTION,
+                                "Are you sure you want to override this image?", JOptionPane.YES_NO_CANCEL_OPTION,
                                 JOptionPane.INFORMATION_MESSAGE);
                         if (userSelection == JOptionPane.YES_OPTION) {
                             try {
@@ -125,15 +127,23 @@ public class FileActions {
                             return;
                         }
                     }
+
+                    // Check if selected file is an image file
+                    String extension = imageFilepath.substring(imageFilepath.lastIndexOf(".") + 1).toLowerCase();
+                    if (!extension.equals("jpg") && !extension.equals("jpeg") && !extension.equals("png")
+                            && !extension.equals("gif")) {
+                        throw new IllegalArgumentException("Selected file is not an image file");
+                    }
+
                     target.getImage().open(imageFilepath);
                 } catch (Exception ex) {
-                    System.exit(1);
+                    JOptionPane.showMessageDialog(target, "Error opening image file: " + ex.getMessage(), "Error",
+                            JOptionPane.ERROR_MESSAGE);
                 }
             }
             target.repaint();
             target.getParent().revalidate();
         }
-
     }
 
     /**
