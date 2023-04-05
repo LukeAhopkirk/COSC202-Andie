@@ -3,13 +3,34 @@ package cosc202.andie;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
+/**
+ * <p>
+ * ImageOperation to increase the Contrast of an image
+ * </p>
+ */
 public class Contrast implements ImageOperation {
     private int multiplier = 1;
 
-    // Default constructor
+    /**
+     * <p>
+     * Default Constructor
+     * </p>
+     */
     Contrast() {
     }
 
+    /**
+     * <p>
+     * Construct a Contrast filter with the given multiplier.
+     * </p>
+     * 
+     * <p>
+     * Higher multiplier produces an image with more contrast.
+     * Lower multiplier produces an image with less contrast.
+     * </p>
+     * 
+     * @param multiplier Strength of the contrast filter.
+     */
     Contrast(int multiplier) {
         if (multiplier < 0) {
             throw new IllegalArgumentException("Multiplier cannot be negative.");
@@ -17,7 +38,19 @@ public class Contrast implements ImageOperation {
         this.multiplier = multiplier;
     }
 
-    // Method to decrease image brightness by 25%
+    /**
+     * <p>
+     * Apply increased Contrast to an image.
+     * </p>
+     * 
+     * <p>
+     * Iterates over each pixes and uses pixelConverter method
+     * to increase the contrast via RGB values
+     * </p>
+     * 
+     * @param input The image to increase the Contrast.
+     * @return The resulting image (with increased Contrast).
+     */
     public BufferedImage apply(BufferedImage input) {
 
         for (int y = 0; y < input.getHeight(); ++y) {
@@ -37,12 +70,18 @@ public class Contrast implements ImageOperation {
                 input.setRGB(x, y, newPix);
             }
         }
-
         return input;
-
     }
 
-    // Method to apply equation to pixel colour
+    /**
+     * <p>
+     * Method to apply Contrast change
+     * </p>
+     * 
+     * @param oldColour Original colour of a pixel
+     * @param contrast  Multiplier to be used
+     * @return The resulting pixel (with changed Brightness).
+     */
     private int pixelConverter(int oldColour, double contrast) {
         int v_dash = (int) ((1 + (contrast / 100)) * (oldColour - 127.5) + 127.5 * (1 + (0 / 100)));
         if (v_dash > 255) {
