@@ -20,8 +20,18 @@ COMPLETED (Jasper) - Median filter
 
 Exception handling (Jasper)
 Other error avoidance/prevention (Jasper/Luke)
-Unit Tests (Jasper)
+Examples:
+- If user opens another image, pop up says to save current picture (Luke)
+- If user tries to open non-image file, an error message pops up (Jasper)
+- Inputs (kernelsize, multiplier) for Resize, MedianFilter, Contrast, Brightness, GaussianBlur throw 
+IllegalArgumentException if out of bounds e.g. Below zero / not within -100 to 100. (Jasper)
+- Sliders have been added for UI ease as well as error handling, user cannot entire inputs
+outisde a certain range. (Jasper)
 
+Unit Tests (Jasper)
+- Tests have been done for Brightness, Contrast, Resize and ImagePanel
+- Checks that exceptions are thrown for out of bounds inputs, constructors work as expected,
+null image files throw a NullPointerException, default values are consistent etc.
 
 
 Part two requirements:
