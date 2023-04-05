@@ -18,8 +18,9 @@ COMPLETED (Jasper) - Gaussian blur filter
 COMPLETED (Jasper) - Median filter
 
 
-Exception handling
-Other error avoidance/prevention
+Exception handling (Jasper)
+Other error avoidance/prevention (Jasper)
+Unit Tests (Jasper)
 
 
 
