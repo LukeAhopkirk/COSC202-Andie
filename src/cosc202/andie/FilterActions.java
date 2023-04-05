@@ -92,7 +92,7 @@ public class FilterActions {
 
         /**
          * <p>
-         * Callback for when the convert-to-grey action is triggered.
+         * Callback for when the MeanFilter action is triggered.
          * </p>
          * 
          * <p>
