@@ -19,7 +19,7 @@ COMPLETED (Jasper) - Median filter
 
 
 Exception handling (Jasper)
-Other error avoidance/prevention (Jasper)
+Other error avoidance/prevention (Jasper/Luke)
 Unit Tests (Jasper)
 
 
