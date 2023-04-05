@@ -8,15 +8,19 @@ import java.awt.image.BufferedImage;
 public class Brightness implements ImageOperation {
     private int multiplier = 1;
 
-    Brightness(){}
-    //Constructor
+    Brightness() {
+    }
+    // Constructor
 
-    Brightness(int multiplier){
+    Brightness(int multiplier) {
+        if (multiplier < -100 || multiplier > 100) {
+            throw new IllegalArgumentException("Multiplier out of bounds (-100,100).");
+        }
         this.multiplier = multiplier;
     }
 
-    //Method to decrease image brightness by 25%
-    public BufferedImage apply(BufferedImage input){
+    // Method to decrease image brightness by 25%
+    public BufferedImage apply(BufferedImage input) {
 
         for (int y = 0; y < input.getHeight(); ++y) {
             for (int x = 0; x < input.getWidth(); ++x) {
@@ -41,11 +45,11 @@ public class Brightness implements ImageOperation {
     }
 
     // Method to apply equation to pixel colour
-    private int pixelConverter(int oldColour, double brightness){
-        int v_dash = (int) ((1+(0/100))*(oldColour - 127.5) + 127.5 * (1 + (brightness/100)));
-        if(v_dash > 255){
+    private int pixelConverter(int oldColour, double brightness) {
+        int v_dash = (int) ((1 + (0 / 100)) * (oldColour - 127.5) + 127.5 * (1 + (brightness / 100)));
+        if (v_dash > 255) {
             v_dash = 255;
-        }else if(v_dash < 0){
+        } else if (v_dash < 0) {
             v_dash = 0;
         }
         return v_dash;

@@ -4,14 +4,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.awt.image.BufferedImage;
 
-import cosc202.andie.Resize;
-
 public class ResizeTest {
 
     @Test
     void initialDummyTest() {
     }
-    
+
     @Test
     void testApplyWithValidInputImage() {
         BufferedImage input = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
