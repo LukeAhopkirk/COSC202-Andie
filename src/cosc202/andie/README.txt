@@ -4,7 +4,7 @@ Image flip: Horizontal; Vertical
 Brightness adjustment
 Contrast adjustment
 Image export
-Other error avoidance/prevention
+Other error avoidance/prevention (Program quitting when saving/saveAsing/exporting an empty image)
 
 Jasper:
 Sharpen filter
@@ -12,16 +12,25 @@ Gaussian blur filter
 Median filter
 Exception handling
 Other error avoidance/prevention
+(- If user tries to open non-image file, an error message pops up.
+- Inputs (kernelsize, multiplier) for Resize, MedianFilter, Contrast, Brightness, GaussianBlur throw 
+IllegalArgumentException if out of bounds e.g. Below zero / not within -100 to 100.
+- Sliders have been added for UI ease as well as error handling,  so user cannot entire inputs
+outisde a certain range)
 
 Luke:
 Image rotations: 90◦, left; 90◦, right; 180◦
-Other error avoidance/prevention
+Other error avoidance/prevention (If user opens another image, pop up says to save current picture)
 
 Aiden:
 Multilingual support (not completed)
 
 Tests:
-The code was tested by Jasper and all the test files are named ___Test.java
+The code was tested by Jasper and all the test files are named ___Test.java. Tests have been done 
+for Brightness, Contrast, Resize and ImagePanel. Examples include checking that exceptions are 
+thrown for out of bounds inputs, constructors work as expected, null image files throw a NullPointerException, 
+default values are consistent etc.
+
 We also had someone who isn't really computer savy and tell them to try to break the program, this worked great
 and we fixed alot of the problems which went over our head.
 
