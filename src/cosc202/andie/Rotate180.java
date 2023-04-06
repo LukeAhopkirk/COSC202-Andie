@@ -1,11 +1,38 @@
 package cosc202.andie;
-
 import java.awt.image.BufferedImage;
+
+/**
+ * <p>
+ * ImageOperation to flip an image vertically.
+ * </p>
+ * 
+ */
 
 public class Rotate180 implements ImageOperation {
 
+     /**
+     * <p>
+     * Default Constructor
+     * </p>
+     */
     Rotate180(){
     }
+
+    /**
+     * <p>
+     * Apply a vertical flip to an image.
+     * </p>
+     * 
+     * <p>
+     * Uses a nested loop iterating over the pixels of an image.
+     * Horizontally (from left to right) and vertically (from top to bottom).
+     * For each pixel, the code swaps its color value with the color value of the
+     * pixel on the opposite side of the image along the vertical axis and horizontal axis.
+     * </p>
+     * 
+     * @param input The image to flip vertically.
+     * @return The resulting (flipped) image
+     */
 
     public BufferedImage apply(BufferedImage input){
 
