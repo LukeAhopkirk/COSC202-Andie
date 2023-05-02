@@ -44,7 +44,7 @@ public class Sobel implements ImageOperation, java.io.Serializable {
      */
     public BufferedImage apply(BufferedImage input) {
         float[] arrayH = { -1 / 2.0f, 0, 1 / 2.0f,
-                -1 / 2.0f, 0, 1,
+                -1, 0, 1,
                 -1 / 2.0f, 0, 1 / 2.0f };
 
         float[] arrayV = { -1 / 2.0f, -1, -1 / 2.0f,
@@ -76,7 +76,7 @@ public class Sobel implements ImageOperation, java.io.Serializable {
             g.dispose();
 
             // Apply the ConvolveOp to the padded image
-            BufferedImage output = customConvolution(kernelV, paddedInput);
+            BufferedImage output = customConvolution(kernelH, paddedInput);
             output = customConvolution(kernelV, paddedInput);
 
             // Crop the image to its original size
@@ -86,7 +86,7 @@ public class Sobel implements ImageOperation, java.io.Serializable {
 
         } else {
 
-            ConvolveOp convOp = new ConvolveOp(kernelV, ConvolveOp.EDGE_NO_OP, null);
+            ConvolveOp convOp = new ConvolveOp(kernelH, ConvolveOp.EDGE_NO_OP, null);
             convOp = new ConvolveOp(kernelV, ConvolveOp.EDGE_NO_OP, null);
 
             // Pad the image with zeros
