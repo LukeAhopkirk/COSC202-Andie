@@ -37,9 +37,10 @@ null image files throw a NullPointerException, default values are consistent etc
 
 Part two requirements:
 
-Extended filters
-Filters with negative results
-Emboss and edge detection filters
+Extended filters (Jasper) - done for Sharpen, GaussianBlur & MeanFilter
+Filters with negative results (Jasper)
+Emboss and edge detection filters (Jasper)
+
 Toolbar for common operations
 Keyboard shortcuts
 Mouse selection of rectangular regions
