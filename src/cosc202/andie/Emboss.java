@@ -7,48 +7,85 @@ import javax.swing.JOptionPane;
 
 /**
  * <p>
- * ImageOperation to apply a Sharpen filter.
+ * ImageOperation to apply an Emboss filter.
  * </p>
  * 
  * <p>
- * Type of image filter that enhances edges and fine details in an image.
- * It works by increasing the contrast between neighboring pixels, making edges
- * appear sharper and more defined.
+ * Type of image filter that produces a 3D effect by detecting edges in the
+ * image and
+ * highlighting them using a lighting effect. The filter calculates the
+ * difference between
+ * neighboring pixel values and uses this information to create a raised or
+ * lowered appearance,
+ * giving the illusion of depth to the image.
  * </p>
  * 
  */
-public class Sharpen implements ImageOperation, java.io.Serializable {
+public class Emboss implements ImageOperation, java.io.Serializable {
 
     /**
      * <p>
      * Default constructor
      * </p>
      */
-    Sharpen() {
+    Emboss() {
     }
 
     /**
      * <p>
-     * Apply a Sharpen filter to an image.
+     * Apply an Emboss filter to an image.
      * </p>
      * 
      * <p>
-     * Increases the contrast between adjacent pixels in the image.
-     * The kernel used places a higher weight on the central
-     * pixel and its adjacent pixels, which results in these pixels having a
-     * greater influence on the output value.
+     * Uses 9 different kernels for different edge directions,
+     * all of which are applied to 1 image
      * </p>
      * 
-     * @param input The image to apply the Sharpen filter to.
-     * @return The resulting (sharpened) image.
+     * @param input The image to apply the Emboss filter to.
+     * @return The resulting (Embossed) image.
      */
     public BufferedImage apply(BufferedImage input) {
-        float[] array = { 0, -1 / 2.0f, 0,
-                -1 / 2.0f, 3, -1 / 2.0f,
-                0, -1 / 2.0f, 0 };
+        float[] array1 = { 0, 0, 0,
+                1, 0, -1,
+                0, 0, 0 };
 
-        // Make a 3x3 kernel
-        Kernel kernel = new Kernel(3, 3, array);
+        float[] array2 = { 1, 0, 0,
+                0, 0, 0,
+                0, 0, -1 };
+
+        float[] array3 = { 0, 1, 0,
+                0, 0, 0,
+                0, -1, 0 };
+
+        float[] array4 = { 0, 0, 1,
+                0, 0, 0,
+                -1, 0, 0 };
+
+        float[] array5 = { 0, 0, 0,
+                -1, 0, 1,
+                0, 0, 0 };
+
+        float[] array6 = { -1, 0, 0,
+                0, 0, 0,
+                0, 0, 1 };
+
+        float[] array7 = { 0, -1, 0,
+                0, 0, 0,
+                0, 1, 0 };
+
+        float[] array8 = { 0, 0, -1,
+                0, 0, 0,
+                1, 0, 0 };
+
+        // Make a 3x3 kernels for horizontal and vertical
+        Kernel kernel1 = new Kernel(3, 3, array1);
+        Kernel kernel2 = new Kernel(3, 3, array2);
+        Kernel kernel3 = new Kernel(3, 3, array3);
+        Kernel kernel4 = new Kernel(3, 3, array4);
+        Kernel kernel5 = new Kernel(3, 3, array5);
+        Kernel kernel6 = new Kernel(3, 3, array6);
+        Kernel kernel7 = new Kernel(3, 3, array7);
+        Kernel kernel8 = new Kernel(3, 3, array8);
 
         // Asking user if they want to account for negative numbers
         boolean userNegatives;
@@ -71,7 +108,14 @@ public class Sharpen implements ImageOperation, java.io.Serializable {
             g.dispose();
 
             // Apply the ConvolveOp to the padded image
-            BufferedImage output = customConvolution(kernel, paddedInput);
+            BufferedImage output = customConvolution(kernel1, paddedInput);
+            output = customConvolution(kernel2, paddedInput);
+            output = customConvolution(kernel3, paddedInput);
+            output = customConvolution(kernel4, paddedInput);
+            output = customConvolution(kernel5, paddedInput);
+            output = customConvolution(kernel6, paddedInput);
+            output = customConvolution(kernel7, paddedInput);
+            output = customConvolution(kernel8, paddedInput);
 
             // Crop the image to its original size
             output = output.getSubimage(1, 1, width, height);
@@ -80,7 +124,14 @@ public class Sharpen implements ImageOperation, java.io.Serializable {
 
         } else {
 
-            ConvolveOp convOp = new ConvolveOp(kernel, ConvolveOp.EDGE_NO_OP, null);
+            ConvolveOp convOp = new ConvolveOp(kernel1, ConvolveOp.EDGE_NO_OP, null);
+            convOp = new ConvolveOp(kernel2, ConvolveOp.EDGE_NO_OP, null);
+            convOp = new ConvolveOp(kernel3, ConvolveOp.EDGE_NO_OP, null);
+            convOp = new ConvolveOp(kernel4, ConvolveOp.EDGE_NO_OP, null);
+            convOp = new ConvolveOp(kernel5, ConvolveOp.EDGE_NO_OP, null);
+            convOp = new ConvolveOp(kernel6, ConvolveOp.EDGE_NO_OP, null);
+            convOp = new ConvolveOp(kernel7, ConvolveOp.EDGE_NO_OP, null);
+            convOp = new ConvolveOp(kernel8, ConvolveOp.EDGE_NO_OP, null);
 
             // Pad the image with zeros
             int width = input.getWidth();

@@ -37,9 +37,9 @@ null image files throw a NullPointerException, default values are consistent etc
 
 Part two requirements:
 
-Extended filters (Jasper) - done for Sharpen, GaussianBlur & MeanFilter
-Filters with negative results (Jasper)
-Emboss and edge detection filters (Jasper)
+ALMOST COMPLETED (Jasper) - Extended filters = done for Sharpen, GaussianBlur & MeanFilter. Need to do Median
+ALMOST COMPLETED (Jasper) - Filters with negative results 
+COMPLETED (Jasper) - Emboss and edge detection filters = Issue with Resize
 
 Toolbar for common operations
 Keyboard shortcuts

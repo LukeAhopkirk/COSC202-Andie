@@ -47,7 +47,12 @@ public class FilterActions {
                 Integer.valueOf(KeyEvent.VK_G)));
         actions.add(new MedianAction(bundle.getString("Median"), null, bundle.getString("MedianDesc"),
                 Integer.valueOf(KeyEvent.VK_M)));
-
+        actions.add(new SobelAction(bundle.getString("Sobel"), null,
+                bundle.getString("SobelDesc"),
+                Integer.valueOf(KeyEvent.VK_B)));
+        actions.add(new EmbossAction(bundle.getString("Emboss"), null,
+                bundle.getString("EmbossDesc"),
+                Integer.valueOf(KeyEvent.VK_E)));
     }
 
     /**
@@ -331,6 +336,84 @@ public class FilterActions {
         public void actionPerformed(ActionEvent e) {
             // Create and apply the filter
             target.getImage().apply(new Sharpen());
+            target.repaint();
+            target.getParent().revalidate();
+        }
+    }
+
+    /**
+     * <p>
+     * Action to apply an Sobel Filter.
+     * </p>
+     *
+     * @see Sobel
+     */
+    public class SobelAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new Emboss Filter action.
+         * </p>
+         *
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        SobelAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * This method is called whenever the MeanFilterAction is triggered.
+         * Applys an appropriately sized {@link Sobel}.
+         * </p>
+         *
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            // Create and apply the filter
+            target.getImage().apply(new Sobel());
+            target.repaint();
+            target.getParent().revalidate();
+        }
+    }
+
+    /**
+     * <p>
+     * Action to apply an Emboss Filter.
+     * </p>
+     *
+     * @see Emboss
+     */
+    public class EmbossAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new Emboss Filter action.
+         * </p>
+         *
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        EmbossAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * This method is called whenever the MeanFilterAction is triggered.
+         * Applys an appropriately sized {@link Emboss}.
+         * </p>
+         *
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            // Create and apply the filter
+            target.getImage().apply(new Emboss());
             target.repaint();
             target.getParent().revalidate();
         }
