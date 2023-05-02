@@ -1,5 +1,6 @@
 package cosc202.andie;
 
+import java.awt.Graphics2D;
 import java.awt.image.*;
 import java.util.*;
 
@@ -10,11 +11,13 @@ import java.util.*;
  * 
  * <p>
  * A Mean filter blurs an image by replacing each pixel by the average of the
- * pixels in a surrounding neighbourhood, and can be implemented by a convoloution.
+ * pixels in a surrounding neighbourhood, and can be implemented by a
+ * convoloution.
  * </p>
  * 
- * <p> 
- * <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+ * <p>
+ * <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA
+ * 4.0</a>
  * </p>
  * 
  * @see java.awt.image.ConvolveOp
@@ -22,9 +25,10 @@ import java.util.*;
  * @version 1.0
  */
 public class MeanFilter implements ImageOperation, java.io.Serializable {
-    
+
     /**
-     * The size of filter to apply. A radius of 1 is a 3x3 filter, a radius of 2 a 5x5 filter, and so forth.
+     * The size of filter to apply. A radius of 1 is a 3x3 filter, a radius of 2 a
+     * 5x5 filter, and so forth.
      */
     private int radius;
 
@@ -42,7 +46,7 @@ public class MeanFilter implements ImageOperation, java.io.Serializable {
      * @param radius The radius of the newly constructed MeanFilter
      */
     MeanFilter(int radius) {
-        this.radius = radius;    
+        this.radius = radius;
     }
 
     /**
@@ -67,7 +71,7 @@ public class MeanFilter implements ImageOperation, java.io.Serializable {
      * 
      * <p>
      * As with many filters, the Mean filter is implemented via convolution.
-     * The size of the convolution kernel is specified by the {@link radius}.  
+     * The size of the convolution kernel is specified by the {@link radius}.
      * Larger radii lead to stronger blurring.
      * </p>
      * 
@@ -75,17 +79,28 @@ public class MeanFilter implements ImageOperation, java.io.Serializable {
      * @return The resulting (blurred)) image.
      */
     public BufferedImage apply(BufferedImage input) {
-        int size = (2*radius+1) * (2*radius+1);
-        float [] array = new float[size];
-        Arrays.fill(array, 1.0f/size);
+        int size = (2 * radius + 1) * (2 * radius + 1);
+        float[] array = new float[size];
+        Arrays.fill(array, 1.0f / size);
 
-        Kernel kernel = new Kernel(2*radius+1, 2*radius+1, array);
-        ConvolveOp convOp = new ConvolveOp(kernel);
-        BufferedImage output = new BufferedImage(input.getColorModel(), input.copyData(null), input.isAlphaPremultiplied(), null);
-        convOp.filter(input, output);
+        Kernel kernel = new Kernel(2 * radius + 1, 2 * radius + 1, array);
+        ConvolveOp convOp = new ConvolveOp(kernel, ConvolveOp.EDGE_NO_OP, null);
+
+        // Pad the image with zeros
+        int width = input.getWidth();
+        int height = input.getHeight();
+        BufferedImage paddedInput = new BufferedImage(width + 2 * radius, height + 2 * radius, input.getType());
+        Graphics2D g = paddedInput.createGraphics();
+        g.drawImage(input, radius, radius, null);
+        g.dispose();
+
+        // Apply the ConvolveOp to the padded image
+        BufferedImage output = convOp.filter(paddedInput, null);
+
+        // Crop the image to its original size
+        output = output.getSubimage(radius, radius, width, height);
 
         return output;
     }
-
 
 }
