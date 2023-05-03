@@ -67,6 +67,7 @@ public class Sobel implements ImageOperation, java.io.Serializable {
             userNegatives = false;
         }
 
+        // User selects Yes
         if (userNegatives) {
             int width = input.getWidth();
             int height = input.getHeight();
@@ -84,6 +85,7 @@ public class Sobel implements ImageOperation, java.io.Serializable {
 
             return output;
 
+            // User selects No
         } else {
 
             ConvolveOp convOp = new ConvolveOp(kernelH, ConvolveOp.EDGE_NO_OP, null);
