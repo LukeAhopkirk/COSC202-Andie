@@ -1,7 +1,10 @@
 package cosc202.andie;
 
 import java.util.*;
+import java.awt.Color;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+
 import javax.swing.*;
 
 /**
@@ -46,6 +49,8 @@ public class ColourActions {
                 Integer.valueOf(KeyEvent.VK_C)));
         actions.add(new SaturationAction(bundle.getString("Saturation"), null, bundle.getString("SaturationDesc"),
                 Integer.valueOf(KeyEvent.VK_S)));
+        actions.add(new ColoursplashAction(bundle.getString("Coloursplash"), null, bundle.getString("ColoursplashDesc"),
+                Integer.valueOf(KeyEvent.VK_P)));
     }
 
     /**
@@ -294,6 +299,61 @@ public class ColourActions {
             target.getParent().revalidate();
         }
 
+    }
+
+    /**
+     * <p>
+     * Action to change satuaration of an image
+     * </p>
+     * 
+     * @see Coloursplash
+     */
+    public class ColoursplashAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new satuariton action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        ColoursplashAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when the coloursplash action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the ColourSplashAction is triggered.
+         * It changes the contrast of an image.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            int pixel = 1;
+
+            // Get the image currently displayed on the panel
+            // EditableImage image = target.getImage();
+
+            // Prompt the user to select a pixel from the image
+            // JOptionPane.showMessageDialog(null, "Click on a pixel to select the color");
+
+            Color color = JColorChooser.showDialog(null, "Select a color", Color.WHITE);
+
+            if (color != null) { // User selected a color
+                pixel = color.getRGB();
+            }
+            target.getImage().apply(new Coloursplash(pixel));
+            target.repaint();
+            target.getParent().revalidate();
+        }
     }
 
 }
