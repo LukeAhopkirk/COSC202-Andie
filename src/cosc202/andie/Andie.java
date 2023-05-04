@@ -228,7 +228,7 @@ public class Andie {
         Image newImg6 = img6.getScaledInstance(defaultWidth, defaultHeight, java.awt.Image.SCALE_AREA_AVERAGING);
         ImageIcon newIcon6 = new ImageIcon(newImg6);
         JButton brightnessButton = new JButton(newIcon6);
-        greyScale.setToolTipText("Change brightness");
+        brightnessButton.setToolTipText("Change brightness");
         ColourActions brightnessAction = new ColourActions(); // Create a new colourAction instance
         // Create a new ColourActions.brightnessAction instance
         ColourActions.BrightnessAction brightnessAction1 = brightnessAction.new BrightnessAction(
