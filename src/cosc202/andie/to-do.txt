@@ -48,4 +48,5 @@ Crop to selection
 Drawing functions – rectangle, ellipse, line
 Macros for record and replay of operations
 
-COMPLETED (Jasper) - Show us something. . . Added a Satuartion filter (might add more things as it's boring)
+COMPLETED (Jasper) - Show us something. . . Coloursplash (user chooses colour, all others turn B&W) & Satuartion filter
+
