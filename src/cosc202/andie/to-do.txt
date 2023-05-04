@@ -42,8 +42,8 @@ COMPLETED (Jasper) - Filters with negative results
 COMPLETED (Jasper) - Emboss and edge detection filters = Issue with Resize
 COMPLETED (Jasper) - Toolbar for common operations
 
-Keyboard shortcuts
-Mouse selection of rectangular regions
+(Richard) - Keyboard shortcuts
+(Luke) - Mouse selection of rectangular regions
 Crop to selection
 Drawing functions – rectangle, ellipse, line
 Macros for record and replay of operations

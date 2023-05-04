@@ -44,6 +44,8 @@ public class ColourActions {
                 Integer.valueOf(KeyEvent.VK_B)));
         actions.add(new ContrastAction(bundle.getString("Contrast"), null, bundle.getString("ContrastDesc"),
                 Integer.valueOf(KeyEvent.VK_C)));
+        actions.add(new SaturationAction(bundle.getString("Saturation"), null, bundle.getString("SaturationDesc"),
+                Integer.valueOf(KeyEvent.VK_S)));
     }
 
     /**
@@ -225,6 +227,69 @@ public class ColourActions {
 
             // Create and apply the filter
             target.getImage().apply(new Brightness(contrast));
+            target.repaint();
+            target.getParent().revalidate();
+        }
+
+    }
+
+    /**
+     * <p>
+     * Action to change satuaration of an image
+     * </p>
+     * 
+     * @see Saturation
+     */
+    public class SaturationAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new satuariton action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        SaturationAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when the satuartion action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the SaturationAction is triggered.
+         * It changes the contrast of an image.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            int saturation = 1;
+
+            // Pop-up dialog box to ask for the brightness value using a JSlider.
+            JSlider contrastSlider = new JSlider(-100, 100, 1);
+            contrastSlider.setMajorTickSpacing(50);
+            contrastSlider.setMinorTickSpacing(10);
+            contrastSlider.setPaintTicks(true);
+            contrastSlider.setPaintLabels(true);
+            contrastSlider.setSnapToTicks(true);
+            int option = JOptionPane.showOptionDialog(null, contrastSlider, bundle.getString("SaturationValueDesc"),
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+            // Check the return value from the dialog box.
+            if (option == JOptionPane.CANCEL_OPTION) {
+                return;
+            } else if (option == JOptionPane.OK_OPTION) {
+                saturation = contrastSlider.getValue();
+            }
+
+            // Create and apply the filter
+            target.getImage().apply(new Saturation(saturation));
             target.repaint();
             target.getParent().revalidate();
         }
