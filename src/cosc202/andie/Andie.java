@@ -1,17 +1,12 @@
 package cosc202.andie;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 
 import javax.swing.*;
-
-import cosc202.andie.FileActions.FileSaveAction;
-import cosc202.andie.ViewActions.ZoomInAction;
 
 import javax.imageio.*;
 

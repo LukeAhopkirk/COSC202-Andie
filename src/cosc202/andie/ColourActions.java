@@ -3,7 +3,6 @@ package cosc202.andie;
 import java.util.*;
 import java.awt.Color;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
 
 import javax.swing.*;
 
@@ -231,7 +230,7 @@ public class ColourActions {
             }
 
             // Create and apply the filter
-            target.getImage().apply(new Brightness(contrast));
+            target.getImage().apply(new Contrast(contrast));
             target.repaint();
             target.getParent().revalidate();
         }
