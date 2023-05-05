@@ -51,7 +51,7 @@ public class Coloursplash implements ImageOperation {
     public BufferedImage apply(BufferedImage input) {
         int width = input.getWidth();
         int height = input.getHeight();
-        int threshold = 60;
+        int threshold = 100;
         Color selectedColor = new Color(pixel);
 
         for (int x = 0; x < width; x++) {
