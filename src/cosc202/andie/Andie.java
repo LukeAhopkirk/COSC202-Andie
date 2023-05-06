@@ -33,7 +33,7 @@ import javax.imageio.*;
 public class Andie {
 
         static ResourceBundle bundle = ResourceBundle.getBundle("MessageBundle");
-
+        
         /**
          * <p>
          * Launches the main GUI for the ANDIE program.

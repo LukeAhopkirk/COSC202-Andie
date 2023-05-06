@@ -23,16 +23,27 @@ public class AdjustImageT {
         actions = new ArrayList<Action>();
         actions.add(new ResizeAction(bundle.getString("Resize"), null, bundle.getString("ResizeDesc"),
                 Integer.valueOf(KeyEvent.VK_R)));
+        actions.get(0).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl shift pressed R"));
+
         actions.add(new FlipVAction(bundle.getString("FlipV"), null, bundle.getString("FlipVDesc"),
                 Integer.valueOf(KeyEvent.VK_V)));
+        actions.get(1).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl shift pressed V"));
+
         actions.add(new FlipHAction(bundle.getString("FlipH"), null, bundle.getString("FlipHDesc"),
                 Integer.valueOf(KeyEvent.VK_H)));
+        actions.get(2).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl shift pressed H"));
+
         actions.add(new RotateLeftAction("Rotate 90\u00B0 Left", null, "Rotate image 90\u00B0 Left",
                 Integer.valueOf(KeyEvent.VK_F)));
+        actions.get(3).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl shift pressed LEFT"));
+
         actions.add(new RotateRightAction("Rotate 90\u00B0 Right", null, "Rotate image 90\u00B0 Right",
                 Integer.valueOf(KeyEvent.VK_F)));
+        actions.get(4).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl shift pressed RIGHT"));
+
         actions.add(new Rotate180Action("Rotate 180\u00B0", null, "Rotate image 180\u00B0",
                 Integer.valueOf(KeyEvent.VK_F)));
+        actions.get(5).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl shift pressed DOWN"));
 
     }
 

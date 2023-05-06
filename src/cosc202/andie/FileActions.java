@@ -37,17 +37,38 @@ public class FileActions {
     public FileActions() {
 
         actions = new ArrayList<Action>();
+        //WHEN YOU ARE EDITING THIS, PLEASE DON'T CHANGE THE ORDER OF THE OPERATIONS OR ELSE KEYBOARD
+        //SHORTCUTS WOULD BREAK
+
+        //Open
         actions.add(new FileOpenAction(bundle.getString("Open"), null, bundle.getString("OpenDesc"),
                 Integer.valueOf(KeyEvent.VK_O)));
+        actions.get(0).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK));
+        //Save
         actions.add(new FileSaveAction(bundle.getString("Save"), null, bundle.getString("SaveDesc"),
                 Integer.valueOf(KeyEvent.VK_S)));
+        actions.get(1).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK));
+        //SaveAs
         actions.add(new FileSaveAsAction(bundle.getString("SaveAs"), null, bundle.getString("SaveAsDesc"),
                 Integer.valueOf(KeyEvent.VK_A)));
+        actions.get(2).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl shift pressed S"));
+        //Export
         actions.add(new ExportAction(bundle.getString("Export"), null, bundle.getString("ExportDesc"),
                 Integer.valueOf(KeyEvent.VK_E)));
+        actions.get(3).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_X, KeyEvent.CTRL_DOWN_MASK));
+        //Exit
         actions.add(
                 new FileExitAction(bundle.getString("Exit"), null, bundle.getString("ExitDesc"), Integer.valueOf(0)));
+        actions.get(4).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Q, KeyEvent.CTRL_DOWN_MASK));
 
+                 
+        
+        
+        //actions.get(1).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK));
+
+
+        //KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, KeyEvent.SHIFT_MASK | KeyEvent.CTRL_MASK)
+        //KeyStroke.getKeyStroke("shift ctrl pressed SPACE")
     }
 
     /**
