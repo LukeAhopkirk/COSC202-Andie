@@ -36,7 +36,9 @@ public class EditActions {
     public EditActions() {
         actions = new ArrayList<Action>();
         actions.add(new UndoAction(bundle.getString("Undo"), null, bundle.getString("UndoDesc"), Integer.valueOf(KeyEvent.VK_U)));
+        actions.get(0).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_DOWN_MASK));
         actions.add(new RedoAction(bundle.getString("Redo"), null, bundle.getString("RedoDesc"), Integer.valueOf(KeyEvent.VK_R)));
+        actions.get(1).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl shift pressed Z"));
     }
 
     /**
