@@ -1,7 +1,10 @@
 package cosc202.andie;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.awt.List;
 import java.awt.image.*;
 
 /**
@@ -62,45 +65,57 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
 
         int k = (kernelSize - 1) / 2;
         int windowSize = kernelSize * kernelSize;
-        byte[] window = new byte[windowSize];
+        byte[] windowR = new byte[windowSize];
+        byte[] windowG = new byte[windowSize];
+        byte[] windowB = new byte[windowSize];
+        byte[] windowA = new byte[windowSize];
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                for (int b = 0; b < numBands; b++) {
-                    int index = y * width * numBands + x * numBands + b;
-                    int windowIndex = 0;
+                int windowIndex = 0;
 
-                    for (int wy = -k; wy <= k; wy++) {
-                        for (int wx = -k; wx <= k; wx++) {
-                            int xx = x + wx;
-                            int yy = y + wy;
+                for (int wy = -k; wy <= k; wy++) {
+                    for (int wx = -k; wx <= k; wx++) {
+                        int xx = x + wx;
+                        int yy = y + wy;
 
-                            if (xx < 0) {
-                                xx = -xx;
-                            } else if (xx >= width) {
-                                xx = width - (xx - width + 2);
-                            }
-
-                            if (yy < 0) {
-                                yy = -yy;
-                            } else if (yy >= height) {
-                                yy = height - (yy - height + 2);
-                            }
-
-                            int windowPixelIndex = yy * width * numBands + xx * numBands + b;
-                            window[windowIndex] = pixels[windowPixelIndex];
-                            windowIndex++;
+                        if (xx < 0) {
+                            xx = -xx;
+                        } else if (xx >= width) {
+                            xx = width - (xx - width + 2);
                         }
-                    }
 
-                    Arrays.sort(window);
-                    int medianIndex = windowSize / 2;
+                        if (yy < 0) {
+                            yy = -yy;
+                        } else if (yy >= height) {
+                            yy = height - (yy - height + 2);
+                        }
 
-                    if (window[0] == window[windowSize - 1]) { // all pixel values are the same
-                        outputPixels[index] = window[0];
-                    } else {
-                        outputPixels[index] = window[medianIndex];
+                        int windowPixelIndex = yy * width * numBands + xx * numBands;
+                        windowR[windowIndex] = pixels[windowPixelIndex];
+                        windowG[windowIndex] = pixels[windowPixelIndex + 1];
+                        windowB[windowIndex] = pixels[windowPixelIndex + 2];
+                        if (numBands > 3) {
+                            windowA[windowIndex] = pixels[windowPixelIndex + 3];
+                        }
+                        windowIndex++;
                     }
+                }
+
+                Arrays.sort(windowR, 0, windowIndex);
+                Arrays.sort(windowG, 0, windowIndex);
+                Arrays.sort(windowB, 0, windowIndex);
+                if (numBands > 3) {
+                    Arrays.sort(windowA, 0, windowIndex);
+                }
+
+                int medianIndex = windowIndex / 2;
+                int index = y * width * numBands + x * numBands;
+                outputPixels[index] = windowR[medianIndex];
+                outputPixels[index + 1] = windowG[medianIndex];
+                outputPixels[index + 2] = windowB[medianIndex];
+                if (numBands > 3) {
+                    outputPixels[index + 3] = windowA[medianIndex];
                 }
             }
         }
