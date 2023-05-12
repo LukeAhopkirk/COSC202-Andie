@@ -33,7 +33,7 @@ import javax.imageio.*;
 public class Andie {
 
         static ResourceBundle bundle = ResourceBundle.getBundle("MessageBundle");
-        
+
         /**
          * <p>
          * Launches the main GUI for the ANDIE program.
@@ -104,6 +104,10 @@ public class Andie {
                 // Actions that affect the representation of colour in the image
                 ColourActions colourActions = new ColourActions();
                 menuBar.add(colourActions.createMenu());
+
+                // Actions that affect draw on the image
+                DrawActions drawActions = new DrawActions();
+                menuBar.add(drawActions.createMenu());
 
                 LanguageActions languageActions = new LanguageActions();
                 menuBar.add(languageActions.createMenu());
