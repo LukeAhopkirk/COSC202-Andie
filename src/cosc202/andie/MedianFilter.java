@@ -59,19 +59,14 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
         int height = input.getHeight();
         BufferedImage output = new BufferedImage(width, height, input.getType());
 
-        int numBands = input.getRaster().getNumBands();
-        byte[] pixels = ((DataBufferByte) input.getRaster().getDataBuffer()).getData();
-        byte[] outputPixels = ((DataBufferByte) output.getRaster().getDataBuffer()).getData();
-
         int k = (kernelSize - 1) / 2;
-        int windowSize = kernelSize * kernelSize;
-        byte[] windowR = new byte[windowSize];
-        byte[] windowG = new byte[windowSize];
-        byte[] windowB = new byte[windowSize];
-        byte[] windowA = new byte[windowSize];
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
+                int[] windowR = new int[kernelSize * kernelSize];
+                int[] windowG = new int[kernelSize * kernelSize];
+                int[] windowB = new int[kernelSize * kernelSize];
+                int[] windowA = new int[kernelSize * kernelSize];
                 int windowIndex = 0;
 
                 for (int wy = -k; wy <= k; wy++) {
@@ -91,12 +86,12 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
                             yy = height - (yy - height + 2);
                         }
 
-                        int windowPixelIndex = yy * width * numBands + xx * numBands;
-                        windowR[windowIndex] = pixels[windowPixelIndex];
-                        windowG[windowIndex] = pixels[windowPixelIndex + 1];
-                        windowB[windowIndex] = pixels[windowPixelIndex + 2];
-                        if (numBands > 3) {
-                            windowA[windowIndex] = pixels[windowPixelIndex + 3];
+                        int color = input.getRGB(xx, yy);
+                        windowR[windowIndex] = (color >> 16) & 0xFF;
+                        windowG[windowIndex] = (color >> 8) & 0xFF;
+                        windowB[windowIndex] = color & 0xFF;
+                        if (input.getAlphaRaster() != null) {
+                            windowA[windowIndex] = input.getAlphaRaster().getSample(xx, yy, 0);
                         }
                         windowIndex++;
                     }
@@ -105,18 +100,17 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
                 Arrays.sort(windowR, 0, windowIndex);
                 Arrays.sort(windowG, 0, windowIndex);
                 Arrays.sort(windowB, 0, windowIndex);
-                if (numBands > 3) {
+                if (input.getAlphaRaster() != null) {
                     Arrays.sort(windowA, 0, windowIndex);
                 }
 
                 int medianIndex = windowIndex / 2;
-                int index = y * width * numBands + x * numBands;
-                outputPixels[index] = windowR[medianIndex];
-                outputPixels[index + 1] = windowG[medianIndex];
-                outputPixels[index + 2] = windowB[medianIndex];
-                if (numBands > 3) {
-                    outputPixels[index + 3] = windowA[medianIndex];
-                }
+                int r = windowR[medianIndex];
+                int g = windowG[medianIndex];
+                int b = windowB[medianIndex];
+                int a = (input.getAlphaRaster() != null) ? windowA[medianIndex] : 255;
+                int color = (a << 24) | (r << 16) | (g << 8) | b;
+                output.setRGB(x, y, color);
             }
         }
 
