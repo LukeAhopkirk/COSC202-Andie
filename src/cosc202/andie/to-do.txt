@@ -42,11 +42,14 @@ COMPLETED (Jasper) - Filters with negative results
 COMPLETED (Jasper) - Emboss and edge detection filters = Issue with Resize
 COMPLETED (Jasper) - Toolbar for common operations
 
-(Richard) - Keyboard shortcuts
+COMPLETED (Richard) - Keyboard shortcuts
+ALMOST (Richard) - Macros for record and replay of operations (Brightness, contrast, saturation does not work for some reason)
+(Richard) - Crop to selection
+
 (Luke) - Mouse selection of rectangular regions
-Crop to selection
+
 Drawing functions – rectangle, ellipse, line
-Macros for record and replay of operations
+
 
 COMPLETED (Jasper) - Show us something. . . Coloursplash (user chooses colour, all others turn B&W) & Satuartion filter
 

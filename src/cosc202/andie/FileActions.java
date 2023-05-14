@@ -256,7 +256,7 @@ public class FileActions {
                     String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
                     target.getImage().saveAs(imageFilepath);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Please open an image to save.");
+                    JOptionPane.showMessageDialog(null, "" + e);
                 }
             }
         }

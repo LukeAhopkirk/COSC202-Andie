@@ -60,6 +60,7 @@ public abstract class ImageAction extends AbstractAction {
             putValue(MNEMONIC_KEY, mnemonic);
         }
     }
+    
 
     /**
      * <p>
