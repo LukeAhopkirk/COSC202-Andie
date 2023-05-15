@@ -12,12 +12,15 @@ import java.awt.image.BufferedImage;
  */
 public class Rectangle implements ImageOperation {
 
+    private static Color currColour;
+
     /**
      * <p>
      * Default Constructor
      * </p>
      */
-    Rectangle() {
+    Rectangle(Color currColour) {
+        Rectangle.currColour = currColour;
     }
 
     /**
@@ -36,7 +39,7 @@ public class Rectangle implements ImageOperation {
 
         // image is a BufferedImage
         Graphics2D g2d = input.createGraphics();
-        g2d.setColor(Color.GREEN);
+        g2d.setColor(Rectangle.currColour);
         g2d.drawRect(100, 100, 100, 100); // (x, y, width, height)
         g2d.dispose();
 

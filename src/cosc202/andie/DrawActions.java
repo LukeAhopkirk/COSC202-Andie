@@ -1,6 +1,7 @@
 package cosc202.andie;
 
 import java.util.*;
+import java.awt.Color;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -22,6 +23,31 @@ public class DrawActions {
      */
     protected ArrayList<Action> actions;
     ResourceBundle bundle = ResourceBundle.getBundle("MessageBundle");
+
+    // Currnt colour for drawing
+    private static Color currColour;
+
+    /**
+     * <p>
+     * Get the current colour for drawing.
+     * </p>
+     * 
+     * @param color The new colour.
+     */
+    public static Color getMyColour() {
+        return currColour;
+    }
+
+    /**
+     * <p>
+     * Set the current colour for drawing.
+     * </p>
+     * 
+     * @param color The new colour.
+     */
+    public static void setMyColour(Color chosenColour) {
+        currColour = chosenColour;
+    }
 
     /**
      * <p>
@@ -90,7 +116,7 @@ public class DrawActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            target.getImage().apply(new Circle()); // pass in co-ordinates? etc
+            target.getImage().apply(new Circle(getMyColour())); // pass in co-ordinates? etc
             target.repaint();
             target.getParent().revalidate();
         }
@@ -130,9 +156,45 @@ public class DrawActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            target.getImage().apply(new Rectangle()); // pass in co-ordinates? etc
+            target.getImage().apply(new Rectangle(getMyColour())); // pass in co-ordinates? etc
             target.repaint();
             target.getParent().revalidate();
+        }
+
+    }
+
+    /**
+     * <p>
+     * Action to change the current drawing colour
+     * </p>
+     */
+    public class ChangeColourAction implements ActionListener {
+
+        private Color innerClassColor;
+
+        /**
+         * <p>
+         * Changes the current colour
+         * </p>
+         * 
+         */
+        ChangeColourAction(Color currColour) {
+            innerClassColor = currColour;
+        }
+
+        /**
+         * <p>
+         * Callback for when the drawrectangle action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the drawRectangle is triggered.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            setMyColour(innerClassColor);
         }
 
     }
