@@ -1,7 +1,6 @@
 package cosc202.andie;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -124,6 +123,20 @@ public class Andie {
                 ArrayList<JButton> buttonList = Toolbar.getButtons();
                 for (int i = 0; i < buttonList.size(); i++) {
                         toolbar.add(buttonList.get(i));
+                }
+
+                // Add a Toolbar for colours
+                JToolBar toolbarColours = new JToolBar();
+                frame.add(toolbarColours, BorderLayout.EAST);
+                toolbarColours.setLayout(new BoxLayout(toolbarColours, BoxLayout.Y_AXIS));
+
+                // Create all the JButtonColour events
+                Toolbar.createColourEvents();
+
+                // Add all the buttons to the JToolBar
+                ArrayList<JButton> buttonColourList = Toolbar.getColourButtons();
+                for (int i = 0; i < buttonColourList.size(); i++) {
+                        toolbar.add(buttonColourList.get(i));
                 }
 
                 frame.setJMenuBar(menuBar);

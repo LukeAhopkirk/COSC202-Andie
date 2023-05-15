@@ -1,11 +1,14 @@
 package cosc202.andie;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+
+import cosc202.andie.DrawActions.ChangeColourAction;
 
 /**
  * <p>
@@ -27,6 +30,7 @@ public class Toolbar extends Andie {
         final static int defaultWidth = 20;
 
         static ArrayList<JButton> JButtonList = new ArrayList<>();
+        static ArrayList<JButton> JButtonColourList = new ArrayList<>();
 
         /* Default constructor */
         Toolbar() {
@@ -70,6 +74,17 @@ public class Toolbar extends Andie {
 
         /**
          * <p>
+         * Adds a JButton to the current list of colours
+         * </p>
+         * 
+         * @param currButton Current JButton to be added to the list
+         */
+        public static void addButtonColourList(JButton currButton) {
+                JButtonColourList.add(currButton);
+        }
+
+        /**
+         * <p>
          * Accessor method for the JButton list
          * </p>
          * 
@@ -77,6 +92,17 @@ public class Toolbar extends Andie {
          */
         public static ArrayList<JButton> getButtons() {
                 return JButtonList;
+        }
+
+        /**
+         * <p>
+         * Accessor method for the JButtonColour list
+         * </p>
+         * 
+         * @return ArrayList containing all the JButtons
+         */
+        public static ArrayList<JButton> getColourButtons() {
+                return JButtonColourList;
         }
 
         /**
@@ -203,5 +229,78 @@ public class Toolbar extends Andie {
                                 null, bundle.getString("RectangleDesc"), Integer.valueOf(KeyEvent.VK_R));
                 // Add the zoomInAction as an ActionListener to the zoomIn
                 drawRectangleButton.addActionListener(drawRectangleAction);
+        }
+
+        /**
+         * <p>
+         * Method that when called, creates all the events that
+         * are triggered when a specific JButton is clicked,
+         * within the colour JToolBar
+         * </p>
+         */
+        public static void createColourEvents() {
+                // Add open icon & event
+                ImageIcon red = new ImageIcon(Andie.class.getClassLoader().getResource("REDCIRCLE.png"));
+                JButton redButton = Toolbar.crateButton(red, "Red");
+                addButtonColourList(redButton);
+                DrawActions redAction = new DrawActions(); // create an instance of the outer class
+                ChangeColourAction changeAction = redAction.new ChangeColourAction(Color.RED);
+                // Add the openAction as an ActionListener to the openButton
+                redButton.addActionListener(changeAction);
+
+                // // Add open icon & event
+                ImageIcon blue = new ImageIcon(Andie.class.getClassLoader().getResource("BLUECIRCLE.png"));
+                JButton blueButton = Toolbar.crateButton(blue, "Blue");
+                addButtonColourList(blueButton);
+                DrawActions blueAction = new DrawActions(); // create an instance of the outer class
+                ChangeColourAction changeAction1 = blueAction.new ChangeColourAction(Color.BLUE);
+                // Add the openAction as an ActionListener to the openButton
+                blueButton.addActionListener(changeAction1);
+
+                // Add open icon & event
+                ImageIcon green = new ImageIcon(Andie.class.getClassLoader().getResource("GREENCIRCLE.png"));
+                JButton greenButton = Toolbar.crateButton(green, "Green");
+                addButtonColourList(greenButton);
+                DrawActions greenAction = new DrawActions(); // create an instance of the outer class
+                ChangeColourAction changeAction2 = greenAction.new ChangeColourAction(Color.GREEN);
+                // Add the openAction as an ActionListener to the openButton
+                greenButton.addActionListener(changeAction2);
+
+                // Add open icon & event
+                ImageIcon yellow = new ImageIcon(Andie.class.getClassLoader().getResource("YELLOWCIRCLE.png"));
+                JButton yellowButton = Toolbar.crateButton(yellow, "Yellow");
+                addButtonColourList(yellowButton);
+                DrawActions yellowAction = new DrawActions(); // create an instance of the outer class
+                ChangeColourAction changeAction3 = yellowAction.new ChangeColourAction(Color.YELLOW);
+                // Add the openAction as an ActionListener to the openButton
+                yellowButton.addActionListener(changeAction3);
+
+                // Add open icon & event
+                ImageIcon pink = new ImageIcon(Andie.class.getClassLoader().getResource("PINKCIRCLE.png"));
+                JButton pinkButton = Toolbar.crateButton(pink, "Pink");
+                addButtonColourList(pinkButton);
+                DrawActions pinkAction = new DrawActions(); // create an instance of the outer class
+                ChangeColourAction changeAction4 = pinkAction.new ChangeColourAction(Color.PINK);
+                // Add the openAction as an ActionListener to the openButton
+                pinkButton.addActionListener(changeAction4);
+
+                // Add open icon & event
+                ImageIcon orange = new ImageIcon(Andie.class.getClassLoader().getResource("ORANGECIRCLE.png"));
+                JButton orangeButton = Toolbar.crateButton(orange, "Orange");
+                addButtonColourList(orangeButton);
+                DrawActions orangeAction = new DrawActions(); // create an instance of the outer class
+                ChangeColourAction changeAction5 = orangeAction.new ChangeColourAction(Color.ORANGE);
+                // Add the openAction as an ActionListener to the openButton
+                orangeButton.addActionListener(changeAction5);
+
+                // Add open icon & event
+                ImageIcon black = new ImageIcon(Andie.class.getClassLoader().getResource("BLACKCIRCLE.png"));
+                JButton blackButton = Toolbar.crateButton(black, "Black");
+                addButtonColourList(blackButton);
+                DrawActions blackAction = new DrawActions(); // create an instance of the outer class
+                ChangeColourAction changeAction6 = blackAction.new ChangeColourAction(Color.BLACK);
+                // Add the openAction as an ActionListener to the openButton
+                blackButton.addActionListener(changeAction6);
+
         }
 }
