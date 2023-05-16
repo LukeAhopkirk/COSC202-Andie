@@ -127,6 +127,8 @@ public class DrawActions {
                 Integer.valueOf(KeyEvent.VK_R)));
         // actions.get(1).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl
         // pressed MINUS"));
+        actions.add(new FillShapeAction(bundle.getString("Fill"), null, bundle.getString("FillDesc"),
+                Integer.valueOf(KeyEvent.VK_F)));
     }
 
     /**
