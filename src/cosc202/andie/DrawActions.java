@@ -26,8 +26,29 @@ public class DrawActions {
     protected ArrayList<Action> actions;
     ResourceBundle bundle = ResourceBundle.getBundle("MessageBundle");
 
-    // Currnt colour for drawing
-    private static Color currColour;
+    // Currnt colour for drawing - default is black
+    private static Color currColour = Color.BLACK;
+
+    // Status for last drawn shape
+    private static int lastX = 0, lastY = 0, lastHeight = 0, lastWidth = 0;
+    private static boolean isCircle = false;
+    private static boolean isCircleRunning = false;
+    private static boolean isRectangleRunning = false;
+
+    /**
+     * <p>
+     * Change the last x,y,height,width, status for a shape
+     * </p>
+     * 
+     * @param color The new colour.
+     */
+    public static void changeLastNumbers(int x, int y, int height, int width, boolean isLastCircle) {
+        lastX = x;
+        lastY = y;
+        lastHeight = height;
+        lastWidth = width;
+        isCircle = isLastCircle;
+    }
 
     /**
      * <p>
@@ -38,6 +59,46 @@ public class DrawActions {
      */
     public static Color getMyColour() {
         return currColour;
+    }
+
+    /*
+     * <p>
+     * Get the last x co-ordinate for a shape
+     */
+    private static int getX() {
+        return lastX;
+    }
+
+    /*
+     * <p>
+     * Get the last y co-ordinate for a shape
+     */
+    private static int getY() {
+        return lastY;
+    }
+
+    /*
+     * <p>
+     * Get the last height for a shape
+     */
+    private static int getHeight() {
+        return lastHeight;
+    }
+
+    /*
+     * <p>
+     * Get the last width for a shape
+     */
+    private static int getWidth() {
+        return lastWidth;
+    }
+
+    /*
+     * <p>
+     * Get the last width for a shape
+     */
+    private static boolean getIsCircle() {
+        return isCircle;
     }
 
     /**
@@ -118,6 +179,11 @@ public class DrawActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
+            isCircleRunning = true;
+            if (isRectangleRunning == true) {
+                JOptionPane.showMessageDialog(null, "Please finish drawing the rectangle first");
+                return;
+            }
             target.addMouseListener(new MouseAdapter() {
                 int startX, startY, endX, endY;
 
@@ -130,6 +196,7 @@ public class DrawActions {
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
+                    isCircleRunning = false;
                     endX = e.getX();
                     endY = e.getY();
                     int width = Math.abs(endX - startX);
@@ -137,7 +204,8 @@ public class DrawActions {
                     int x = Math.min(startX, endX);
                     int y = Math.min(startY, endY);
                     int diameter = Math.min(width, height);
-                    target.getImage().apply(new Circle(getMyColour(), x, y, diameter, diameter));
+                    target.getImage().apply(new Circle(getMyColour(), x, y, diameter, diameter, false));
+                    changeLastNumbers(x, y, diameter, diameter, true);
                     target.repaint();
                     target.getParent().revalidate();
                     target.removeMouseListener(this);
@@ -155,7 +223,7 @@ public class DrawActions {
                     int diameter = Math.min(width, height);
                     target.repaint();
                     Graphics2D g2d = (Graphics2D) target.getGraphics();
-                    g2d.setStroke(new BasicStroke(2));
+                    g2d.setStroke(new BasicStroke(3));
                     g2d.setColor(getMyColour());
                     g2d.drawOval(x, y, diameter, diameter);
                 }
@@ -197,6 +265,12 @@ public class DrawActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
+            isRectangleRunning = true;
+            System.out.println(isCircleRunning);
+            if (isCircleRunning == true) {
+                JOptionPane.showMessageDialog(null, "Please finish drawing the circle first");
+                return;
+            }
             target.addMouseListener(new MouseAdapter() {
                 int startX, startY, endX, endY;
 
@@ -209,13 +283,15 @@ public class DrawActions {
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
+                    isRectangleRunning = false;
                     endX = e.getX();
                     endY = e.getY();
                     int width = Math.abs(endX - startX);
                     int height = Math.abs(endY - startY);
                     int x = Math.min(startX, endX);
                     int y = Math.min(startY, endY);
-                    target.getImage().apply(new Rectangle(getMyColour(), x, y, width, height));
+                    target.getImage().apply(new Rectangle(getMyColour(), x, y, width, height, false));
+                    changeLastNumbers(x, y, width, height, false);
                     target.repaint();
                     target.getParent().revalidate();
                     target.removeMouseListener(this);
@@ -272,6 +348,57 @@ public class DrawActions {
          */
         public void actionPerformed(ActionEvent e) {
             setMyColour(innerClassColor);
+        }
+
+    }
+
+    /**
+     * <p>
+     * Action to fill the last shape
+     * </p>
+     */
+    public class FillShapeAction extends ImageAction {
+
+        // private Color innerClassColor;
+
+        /**
+         * <p>
+         * Create a new drawrectangle action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        FillShapeAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when the fillshapeaction is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the fillshapeaction is triggered.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            if (getX() == 0 && getY() == 0 && getWidth() == 0 && getHeight() == 0) {
+                JOptionPane.showMessageDialog(null, "No shapes drawn");
+            } else {
+                if (getIsCircle()) {
+                    target.getImage().apply(new Circle(getMyColour(), getX(), getY(), getWidth(), getHeight(), true));
+                } else {
+                    target.getImage()
+                            .apply(new Rectangle(getMyColour(), getX(), getY(), getHeight(), getWidth(), true));
+                }
+                target.repaint();
+                target.getParent().revalidate();
+            }
         }
 
     }
