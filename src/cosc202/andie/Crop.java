@@ -11,7 +11,10 @@ import java.awt.image.BufferedImage;
 public class Crop implements ImageOperation {
     static int x, y, width, height;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9d2f9338d37208414d1f901e872d5147b3094878
     /**
      * <p>
      * Default Constructor

@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import cosc202.andie.DrawActions.ChangeColourAction;
+import cosc202.andie.DrawActions.FillShapeAction;
 
 /**
  * <p>
@@ -239,6 +240,17 @@ public class Toolbar extends Andie {
          * </p>
          */
         public static void createColourEvents() {
+
+                // Add paint icon & event
+                ImageIcon paint = new ImageIcon(Andie.class.getClassLoader().getResource("PAINT.png"));
+                JButton paintButton = Toolbar.crateButton(paint, "Fill shape");
+                addButtonColourList(paintButton);
+                DrawActions paintAction = new DrawActions(); // create an instance of the outer class
+                FillShapeAction fillShapeAction = paintAction.new FillShapeAction("Fill", null, "Fill Shape",
+                                Integer.valueOf(KeyEvent.VK_F));
+                // Add the openAction as an ActionListener to the openButton
+                paintButton.addActionListener(fillShapeAction);
+
                 // Add open icon & event
                 ImageIcon red = new ImageIcon(Andie.class.getClassLoader().getResource("REDCIRCLE.png"));
                 JButton redButton = Toolbar.crateButton(red, "Red");

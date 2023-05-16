@@ -1,5 +1,6 @@
 package cosc202.andie;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -17,18 +18,20 @@ public class Rectangle implements ImageOperation {
     private static int y;
     private static int width;
     private static int height;
+    private static boolean fill;
 
     /**
      * <p>
      * Default Constructor
      * </p>
      */
-    Rectangle(Color currColour, int x, int y, int width, int height) {
+    Rectangle(Color currColour, int x, int y, int width, int height, boolean fill) {
         Rectangle.currColour = currColour;
         Rectangle.x = x;
         Rectangle.y = y;
         Rectangle.width = width;
         Rectangle.height = height;
+        Rectangle.fill = fill;
     }
 
     /**
@@ -46,10 +49,19 @@ public class Rectangle implements ImageOperation {
     public BufferedImage apply(BufferedImage input) {
 
         // image is a BufferedImage
-        Graphics2D g2d = input.createGraphics();
-        g2d.setColor(Rectangle.currColour);
-        g2d.drawRect(Rectangle.x, Rectangle.y, Rectangle.width, Rectangle.height); // (x, y, width, height)
-        g2d.dispose();
+        if (fill) {
+            Graphics2D g2d = input.createGraphics();
+            g2d.setColor(Rectangle.currColour);
+            g2d.setStroke(new BasicStroke(3));
+            g2d.fillRect(Rectangle.x, Rectangle.y, Rectangle.width, Rectangle.height); // (x, y, width, height)
+            g2d.dispose();
+        } else {
+            Graphics2D g2d = input.createGraphics();
+            g2d.setColor(Rectangle.currColour);
+            g2d.setStroke(new BasicStroke(3));
+            g2d.drawRect(Rectangle.x, Rectangle.y, Rectangle.width, Rectangle.height); // (x, y, width, height)
+            g2d.dispose();
+        }
 
         return input;
     }

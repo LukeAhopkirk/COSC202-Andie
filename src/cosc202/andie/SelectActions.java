@@ -152,7 +152,6 @@ public class SelectActions {
                     g2d.drawRect(x, y, width, height);
                 }
             });
-            System.out.println(x + " " +  y + " " + height + " " + width);
         }
     }
 
