@@ -13,14 +13,22 @@ import java.awt.image.BufferedImage;
 public class Rectangle implements ImageOperation {
 
     private static Color currColour;
+    private static int x;
+    private static int y;
+    private static int width;
+    private static int height;
 
     /**
      * <p>
      * Default Constructor
      * </p>
      */
-    Rectangle(Color currColour) {
+    Rectangle(Color currColour, int x, int y, int width, int height) {
         Rectangle.currColour = currColour;
+        Rectangle.x = x;
+        Rectangle.y = y;
+        Rectangle.width = width;
+        Rectangle.height = height;
     }
 
     /**
@@ -40,7 +48,7 @@ public class Rectangle implements ImageOperation {
         // image is a BufferedImage
         Graphics2D g2d = input.createGraphics();
         g2d.setColor(Rectangle.currColour);
-        g2d.drawRect(100, 100, 100, 100); // (x, y, width, height)
+        g2d.drawRect(Rectangle.x, Rectangle.y, Rectangle.width, Rectangle.height); // (x, y, width, height)
         g2d.dispose();
 
         return input;

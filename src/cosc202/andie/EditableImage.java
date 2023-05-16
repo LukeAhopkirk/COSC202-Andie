@@ -321,7 +321,7 @@ class EditableImage {
      * Apply an {@link ImageOperation} to this image.
      * </p>
      * 
-     * @param op The operation to apply.
+     * @param clearRect The operation to apply.
      */
     public void apply(ImageOperation op) {
         current = op.apply(current);

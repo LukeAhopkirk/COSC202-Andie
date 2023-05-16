@@ -13,14 +13,22 @@ import java.awt.image.BufferedImage;
 public class Circle implements ImageOperation {
 
     private static Color currColour;
+    private static int x;
+    private static int y;
+    private static int width;
+    private static int height;
 
     /**
      * <p>
      * Default Constructor
      * </p>
      */
-    Circle(Color currColour) {
+    Circle(Color currColour, int x, int y, int width, int height) {
         Circle.currColour = currColour;
+        Circle.x = x;
+        Circle.y = y;
+        Circle.width = width;
+        Circle.height = height;
     }
 
     /**
@@ -40,7 +48,7 @@ public class Circle implements ImageOperation {
         // image is a BufferedImage
         Graphics2D g2d = input.createGraphics();
         g2d.setColor(Circle.currColour);
-        g2d.drawOval(100, 100, 100, 100); // (x, y, width, height)
+        g2d.drawOval(Circle.x, Circle.y, Circle.width, Circle.height); // (x, y, width, height)
         g2d.dispose();
 
         return input;
