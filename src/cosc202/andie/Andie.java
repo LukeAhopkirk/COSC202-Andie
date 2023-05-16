@@ -104,6 +104,9 @@ public class Andie {
                 ColourActions colourActions = new ColourActions();
                 menuBar.add(colourActions.createMenu());
 
+                SelectActions selectActions = new SelectActions();
+                menuBar.add(selectActions.createMenu());
+
                 // Actions that affect draw on the image
                 DrawActions drawActions = new DrawActions();
                 menuBar.add(drawActions.createMenu());
