@@ -21,16 +21,19 @@ import javax.swing.*;
 public class SelectActions {
     private int x, y, height, width;
 
-    public int getX(){
+    public int getX() {
         return x;
     }
-    public int getY(){
+
+    public int getY() {
         return y;
     }
-    public int getHeight(){
+
+    public int getHeight() {
         return height;
     }
-    public int getWidth(){
+
+    public int getWidth() {
         return width;
     }
 
@@ -39,8 +42,6 @@ public class SelectActions {
      */
     protected ArrayList<Action> actions;
     ResourceBundle bundle = ResourceBundle.getBundle("MessageBundle");
-
-    
 
     /**
      * <p>
@@ -53,7 +54,7 @@ public class SelectActions {
                 Integer.valueOf(KeyEvent.VK_C)));
         actions.add(new CropAction(bundle.getString("Crop"), null, bundle.getString("CropDesc"),
                 Integer.valueOf(KeyEvent.VK_C)));
-       }
+    }
 
     /**
      * <p>
@@ -77,19 +78,19 @@ public class SelectActions {
      * Action to draw a circle on an image.
      * </p>
      */
-    public class CropAction extends ImageAction{
+    public class CropAction extends ImageAction {
         CropAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
         }
+
         public void actionPerformed(ActionEvent e) {
             target.getImage().apply(new Crop(getX(), getY(), getWidth(), getHeight()));
             target.repaint();
             target.getParent().revalidate();
         }
 
-
     }
-  
+
     public class SelectAreaAction extends ImageAction {
 
         /**
@@ -135,6 +136,10 @@ public class SelectActions {
                     target.getParent().revalidate();
                     target.removeMouseListener(this);
                     target.removeMouseMotionListener(this);
+                    Graphics2D g2d = (Graphics2D) target.getGraphics();
+                    g2d.setStroke(new BasicStroke(3));
+                    g2d.setColor(Color.black);
+                    g2d.drawRect(startX, startY, width, height);
                 }
 
                 @Override
@@ -147,7 +152,7 @@ public class SelectActions {
                     y = Math.min(startY, endY);
                     target.repaint();
                     Graphics2D g2d = (Graphics2D) target.getGraphics();
-                    g2d.setStroke(new BasicStroke(2));
+                    g2d.setStroke(new BasicStroke(3));
                     g2d.setColor(Color.black);
                     g2d.drawRect(x, y, width, height);
                 }
@@ -155,5 +160,4 @@ public class SelectActions {
         }
     }
 
- 
 }

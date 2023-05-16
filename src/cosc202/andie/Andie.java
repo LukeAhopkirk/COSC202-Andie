@@ -104,6 +104,7 @@ public class Andie {
                 ColourActions colourActions = new ColourActions();
                 menuBar.add(colourActions.createMenu());
 
+                // Actions that select / crop the image
                 SelectActions selectActions = new SelectActions();
                 menuBar.add(selectActions.createMenu());
 

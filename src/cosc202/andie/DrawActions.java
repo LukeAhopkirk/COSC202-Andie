@@ -181,11 +181,12 @@ public class DrawActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            isCircleRunning = true;
-            if (isRectangleRunning == true) {
-                JOptionPane.showMessageDialog(null, "Please finish drawing the rectangle first");
-                return;
-            }
+            // isCircleRunning = true;
+            // if (isRectangleRunning == true) {
+            // JOptionPane.showMessageDialog(null, "Please finish drawing the rectangle
+            // first");
+            // return;
+            // }
             target.addMouseListener(new MouseAdapter() {
                 int startX, startY, endX, endY;
 
@@ -198,7 +199,7 @@ public class DrawActions {
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
-                    isCircleRunning = false;
+                    // isCircleRunning = false;
                     endX = e.getX();
                     endY = e.getY();
                     int width = Math.abs(endX - startX);
@@ -267,12 +268,12 @@ public class DrawActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            isRectangleRunning = true;
-            System.out.println(isCircleRunning);
-            if (isCircleRunning == true) {
-                JOptionPane.showMessageDialog(null, "Please finish drawing the circle first");
-                return;
-            }
+            // isRectangleRunning = true;
+            // if (isCircleRunning == true) {
+            // JOptionPane.showMessageDialog(null, "Please finish drawing the circle
+            // first");
+            // return;
+            // }
             target.addMouseListener(new MouseAdapter() {
                 int startX, startY, endX, endY;
 
@@ -285,7 +286,7 @@ public class DrawActions {
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
-                    isRectangleRunning = false;
+                    // isRectangleRunning = false;
                     endX = e.getX();
                     endY = e.getY();
                     int width = Math.abs(endX - startX);
