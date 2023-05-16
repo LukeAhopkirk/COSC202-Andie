@@ -1,7 +1,9 @@
 package cosc202.andie;
 
 import java.util.*;
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -116,9 +118,48 @@ public class DrawActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            target.getImage().apply(new Circle(getMyColour())); // pass in co-ordinates? etc
-            target.repaint();
-            target.getParent().revalidate();
+            target.addMouseListener(new MouseAdapter() {
+                int startX, startY, endX, endY;
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    startX = e.getX();
+                    startY = e.getY();
+                    target.addMouseMotionListener(this);
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                    endX = e.getX();
+                    endY = e.getY();
+                    int width = Math.abs(endX - startX);
+                    int height = Math.abs(endY - startY);
+                    int x = Math.min(startX, endX);
+                    int y = Math.min(startY, endY);
+                    int diameter = Math.min(width, height);
+                    target.getImage().apply(new Circle(getMyColour(), x, y, diameter, diameter));
+                    target.repaint();
+                    target.getParent().revalidate();
+                    target.removeMouseListener(this);
+                    target.removeMouseMotionListener(this);
+                }
+
+                @Override
+                public void mouseDragged(MouseEvent e) {
+                    endX = e.getX();
+                    endY = e.getY();
+                    int width = Math.abs(endX - startX);
+                    int height = Math.abs(endY - startY);
+                    int x = Math.min(startX, endX);
+                    int y = Math.min(startY, endY);
+                    int diameter = Math.min(width, height);
+                    target.repaint();
+                    Graphics2D g2d = (Graphics2D) target.getGraphics();
+                    g2d.setStroke(new BasicStroke(2));
+                    g2d.setColor(getMyColour());
+                    g2d.drawOval(x, y, diameter, diameter);
+                }
+            });
         }
 
     }
@@ -156,11 +197,47 @@ public class DrawActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            target.getImage().apply(new Rectangle(getMyColour())); // pass in co-ordinates? etc
-            target.repaint();
-            target.getParent().revalidate();
-        }
+            target.addMouseListener(new MouseAdapter() {
+                int startX, startY, endX, endY;
 
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    startX = e.getX();
+                    startY = e.getY();
+                    target.addMouseMotionListener(this);
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                    endX = e.getX();
+                    endY = e.getY();
+                    int width = Math.abs(endX - startX);
+                    int height = Math.abs(endY - startY);
+                    int x = Math.min(startX, endX);
+                    int y = Math.min(startY, endY);
+                    target.getImage().apply(new Rectangle(getMyColour(), x, y, width, height));
+                    target.repaint();
+                    target.getParent().revalidate();
+                    target.removeMouseListener(this);
+                    target.removeMouseMotionListener(this);
+                }
+
+                @Override
+                public void mouseDragged(MouseEvent e) {
+                    endX = e.getX();
+                    endY = e.getY();
+                    int width = Math.abs(endX - startX);
+                    int height = Math.abs(endY - startY);
+                    int x = Math.min(startX, endX);
+                    int y = Math.min(startY, endY);
+                    target.repaint();
+                    Graphics2D g2d = (Graphics2D) target.getGraphics();
+                    g2d.setStroke(new BasicStroke(2));
+                    g2d.setColor(getMyColour());
+                    g2d.drawRect(x, y, width, height);
+                }
+            });
+        }
     }
 
     /**
