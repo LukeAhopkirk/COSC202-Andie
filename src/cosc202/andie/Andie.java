@@ -111,6 +111,10 @@ public class Andie {
                 LanguageActions languageActions = new LanguageActions();
                 menuBar.add(languageActions.createMenu());
 
+                // Actions that select / crop an image
+                SelectActions selectActions = new SelectActions();
+                menuBar.add(selectActions.createMenu());
+
                 // Add a ToolBar
                 JToolBar toolbar = new JToolBar();
                 frame.add(toolbar, BorderLayout.WEST);
