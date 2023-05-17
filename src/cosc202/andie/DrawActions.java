@@ -225,7 +225,6 @@ public class DrawActions {
                     target.removeMouseListener(this);
                     target.removeMouseMotionListener(this);
                     isCircleRunning = false;
-                    System.out.println(isCircleRunning);
                 }
 
                 @Override
@@ -244,7 +243,6 @@ public class DrawActions {
                     g2d.drawOval(x, y, diameter, diameter);
                 }
             });
-            System.out.println(isCircleRunning);
         }
 
     }
