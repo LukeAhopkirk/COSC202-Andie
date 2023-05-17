@@ -133,6 +133,28 @@ public class Toolbar extends Andie {
                                 bundle.getString("SaveDesc"), KeyEvent.VK_S);
                 saveButton.addActionListener(saveAction);
 
+                // Add zoom in icon & event
+                ImageIcon icon5 = new ImageIcon(Andie.class.getClassLoader().getResource("ZOOM-IN.png"));
+                JButton zoomInButton = Toolbar.crateButton(icon5, "Zoom in");
+                addButtonList(zoomInButton);
+                ViewActions viewActions2 = new ViewActions(); // Create a new viewActions instance
+                // Create a new ViewActions.ZoomInAction instance
+                ViewActions.ZoomInAction zoomInAction = viewActions2.new ZoomInAction(bundle.getString("ZoomI"),
+                                null, bundle.getString("ZoomIDesc"), Integer.valueOf(KeyEvent.VK_PLUS));
+                // Add the zoomInAction as an ActionListener to the zoomIn
+                zoomInButton.addActionListener(zoomInAction);
+
+                // Add zoom out icon & event
+                ImageIcon icon6 = new ImageIcon(Andie.class.getClassLoader().getResource("ZOOM-OUT.png"));
+                JButton zoomOutButton = Toolbar.crateButton(icon6, "Zoom out");
+                addButtonList(zoomOutButton);
+                ViewActions viewActions3 = new ViewActions(); // Create a new viewActions instance
+                // Create a new ViewActions.ZoomInAction instance
+                ViewActions.ZoomOutAction zoomOutAction = viewActions3.new ZoomOutAction(bundle.getString("ZoomO"),
+                                null, bundle.getString("ZoomODesc"), Integer.valueOf(KeyEvent.VK_MINUS));
+                // Add the zoomInAction as an ActionListener to the zoomIn
+                zoomOutButton.addActionListener(zoomOutAction);
+
                 // Add rotate right icon & event
                 ImageIcon icon1 = new ImageIcon(Andie.class.getClassLoader().getResource("ROTATE-RIGHT.png"));
                 JButton rotateRightButton = Toolbar.crateButton(icon1, "Rotate Right 90 degrees");
@@ -185,28 +207,6 @@ public class Toolbar extends Andie {
                 // Add the brightnessAction as an ActionListener to the brightnessButton
                 brightnessButton.addActionListener(brightnessAction1);
 
-                // Add zoom in icon & event
-                ImageIcon icon5 = new ImageIcon(Andie.class.getClassLoader().getResource("ZOOM-IN.png"));
-                JButton zoomInButton = Toolbar.crateButton(icon5, "Zoom in");
-                addButtonList(zoomInButton);
-                ViewActions viewActions2 = new ViewActions(); // Create a new viewActions instance
-                // Create a new ViewActions.ZoomInAction instance
-                ViewActions.ZoomInAction zoomInAction = viewActions2.new ZoomInAction(bundle.getString("ZoomI"),
-                                null, bundle.getString("ZoomIDesc"), Integer.valueOf(KeyEvent.VK_PLUS));
-                // Add the zoomInAction as an ActionListener to the zoomIn
-                zoomInButton.addActionListener(zoomInAction);
-
-                // Add zoom out icon & event
-                ImageIcon icon6 = new ImageIcon(Andie.class.getClassLoader().getResource("ZOOM-OUT.png"));
-                JButton zoomOutButton = Toolbar.crateButton(icon6, "Zoom out");
-                addButtonList(zoomOutButton);
-                ViewActions viewActions3 = new ViewActions(); // Create a new viewActions instance
-                // Create a new ViewActions.ZoomInAction instance
-                ViewActions.ZoomOutAction zoomOutAction = viewActions3.new ZoomOutAction(bundle.getString("ZoomO"),
-                                null, bundle.getString("ZoomODesc"), Integer.valueOf(KeyEvent.VK_MINUS));
-                // Add the zoomInAction as an ActionListener to the zoomIn
-                zoomOutButton.addActionListener(zoomOutAction);
-
                 // Add draw circle icon & event
                 ImageIcon icon7 = new ImageIcon(Andie.class.getClassLoader().getResource("CIRCLE.png"));
                 JButton drawCircleButton = Toolbar.crateButton(icon7, "Draw circle");
@@ -230,6 +230,18 @@ public class Toolbar extends Andie {
                                 null, bundle.getString("RectangleDesc"), Integer.valueOf(KeyEvent.VK_R));
                 // Add the zoomInAction as an ActionListener to the zoomIn
                 drawRectangleButton.addActionListener(drawRectangleAction);
+
+                // Add draw line icon & event
+                ImageIcon icon9 = new ImageIcon(Andie.class.getClassLoader().getResource("LINE.png"));
+                JButton drawLineButton = Toolbar.crateButton(icon9, "Draw line");
+                addButtonList(drawLineButton);
+                DrawActions drawActions3 = new DrawActions(); // Create a new viewActions instance
+                // Create a new DrawActions.DrawRectangleAction instance
+                DrawActions.DrawLineAction drawLineAction = drawActions3.new DrawLineAction(
+                                bundle.getString("Line"),
+                                null, bundle.getString("LineDesc"), Integer.valueOf(KeyEvent.VK_L));
+                // Add the zoomInAction as an ActionListener to the zoomIn
+                drawLineButton.addActionListener(drawLineAction);
         }
 
         /**

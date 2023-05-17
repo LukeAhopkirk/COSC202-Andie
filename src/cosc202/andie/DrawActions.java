@@ -34,6 +34,11 @@ public class DrawActions {
     private static boolean isCircle = false;
     private static boolean isCircleRunning = false;
     private static boolean isRectangleRunning = false;
+    private static boolean isLineRunning = false;
+
+    // Shape x,y,height,width
+    private int[][] shapeXY;
+    private int counter = 0;
 
     /**
      * <p>
@@ -125,10 +130,13 @@ public class DrawActions {
         // shift pressed EQUALS"));
         actions.add(new DrawRectangleAction(bundle.getString("Rectangle"), null, bundle.getString("RectangleDesc"),
                 Integer.valueOf(KeyEvent.VK_R)));
+        actions.add(new DrawLineAction(bundle.getString("Line"), null, bundle.getString("LineDesc"),
+                Integer.valueOf(KeyEvent.VK_L)));
         // actions.get(1).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl
         // pressed MINUS"));
         actions.add(new FillShapeAction(bundle.getString("Fill"), null, bundle.getString("FillDesc"),
                 Integer.valueOf(KeyEvent.VK_F)));
+
     }
 
     /**
@@ -181,12 +189,11 @@ public class DrawActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            // isCircleRunning = true;
-            // if (isRectangleRunning == true) {
-            // JOptionPane.showMessageDialog(null, "Please finish drawing the rectangle
-            // first");
-            // return;
-            // }
+            if (isRectangleRunning == true || isLineRunning == true) {
+                JOptionPane.showMessageDialog(null, "Please finish drawing the other shape first");
+                return;
+            }
+            isCircleRunning = true;
             target.addMouseListener(new MouseAdapter() {
                 int startX, startY, endX, endY;
 
@@ -199,7 +206,6 @@ public class DrawActions {
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
-                    // isCircleRunning = false;
                     endX = e.getX();
                     endY = e.getY();
                     int width = Math.abs(endX - startX);
@@ -208,11 +214,18 @@ public class DrawActions {
                     int y = Math.min(startY, endY);
                     int diameter = Math.min(width, height);
                     target.getImage().apply(new Circle(getMyColour(), x, y, diameter, diameter, false));
+                    // shapeXY[counter][0] = x;
+                    // shapeXY[counter][1] = y;
+                    // shapeXY[counter][2] = height;
+                    // shapeXY[counter][3] = width;
+                    // counter++;
                     changeLastNumbers(x, y, diameter, diameter, true);
                     target.repaint();
                     target.getParent().revalidate();
                     target.removeMouseListener(this);
                     target.removeMouseMotionListener(this);
+                    isCircleRunning = false;
+                    System.out.println(isCircleRunning);
                 }
 
                 @Override
@@ -231,6 +244,7 @@ public class DrawActions {
                     g2d.drawOval(x, y, diameter, diameter);
                 }
             });
+            System.out.println(isCircleRunning);
         }
 
     }
@@ -268,12 +282,11 @@ public class DrawActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            // isRectangleRunning = true;
-            // if (isCircleRunning == true) {
-            // JOptionPane.showMessageDialog(null, "Please finish drawing the circle
-            // first");
-            // return;
-            // }
+            if (isCircleRunning == true || isLineRunning == true) {
+                JOptionPane.showMessageDialog(null, "Please finish drawing the other shape first");
+                return;
+            }
+            isRectangleRunning = true;
             target.addMouseListener(new MouseAdapter() {
                 int startX, startY, endX, endY;
 
@@ -286,7 +299,6 @@ public class DrawActions {
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
-                    // isRectangleRunning = false;
                     endX = e.getX();
                     endY = e.getY();
                     int width = Math.abs(endX - startX);
@@ -294,11 +306,17 @@ public class DrawActions {
                     int x = Math.min(startX, endX);
                     int y = Math.min(startY, endY);
                     target.getImage().apply(new Rectangle(getMyColour(), x, y, width, height, false));
+                    // shapeXY[counter][0] = x;
+                    // shapeXY[counter][1] = y;
+                    // shapeXY[counter][2] = height;
+                    // shapeXY[counter][3] = width;
+                    // counter++;
                     changeLastNumbers(x, y, width, height, false);
                     target.repaint();
                     target.getParent().revalidate();
                     target.removeMouseListener(this);
                     target.removeMouseMotionListener(this);
+                    isRectangleRunning = false;
                 }
 
                 @Override
@@ -311,9 +329,82 @@ public class DrawActions {
                     int y = Math.min(startY, endY);
                     target.repaint();
                     Graphics2D g2d = (Graphics2D) target.getGraphics();
-                    g2d.setStroke(new BasicStroke(2));
+                    g2d.setStroke(new BasicStroke(3));
                     g2d.setColor(getMyColour());
                     g2d.drawRect(x, y, width, height);
+                }
+            });
+        }
+    }
+
+    /**
+     * <p>
+     * Action to draw a line
+     * </p>
+     */
+    public class DrawLineAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new drawline action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        DrawLineAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when the drawline action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the drawline is triggered.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            if (isCircleRunning == true || isLineRunning == true) {
+                JOptionPane.showMessageDialog(null, "Please finish drawing the other shape first");
+                return;
+            }
+            isLineRunning = true;
+            target.addMouseListener(new MouseAdapter() {
+                int startX, startY, endX, endY;
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    startX = e.getX();
+                    startY = e.getY();
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                    endX = e.getX();
+                    endY = e.getY();
+                    target.getImage().apply(new Line(getMyColour(), startX, startY, endX, endY));
+                    target.repaint();
+                    target.getParent().revalidate();
+                    target.removeMouseListener(this);
+                    target.removeMouseMotionListener(this);
+                    isLineRunning = false;
+                }
+
+                @Override
+                public void mouseDragged(MouseEvent e) {
+                    endX = e.getX();
+                    endY = e.getY();
+                    target.repaint();
+                    Graphics2D g2d = (Graphics2D) target.getGraphics();
+                    g2d.setStroke(new BasicStroke(3));
+                    g2d.setColor(getMyColour());
+                    g2d.drawLine(startX, startY, endX, endY);
                 }
             });
         }

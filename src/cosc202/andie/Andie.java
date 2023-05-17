@@ -137,7 +137,7 @@ public class Andie {
                 // Create all the JButtonColour events
                 Toolbar.createColourEvents();
 
-                // Add all the buttons to the JToolBar
+                // Add all the colour buttons to the JToolBar
                 ArrayList<JButton> buttonColourList = Toolbar.getColourButtons();
                 for (int i = 0; i < buttonColourList.size(); i++) {
                         toolbar.add(buttonColourList.get(i));
