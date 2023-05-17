@@ -435,6 +435,7 @@ public class DrawActions {
     public class ChangeColourAction implements ActionListener {
 
         private Color innerClassColor;
+        private boolean colourWheel;
 
         /**
          * <p>
@@ -442,8 +443,9 @@ public class DrawActions {
          * </p>
          * 
          */
-        ChangeColourAction(Color currColour) {
+        ChangeColourAction(Color currColour, boolean colourWheel) {
             innerClassColor = currColour;
+            this.colourWheel = colourWheel;
         }
 
         /**
@@ -458,7 +460,16 @@ public class DrawActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            setMyColour(innerClassColor);
+            if (colourWheel) {
+                Color newColor = JColorChooser.showDialog(null, "Choose a color", innerClassColor);
+                if (newColor == null) {
+                    return;
+                } else {
+                    setMyColour(newColor);
+                }
+            } else {
+                setMyColour(innerClassColor);
+            }
         }
 
     }
