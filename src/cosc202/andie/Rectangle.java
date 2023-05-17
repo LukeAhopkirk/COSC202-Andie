@@ -47,19 +47,25 @@ public class Rectangle implements ImageOperation {
      * @return The resulting (drawn on) image
      */
     public BufferedImage apply(BufferedImage input) {
-
-        // image is a BufferedImage
         if (fill) {
             Graphics2D g2d = input.createGraphics();
             g2d.setColor(Rectangle.currColour);
-            g2d.setStroke(new BasicStroke(3));
-            g2d.fillRect(Rectangle.x, Rectangle.y, Rectangle.width, Rectangle.height); // (x, y, width, height)
+            g2d.setStroke(new BasicStroke(1));
+
+            int offsetX = 2; // Adjust the offset to control the size reduction
+            int offsetY = 2;
+            int smallerWidth = Rectangle.width + 1 - (2 * offsetX);
+            int smallerHeight = Rectangle.height + 1 - (2 * offsetY);
+            int smallerX = Rectangle.x + offsetX;
+            int smallerY = Rectangle.y + offsetY;
+
+            g2d.fillRect(smallerX, smallerY, smallerWidth, smallerHeight);
             g2d.dispose();
         } else {
             Graphics2D g2d = input.createGraphics();
             g2d.setColor(Rectangle.currColour);
-            g2d.setStroke(new BasicStroke(3));
-            g2d.drawRect(Rectangle.x, Rectangle.y, Rectangle.width, Rectangle.height); // (x, y, width, height)
+            g2d.setStroke(new BasicStroke(4));
+            g2d.drawRect(Rectangle.x, Rectangle.y, Rectangle.width, Rectangle.height);
             g2d.dispose();
         }
 

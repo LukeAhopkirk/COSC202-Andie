@@ -1,7 +1,10 @@
 package cosc202.andie;
 
 import java.util.*;
-import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.*;
 
 import javax.swing.*;
@@ -336,22 +339,34 @@ public class ColourActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            int pixel = 1;
+            // Load the custom cursor image
+            Image cursorImage = Toolkit.getDefaultToolkit()
+                    .getImage(Andie.class.getClassLoader().getResource("COLORPICKER.png"));
 
-            // Get the image currently displayed on the panel
-            // EditableImage image = target.getImage();
+            // Create a custom cursor from the image
+            Cursor customCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImage, new Point(0, 0),
+                    "Custom Cursor");
 
-            // Prompt the user to select a pixel from the image
-            // JOptionPane.showMessageDialog(null, "Click on a pixel to select the color");
+            // Set the custom cursor
+            target.setCursor(customCursor);
 
-            Color color = JColorChooser.showDialog(null, "Select a color", Color.WHITE);
+            JOptionPane.showMessageDialog(null, "Please click on a pixel to apply the filter.");
 
-            if (color != null) { // User selected a color
-                pixel = color.getRGB();
-            }
-            target.getImage().apply(new Coloursplash(pixel));
-            target.repaint();
-            target.getParent().revalidate();
+            target.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    int pixelX = e.getX();
+                    int pixelY = e.getY();
+                    target.getImage().apply(new Coloursplash(pixelX, pixelY));
+                    target.repaint();
+                    target.getParent().revalidate();
+
+                    // Restore the default cursor
+                    target.setCursor(Cursor.getDefaultCursor());
+
+                    target.removeMouseListener(this);
+                }
+            });
         }
     }
 

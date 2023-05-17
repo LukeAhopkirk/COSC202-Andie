@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
  * </p>
  */
 public class Coloursplash implements ImageOperation {
-    private int pixel = 1;
+    private int x, y;;
 
     /**
      * <p>
@@ -31,8 +31,9 @@ public class Coloursplash implements ImageOperation {
      * 
      * @param multiplier Strength of the contrast filter.
      */
-    Coloursplash(int pixel) {
-        this.pixel = pixel;
+    Coloursplash(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
     /**
@@ -51,7 +52,9 @@ public class Coloursplash implements ImageOperation {
     public BufferedImage apply(BufferedImage input) {
         int width = input.getWidth();
         int height = input.getHeight();
-        int threshold = 100;
+        int threshold = 40;
+
+        int pixel = input.getRGB(x, y);
         Color selectedColor = new Color(pixel);
 
         for (int x = 0; x < width; x++) {

@@ -3,7 +3,11 @@ package cosc202.andie;
 import java.util.*;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -37,8 +41,8 @@ public class DrawActions {
     private static boolean isLineRunning = false;
 
     // Shape x,y,height,width
-    private int[][] shapeXY;
-    private int counter = 0;
+    // private int[][] shapeXY;
+    // private int counter = 0;
 
     /**
      * <p>
@@ -136,6 +140,9 @@ public class DrawActions {
         // pressed MINUS"));
         actions.add(new FillShapeAction(bundle.getString("Fill"), null, bundle.getString("FillDesc"),
                 Integer.valueOf(KeyEvent.VK_F)));
+        actions.add(new ChangeClickColourAction(bundle.getString("ColourPicker"), null,
+                bundle.getString("ColourPickerDesc"),
+                Integer.valueOf(KeyEvent.VK_P)));
 
     }
 
@@ -189,8 +196,12 @@ public class DrawActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            if (isRectangleRunning == true || isLineRunning == true) {
-                JOptionPane.showMessageDialog(null, "Please finish drawing the other shape first");
+            if (isLineRunning) {
+                JOptionPane.showMessageDialog(null, "Please finish drawing the line first");
+                return;
+            }
+            if (isRectangleRunning) {
+                JOptionPane.showMessageDialog(null, "Please finish drawing the rectangle first");
                 return;
             }
             isCircleRunning = true;
@@ -280,8 +291,12 @@ public class DrawActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            if (isCircleRunning == true || isLineRunning == true) {
-                JOptionPane.showMessageDialog(null, "Please finish drawing the other shape first");
+            if (isLineRunning) {
+                JOptionPane.showMessageDialog(null, "Please finish drawing the line first");
+                return;
+            }
+            if (isCircleRunning) {
+                JOptionPane.showMessageDialog(null, "Please finish drawing the circle first");
                 return;
             }
             isRectangleRunning = true;
@@ -327,7 +342,7 @@ public class DrawActions {
                     int y = Math.min(startY, endY);
                     target.repaint();
                     Graphics2D g2d = (Graphics2D) target.getGraphics();
-                    g2d.setStroke(new BasicStroke(3));
+                    g2d.setStroke(new BasicStroke(4));
                     g2d.setColor(getMyColour());
                     g2d.drawRect(x, y, width, height);
                 }
@@ -368,8 +383,12 @@ public class DrawActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            if (isCircleRunning == true || isLineRunning == true) {
-                JOptionPane.showMessageDialog(null, "Please finish drawing the other shape first");
+            if (isRectangleRunning) {
+                JOptionPane.showMessageDialog(null, "Please finish drawing the rectangle shape first");
+                return;
+            }
+            if (isCircleRunning) {
+                JOptionPane.showMessageDialog(null, "Please finish drawing the circle first");
                 return;
             }
             isLineRunning = true;
@@ -400,7 +419,7 @@ public class DrawActions {
                     endY = e.getY();
                     target.repaint();
                     Graphics2D g2d = (Graphics2D) target.getGraphics();
-                    g2d.setStroke(new BasicStroke(3));
+                    g2d.setStroke(new BasicStroke(4));
                     g2d.setColor(getMyColour());
                     g2d.drawLine(startX, startY, endX, endY);
                 }
@@ -491,6 +510,71 @@ public class DrawActions {
                 target.repaint();
                 target.getParent().revalidate();
             }
+        }
+
+    }
+
+    /**
+     * <p>
+     * Action to change the current drawing colour with a user click
+     * </p>
+     */
+    public class ChangeClickColourAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new ChangeClickColourAction action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        ChangeClickColourAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when the changeclickcolour action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the changeclickcolour is triggered.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            // Load the custom cursor image
+            Image cursorImage = Toolkit.getDefaultToolkit()
+                    .getImage(Andie.class.getClassLoader().getResource("COLORPICKER.png"));
+
+            // Create a custom cursor from the image
+            Cursor customCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImage, new Point(0, 0),
+                    "Custom Cursor");
+
+            // Set the custom cursor
+            target.setCursor(customCursor);
+
+            JOptionPane.showMessageDialog(null, "Please click on a pixel.");
+
+            target.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    int pixelX = e.getX();
+                    int pixelY = e.getY();
+                    target.getImage().apply(new ColourUserPick(pixelX, pixelY));
+                    target.repaint();
+                    target.getParent().revalidate();
+
+                    // Restore the default cursor
+                    target.setCursor(Cursor.getDefaultCursor());
+
+                    target.removeMouseListener(this);
+                }
+            });
         }
 
     }

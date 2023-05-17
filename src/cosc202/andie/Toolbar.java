@@ -27,8 +27,8 @@ import cosc202.andie.DrawActions.FillShapeAction;
 public class Toolbar extends Andie {
 
         // Defualt value for the icon size
-        final static int defaultHeight = 20;
-        final static int defaultWidth = 20;
+        final static int defaultHeight = 23;
+        final static int defaultWidth = 23;
 
         static ArrayList<JButton> JButtonList = new ArrayList<>();
         static ArrayList<JButton> JButtonColourList = new ArrayList<>();
@@ -133,6 +133,24 @@ public class Toolbar extends Andie {
                                 bundle.getString("SaveDesc"), KeyEvent.VK_S);
                 saveButton.addActionListener(saveAction);
 
+                // Add undo icon & event
+                ImageIcon undo = new ImageIcon(Andie.class.getClassLoader().getResource("UNDO.png"));
+                JButton undoButton = Toolbar.crateButton(undo, "Undo");
+                addButtonList(undoButton);
+                EditActions editActions = new EditActions(); // create an instance of the outer class
+                EditActions.UndoAction undoAction = editActions.new UndoAction(bundle.getString("Undo"), null,
+                                bundle.getString("UndoDesc"), KeyEvent.VK_U);
+                undoButton.addActionListener(undoAction);
+
+                // Add undo icon & event
+                ImageIcon redo = new ImageIcon(Andie.class.getClassLoader().getResource("REDO.png"));
+                JButton redoButton = Toolbar.crateButton(redo, "Redo");
+                addButtonList(redoButton);
+                EditActions editActions1 = new EditActions(); // create an instance of the outer class
+                EditActions.RedoAction redoAction = editActions1.new RedoAction(bundle.getString("Redo"), null,
+                                bundle.getString("RedoDesc"), KeyEvent.VK_R);
+                redoButton.addActionListener(redoAction);
+
                 // Add zoom in icon & event
                 ImageIcon icon5 = new ImageIcon(Andie.class.getClassLoader().getResource("ZOOM-IN.png"));
                 JButton zoomInButton = Toolbar.crateButton(icon5, "Zoom in");
@@ -206,42 +224,6 @@ public class Toolbar extends Andie {
                                 Integer.valueOf(KeyEvent.VK_B));
                 // Add the brightnessAction as an ActionListener to the brightnessButton
                 brightnessButton.addActionListener(brightnessAction1);
-
-                // Add draw circle icon & event
-                ImageIcon icon7 = new ImageIcon(Andie.class.getClassLoader().getResource("CIRCLE.png"));
-                JButton drawCircleButton = Toolbar.crateButton(icon7, "Draw circle");
-                addButtonList(drawCircleButton);
-                DrawActions drawActions1 = new DrawActions(); // Create a new viewActions instance
-                // Create a new DrawActions.DrawCircleAction instance
-                DrawActions.DrawCircleAction drawCircleAction = drawActions1.new DrawCircleAction(
-                                bundle.getString("Circle"),
-                                null, bundle.getString("CircleDesc"), Integer.valueOf(KeyEvent.VK_C));
-                // Add the zoomInAction as an ActionListener to the zoomIn
-                drawCircleButton.addActionListener(drawCircleAction);
-
-                // Add draw rectangle icon & event
-                ImageIcon icon8 = new ImageIcon(Andie.class.getClassLoader().getResource("RECTANGLE.png"));
-                JButton drawRectangleButton = Toolbar.crateButton(icon8, "Draw rectangle");
-                addButtonList(drawRectangleButton);
-                DrawActions drawActions2 = new DrawActions(); // Create a new viewActions instance
-                // Create a new DrawActions.DrawRectangleAction instance
-                DrawActions.DrawRectangleAction drawRectangleAction = drawActions2.new DrawRectangleAction(
-                                bundle.getString("Rectangle"),
-                                null, bundle.getString("RectangleDesc"), Integer.valueOf(KeyEvent.VK_R));
-                // Add the zoomInAction as an ActionListener to the zoomIn
-                drawRectangleButton.addActionListener(drawRectangleAction);
-
-                // Add draw line icon & event
-                ImageIcon icon9 = new ImageIcon(Andie.class.getClassLoader().getResource("LINE.png"));
-                JButton drawLineButton = Toolbar.crateButton(icon9, "Draw line");
-                addButtonList(drawLineButton);
-                DrawActions drawActions3 = new DrawActions(); // Create a new viewActions instance
-                // Create a new DrawActions.DrawRectangleAction instance
-                DrawActions.DrawLineAction drawLineAction = drawActions3.new DrawLineAction(
-                                bundle.getString("Line"),
-                                null, bundle.getString("LineDesc"), Integer.valueOf(KeyEvent.VK_L));
-                // Add the zoomInAction as an ActionListener to the zoomIn
-                drawLineButton.addActionListener(drawLineAction);
         }
 
         /**
@@ -253,17 +235,53 @@ public class Toolbar extends Andie {
          */
         public static void createColourEvents() {
 
-                // Add paint icon & event
-                ImageIcon paint = new ImageIcon(Andie.class.getClassLoader().getResource("PAINT.png"));
-                JButton paintButton = Toolbar.crateButton(paint, "Fill shape");
-                addButtonColourList(paintButton);
-                DrawActions paintAction = new DrawActions(); // create an instance of the outer class
-                FillShapeAction fillShapeAction = paintAction.new FillShapeAction("Fill", null, "Fill Shape",
+                // Add draw circle icon & event
+                ImageIcon icon7 = new ImageIcon(Andie.class.getClassLoader().getResource("CIRCLE.png"));
+                JButton drawCircleButton = Toolbar.crateButton(icon7, "Draw circle");
+                addButtonColourList(drawCircleButton);
+                DrawActions drawActions1 = new DrawActions(); // Create a new viewActions instance
+                // Create a new DrawActions.DrawCircleAction instance
+                DrawActions.DrawCircleAction drawCircleAction = drawActions1.new DrawCircleAction(
+                                bundle.getString("Circle"),
+                                null, bundle.getString("CircleDesc"), Integer.valueOf(KeyEvent.VK_C));
+                // Add the zoomInAction as an ActionListener to the zoomIn
+                drawCircleButton.addActionListener(drawCircleAction);
+
+                // Add draw rectangle icon & event
+                ImageIcon icon8 = new ImageIcon(Andie.class.getClassLoader().getResource("RECTANGLE.png"));
+                JButton drawRectangleButton = Toolbar.crateButton(icon8, "Draw rectangle");
+                addButtonColourList(drawRectangleButton);
+                DrawActions drawActions2 = new DrawActions(); // Create a new viewActions instance
+                // Create a new DrawActions.DrawRectangleAction instance
+                DrawActions.DrawRectangleAction drawRectangleAction = drawActions2.new DrawRectangleAction(
+                                bundle.getString("Rectangle"),
+                                null, bundle.getString("RectangleDesc"), Integer.valueOf(KeyEvent.VK_R));
+                // Add the zoomInAction as an ActionListener to the zoomIn
+                drawRectangleButton.addActionListener(drawRectangleAction);
+
+                // Add draw line icon & event
+                ImageIcon icon9 = new ImageIcon(Andie.class.getClassLoader().getResource("LINE.png"));
+                JButton drawLineButton = Toolbar.crateButton(icon9, "Draw line");
+                addButtonColourList(drawLineButton);
+                DrawActions drawActions3 = new DrawActions(); // Create a new viewActions instance
+                // Create a new DrawActions.DrawRectangleAction instance
+                DrawActions.DrawLineAction drawLineAction = drawActions3.new DrawLineAction(
+                                bundle.getString("Line"),
+                                null, bundle.getString("LineDesc"), Integer.valueOf(KeyEvent.VK_L));
+                // Add the zoomInAction as an ActionListener to the zoomIn
+                drawLineButton.addActionListener(drawLineAction);
+
+                // Add fill icon & event
+                ImageIcon fill = new ImageIcon(Andie.class.getClassLoader().getResource("PAINT.png"));
+                JButton fillButton = Toolbar.crateButton(fill, "Fill shape");
+                addButtonColourList(fillButton);
+                DrawActions fillAction = new DrawActions(); // create an instance of the outer class
+                FillShapeAction fillShapeAction = fillAction.new FillShapeAction("Fill", null, "Fill Shape",
                                 Integer.valueOf(KeyEvent.VK_F));
                 // Add the openAction as an ActionListener to the openButton
-                paintButton.addActionListener(fillShapeAction);
+                fillButton.addActionListener(fillShapeAction);
 
-                // Add open icon & event
+                // Add red icon & event
                 ImageIcon red = new ImageIcon(Andie.class.getClassLoader().getResource("REDCIRCLE.png"));
                 JButton redButton = Toolbar.crateButton(red, "Red");
                 addButtonColourList(redButton);
@@ -272,7 +290,7 @@ public class Toolbar extends Andie {
                 // Add the openAction as an ActionListener to the openButton
                 redButton.addActionListener(changeAction);
 
-                // // Add open icon & event
+                // Add blue icon & event
                 ImageIcon blue = new ImageIcon(Andie.class.getClassLoader().getResource("BLUECIRCLE.png"));
                 JButton blueButton = Toolbar.crateButton(blue, "Blue");
                 addButtonColourList(blueButton);
@@ -281,7 +299,16 @@ public class Toolbar extends Andie {
                 // Add the openAction as an ActionListener to the openButton
                 blueButton.addActionListener(changeAction1);
 
-                // Add open icon & event
+                // Add purple icon & event
+                ImageIcon purple = new ImageIcon(Andie.class.getClassLoader().getResource("PURPLECIRCLE.png"));
+                JButton purpleButton = Toolbar.crateButton(purple, "Purple");
+                addButtonColourList(purpleButton);
+                DrawActions purpleAction = new DrawActions(); // create an instance of the outer class
+                ChangeColourAction changeAction7 = purpleAction.new ChangeColourAction(new Color(128, 0, 128));
+                // Add the openAction as an ActionListener to the openButton
+                purpleButton.addActionListener(changeAction7);
+
+                // Add green icon & event
                 ImageIcon green = new ImageIcon(Andie.class.getClassLoader().getResource("GREENCIRCLE.png"));
                 JButton greenButton = Toolbar.crateButton(green, "Green");
                 addButtonColourList(greenButton);
@@ -290,7 +317,7 @@ public class Toolbar extends Andie {
                 // Add the openAction as an ActionListener to the openButton
                 greenButton.addActionListener(changeAction2);
 
-                // Add open icon & event
+                // Add yellow icon & event
                 ImageIcon yellow = new ImageIcon(Andie.class.getClassLoader().getResource("YELLOWCIRCLE.png"));
                 JButton yellowButton = Toolbar.crateButton(yellow, "Yellow");
                 addButtonColourList(yellowButton);
@@ -299,7 +326,7 @@ public class Toolbar extends Andie {
                 // Add the openAction as an ActionListener to the openButton
                 yellowButton.addActionListener(changeAction3);
 
-                // Add open icon & event
+                // Add pink icon & event
                 ImageIcon pink = new ImageIcon(Andie.class.getClassLoader().getResource("PINKCIRCLE.png"));
                 JButton pinkButton = Toolbar.crateButton(pink, "Pink");
                 addButtonColourList(pinkButton);
@@ -308,7 +335,7 @@ public class Toolbar extends Andie {
                 // Add the openAction as an ActionListener to the openButton
                 pinkButton.addActionListener(changeAction4);
 
-                // Add open icon & event
+                // Add orange icon & event
                 ImageIcon orange = new ImageIcon(Andie.class.getClassLoader().getResource("ORANGECIRCLE.png"));
                 JButton orangeButton = Toolbar.crateButton(orange, "Orange");
                 addButtonColourList(orangeButton);
@@ -317,7 +344,7 @@ public class Toolbar extends Andie {
                 // Add the openAction as an ActionListener to the openButton
                 orangeButton.addActionListener(changeAction5);
 
-                // Add open icon & event
+                // Add black icon & event
                 ImageIcon black = new ImageIcon(Andie.class.getClassLoader().getResource("BLACKCIRCLE.png"));
                 JButton blackButton = Toolbar.crateButton(black, "Black");
                 addButtonColourList(blackButton);
@@ -325,6 +352,16 @@ public class Toolbar extends Andie {
                 ChangeColourAction changeAction6 = blackAction.new ChangeColourAction(Color.BLACK);
                 // Add the openAction as an ActionListener to the openButton
                 blackButton.addActionListener(changeAction6);
+
+                // Add custom icon & event
+                ImageIcon custom = new ImageIcon(Andie.class.getClassLoader().getResource("COLORPICKER.png"));
+                JButton customButton = Toolbar.crateButton(custom, "Choose a colour");
+                addButtonColourList(customButton);
+                DrawActions customAction = new DrawActions(); // create an instance of the outer class
+                DrawActions.ChangeClickColourAction changeClickAction = customAction.new ChangeClickColourAction(
+                                "Custom", null, "Choose a colour", Integer.valueOf(KeyEvent.VK_F));
+                // Add the openAction as an ActionListener to the openButton
+                customButton.addActionListener(changeClickAction);
 
         }
 }

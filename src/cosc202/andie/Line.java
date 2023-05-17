@@ -49,7 +49,7 @@ public class Line implements ImageOperation {
         // image is a BufferedImage
         Graphics2D g2d = input.createGraphics();
         g2d.setColor(Line.currColour);
-        g2d.setStroke(new BasicStroke(3));
+        g2d.setStroke(new BasicStroke(4));
         g2d.drawLine(Line.x1, Line.y1, Line.x2, Line.y2); // (x1, y1, x2, y2)
         g2d.dispose();
 

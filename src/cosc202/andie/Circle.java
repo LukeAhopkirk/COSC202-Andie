@@ -47,19 +47,25 @@ public class Circle implements ImageOperation {
      * @return The resulting (drawn on) image
      */
     public BufferedImage apply(BufferedImage input) {
-
-        // image is a BufferedImage
         if (fill) {
             Graphics2D g2d = input.createGraphics();
             g2d.setColor(Circle.currColour);
-            g2d.setStroke(new BasicStroke(3));
-            g2d.fillOval(Circle.x, Circle.y, Circle.width, Circle.height); // (x, y, width, height)
+            g2d.setStroke(new BasicStroke(1));
+
+            int offsetX = 2; // Adjust the offset to control the size reduction
+            int offsetY = 2;
+            int smallerWidth = Circle.width - (2 * offsetX);
+            int smallerHeight = Circle.height - (2 * offsetY);
+            int smallerX = Circle.x + offsetX;
+            int smallerY = Circle.y + offsetY;
+
+            g2d.fillOval(smallerX, smallerY, smallerWidth, smallerHeight);
             g2d.dispose();
         } else {
             Graphics2D g2d = input.createGraphics();
             g2d.setColor(Circle.currColour);
-            g2d.setStroke(new BasicStroke(3));
-            g2d.drawOval(Circle.x, Circle.y, Circle.width, Circle.height); // (x, y, width, height)
+            g2d.setStroke(new BasicStroke(4));
+            g2d.drawOval(Circle.x, Circle.y, Circle.width, Circle.height);
             g2d.dispose();
         }
 

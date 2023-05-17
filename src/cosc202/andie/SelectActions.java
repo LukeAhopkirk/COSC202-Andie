@@ -137,7 +137,8 @@ public class SelectActions {
                     target.removeMouseListener(this);
                     target.removeMouseMotionListener(this);
                     Graphics2D g2d = (Graphics2D) target.getGraphics();
-                    g2d.setStroke(new BasicStroke(3));
+                    g2d.setStroke(
+                            new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[] { 5 }, 0));
                     g2d.setColor(Color.black);
                     g2d.drawRect(startX, startY, width, height);
                 }
@@ -152,7 +153,8 @@ public class SelectActions {
                     y = Math.min(startY, endY);
                     target.repaint();
                     Graphics2D g2d = (Graphics2D) target.getGraphics();
-                    g2d.setStroke(new BasicStroke(3));
+                    g2d.setStroke(
+                            new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[] { 5 }, 0));
                     g2d.setColor(Color.black);
                     g2d.drawRect(x, y, width, height);
                 }

@@ -48,7 +48,7 @@ ALMOST (Richard) - Macros for record and replay of operations (Brightness, contr
 
 (Luke) - Mouse selection of rectangular regions
 
-Drawing functions – rectangle, ellipse, line
+(Jasper) Drawing functions – rectangle, ellipse, line
 
 
 COMPLETED (Jasper) - Show us something. . . Coloursplash (user chooses colour, all others turn B&W) & Satuartion filter
