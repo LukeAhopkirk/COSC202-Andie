@@ -39,10 +39,14 @@ public class DrawActions {
     private static boolean isCircleRunning = false;
     private static boolean isRectangleRunning = false;
     private static boolean isLineRunning = false;
+    private static boolean isFillRunning = false;
+    private static boolean isColorPickerRunning = false;
 
     // Shape x,y,height,width
-    // private int[][] shapeXY;
-    // private int counter = 0;
+    private static int[][] shapeXYCircle = new int[100][4];
+    private static int[][] shapeXYRectangle = new int[100][4];
+    private static int counterCircle = 0;
+    private static int counterRectangle = 0;
 
     /**
      * <p>
@@ -204,6 +208,12 @@ public class DrawActions {
                 JOptionPane.showMessageDialog(null, "Please finish drawing the rectangle first");
                 return;
             }
+            if (isFillRunning || isColorPickerRunning) {
+                // Restore the default cursor
+                target.setCursor(Cursor.getDefaultCursor());
+                isFillRunning = false;
+                isColorPickerRunning = false;
+            }
             isCircleRunning = true;
             target.addMouseListener(new MouseAdapter() {
                 int startX, startY, endX, endY;
@@ -225,12 +235,12 @@ public class DrawActions {
                     int y = Math.min(startY, endY);
                     int diameter = Math.min(width, height);
                     target.getImage().apply(new Circle(getMyColour(), x, y, diameter, diameter, false));
-                    // shapeXY[counter][0] = x;
-                    // shapeXY[counter][1] = y;
-                    // shapeXY[counter][2] = height;
-                    // shapeXY[counter][3] = width;
-                    // counter++;
                     changeLastNumbers(x, y, diameter, diameter, true);
+                    shapeXYCircle[counterCircle][0] = x;
+                    shapeXYCircle[counterCircle][1] = y;
+                    shapeXYCircle[counterCircle][2] = height;
+                    shapeXYCircle[counterCircle][3] = width;
+                    counterCircle++;
                     target.repaint();
                     target.getParent().revalidate();
                     target.removeMouseListener(this);
@@ -249,7 +259,7 @@ public class DrawActions {
                     int diameter = Math.min(width, height);
                     target.repaint();
                     Graphics2D g2d = (Graphics2D) target.getGraphics();
-                    g2d.setStroke(new BasicStroke(3));
+                    g2d.setStroke(new BasicStroke(4));
                     g2d.setColor(getMyColour());
                     g2d.drawOval(x, y, diameter, diameter);
                 }
@@ -299,6 +309,12 @@ public class DrawActions {
                 JOptionPane.showMessageDialog(null, "Please finish drawing the circle first");
                 return;
             }
+            if (isFillRunning || isColorPickerRunning) {
+                // Restore the default cursor
+                target.setCursor(Cursor.getDefaultCursor());
+                isFillRunning = false;
+                isColorPickerRunning = false;
+            }
             isRectangleRunning = true;
             target.addMouseListener(new MouseAdapter() {
                 int startX, startY, endX, endY;
@@ -319,12 +335,12 @@ public class DrawActions {
                     int x = Math.min(startX, endX);
                     int y = Math.min(startY, endY);
                     target.getImage().apply(new Rectangle(getMyColour(), x, y, width, height, false));
-                    // shapeXY[counter][0] = x;
-                    // shapeXY[counter][1] = y;
-                    // shapeXY[counter][2] = height;
-                    // shapeXY[counter][3] = width;
-                    // counter++;
                     changeLastNumbers(x, y, width, height, false);
+                    shapeXYRectangle[counterRectangle][0] = x;
+                    shapeXYRectangle[counterRectangle][1] = y;
+                    shapeXYRectangle[counterRectangle][2] = height;
+                    shapeXYRectangle[counterRectangle][3] = width;
+                    counterRectangle++;
                     target.repaint();
                     target.getParent().revalidate();
                     target.removeMouseListener(this);
@@ -390,6 +406,12 @@ public class DrawActions {
             if (isCircleRunning) {
                 JOptionPane.showMessageDialog(null, "Please finish drawing the circle first");
                 return;
+            }
+            if (isFillRunning || isColorPickerRunning) {
+                // Restore the default cursor
+                target.setCursor(Cursor.getDefaultCursor());
+                isFillRunning = false;
+                isColorPickerRunning = false;
             }
             isLineRunning = true;
             target.addMouseListener(new MouseAdapter() {
@@ -509,17 +531,102 @@ public class DrawActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
+            if (isRectangleRunning) {
+                JOptionPane.showMessageDialog(null, "Please finish drawing the rectangle shape first");
+                return;
+            }
+            if (isCircleRunning) {
+                JOptionPane.showMessageDialog(null, "Please finish drawing the circle first");
+                return;
+            }
+            if (isLineRunning) {
+                JOptionPane.showMessageDialog(null, "Please finish drawing the line first");
+                return;
+            }
+            if (isColorPickerRunning) {
+                JOptionPane.showMessageDialog(null, "Please pick a colour first");
+                return;
+            }
+
             if (getX() == 0 && getY() == 0 && getWidth() == 0 && getHeight() == 0) {
                 JOptionPane.showMessageDialog(null, "No shapes drawn");
             } else {
-                if (getIsCircle()) {
-                    target.getImage().apply(new Circle(getMyColour(), getX(), getY(), getWidth(), getHeight(), true));
-                } else {
-                    target.getImage()
-                            .apply(new Rectangle(getMyColour(), getX(), getY(), getHeight(), getWidth(), true));
-                }
-                target.repaint();
-                target.getParent().revalidate();
+                // } else {
+                // if (getIsCircle()) {
+                // target.getImage().apply(new Circle(getMyColour(), getX(), getY(), getWidth(),
+                // getHeight(), true));
+                // } else {
+                // target.getImage()
+                // .apply(new Rectangle(getMyColour(), getX(), getY(), getHeight(), getWidth(),
+                // true));
+                // }
+
+                isFillRunning = true;
+                // Load the custom cursor image
+                Image cursorImage = Toolkit.getDefaultToolkit()
+                        .getImage(Andie.class.getClassLoader().getResource("PAINT.png"));
+                // Create a custom cursor from the image
+                Cursor customCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImage, new Point(0, 0),
+                        "Custom Cursor");
+
+                // Set the custom cursor
+                target.setCursor(customCursor);
+
+                target.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                        // Co-ordinates of mouse click
+                        int pixelX = e.getX();
+                        int pixelY = e.getY();
+
+                        // Checking if user click lies within any rectangles
+                        for (int i = 0; i < shapeXYRectangle.length; i++) {
+                            if (shapeXYRectangle[i][0] == 0 && shapeXYRectangle[i][1] == 0 &&
+                                    shapeXYRectangle[i][2] == 0 && shapeXYRectangle[i][3] == 0) {
+                                break;
+                            }
+
+                            int rectX = shapeXYRectangle[i][0];
+                            int rectY = shapeXYRectangle[i][1];
+                            int rectWidth = shapeXYRectangle[i][3];
+                            int rectHeight = shapeXYRectangle[i][2];
+
+                            if (pixelX >= rectX && pixelX <= rectX + rectWidth &&
+                                    pixelY >= rectY && pixelY <= rectY + rectHeight) {
+                                target.getImage().apply(new Rectangle(getMyColour(), rectX, rectY,
+                                        rectWidth, rectHeight, true));
+                            }
+                        }
+
+                        // Checking if user click lies within any circles
+                        for (int j = 0; j < shapeXYCircle.length; j++) {
+                            if (shapeXYCircle[j][0] == 0 && shapeXYCircle[j][1] == 0 && shapeXYCircle[j][2] == 0
+                                    && shapeXYCircle[j][3] == 0) {
+                                break;
+                            }
+
+                            int circX = shapeXYCircle[j][0];
+                            int circY = shapeXYCircle[j][1];
+                            int circWidth = shapeXYCircle[j][3];
+                            int circHeight = shapeXYCircle[j][2];
+
+                            if (pixelX >= circX && pixelX <= circX + circWidth &&
+                                    pixelY >= circY && pixelY <= circY + circHeight) {
+                                target.getImage().apply(new Circle(getMyColour(), circX, circY,
+                                        Math.min(circWidth, circHeight), Math.min(circWidth, circHeight), true));
+                            }
+                        }
+
+                        target.removeMouseListener(this);
+
+                        // Restore the default cursor
+                        target.setCursor(Cursor.getDefaultCursor());
+                        isFillRunning = false;
+
+                        target.repaint();
+                        target.getParent().revalidate();
+                    }
+                });
             }
         }
 
@@ -558,6 +665,23 @@ public class DrawActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
+            if (isRectangleRunning) {
+                JOptionPane.showMessageDialog(null, "Please finish drawing the rectangle shape first");
+                return;
+            }
+            if (isCircleRunning) {
+                JOptionPane.showMessageDialog(null, "Please finish drawing the circle first");
+                return;
+            }
+            if (isLineRunning) {
+                JOptionPane.showMessageDialog(null, "Please finish drawing the line first");
+                return;
+            }
+            if (isFillRunning) {
+                JOptionPane.showMessageDialog(null, "Please fill the shape first");
+                return;
+            }
+            isColorPickerRunning = true;
             // Load the custom cursor image
             Image cursorImage = Toolkit.getDefaultToolkit()
                     .getImage(Andie.class.getClassLoader().getResource("COLORPICKER.png"));
@@ -568,8 +692,6 @@ public class DrawActions {
 
             // Set the custom cursor
             target.setCursor(customCursor);
-
-            JOptionPane.showMessageDialog(null, "Please click on a pixel.");
 
             target.addMouseListener(new MouseAdapter() {
                 @Override
@@ -582,6 +704,7 @@ public class DrawActions {
 
                     // Restore the default cursor
                     target.setCursor(Cursor.getDefaultCursor());
+                    isColorPickerRunning = false;
 
                     target.removeMouseListener(this);
                 }
