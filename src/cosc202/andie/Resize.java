@@ -60,20 +60,24 @@ public class Resize implements ImageOperation {
      * @return The resulting (resized) image.
      */
     public BufferedImage apply(BufferedImage input) {
+        int newW = (int) (input.getWidth() * (multiplier / 100));
+        int newH = (int) (input.getHeight() * (multiplier / 100));
 
-        BufferedImage changeBuff = new BufferedImage(input.getColorModel(),
-                input.copyData(null),
-                input.isAlphaPremultiplied(), null);
-
-        int newW = (int) (changeBuff.getWidth() * (multiplier / 100));
-        int newH = (int) (changeBuff.getHeight() * (multiplier / 100));
-
-        // Convert Image to BufferedImage
+        // Create a new BufferedImage with the desired dimensions and ARGB type
         BufferedImage output = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
 
-        Graphics g = output.createGraphics();
-        g.drawImage(changeBuff, 0, 0, newW, newH, null);
-        g.dispose();
+        // Create a Graphics2D object for drawing on the output image
+        Graphics2D g2d = output.createGraphics();
+
+        // Set rendering hints for better quality and smooth resizing
+        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+
+        // Draw the resized image onto the output image
+        g2d.drawImage(input, 0, 0, newW, newH, null);
+
+        // Dispose the Graphics2D object
+        g2d.dispose();
 
         return output;
     }
