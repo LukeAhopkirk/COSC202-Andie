@@ -350,7 +350,7 @@ public class ColourActions {
             // Set the custom cursor
             target.setCursor(customCursor);
 
-            JOptionPane.showMessageDialog(null, "Please click on a pixel to apply the filter.");
+            JOptionPane.showMessageDialog(null, "Please click on a colour to apply the filter.");
 
             target.addMouseListener(new MouseAdapter() {
                 @Override

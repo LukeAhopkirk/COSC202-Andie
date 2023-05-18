@@ -81,13 +81,14 @@ public class GaussianB implements ImageOperation, java.io.Serializable {
         // Pad the image with zeros
         int width = input.getWidth();
         int height = input.getHeight();
-        BufferedImage paddedInput = new BufferedImage(width + 2 * k, height + 2 * k, input.getType());
+        BufferedImage paddedInput = new BufferedImage(width + 2 * k, height + 2 * k, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = paddedInput.createGraphics();
         g.drawImage(input, k, k, null);
         g.dispose();
 
         // Enlarge the image by one pixel
-        BufferedImage enlargedInput = new BufferedImage(width + 2 * k + 1, height + 2 * k + 1, input.getType());
+        BufferedImage enlargedInput = new BufferedImage(width + 2 * k + 1, height + 2 * k + 1,
+                BufferedImage.TYPE_INT_ARGB);
         g = enlargedInput.createGraphics();
         g.drawImage(paddedInput, 0, 0, null);
         g.dispose();
