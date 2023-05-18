@@ -210,7 +210,7 @@ public class EditActions {
                         return;
                     }
                     String extension = imageFilepath.substring(imageFilepath.lastIndexOf(".") + 1).toLowerCase();
-                    if (!extension.equals("macro")) {
+                    if (!extension.equals("ops")) {
                         throw new IllegalArgumentException("Selected file is not a macro");
                     }
                     // String filename = JOptionPane.showInputDialog("Please enter a file name for

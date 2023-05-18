@@ -183,6 +183,8 @@ class EditableImage {
             // Could be no file or something else. Carry on for now.
         }
         this.refresh();
+        ops = new Stack<ImageOperation>();
+        redoOps = new Stack<ImageOperation>();
     }
 
     /**
@@ -239,11 +241,11 @@ class EditableImage {
 
     public void macroF(String inputName) throws Exception {
         if (!macroB) {
-            JOptionPane.showMessageDialog(null, "No active macro has been found!");
+            JOptionPane.showMessageDialog(null, "No active macro has been found.");
             return;
         } else {
             macroB = false;
-            this.macroName = inputName + ".macro";
+            this.macroName = inputName + ".ops";
             FileOutputStream fileOut = new FileOutputStream(this.macroName);
             ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
             objOut.writeObject(this.macroOps);
@@ -255,7 +257,7 @@ class EditableImage {
 
     public void macroOpen(String inputName) throws Exception {
         imageFilename = inputName;
-        macroName = imageFilename + ".macro";
+        macroName = imageFilename + ".ops";
 
         try {
             FileInputStream fileIn = new FileInputStream(this.imageFilename);
