@@ -158,6 +158,28 @@ public class SelectActions {
                     g2d.setColor(Color.black);
                     g2d.drawRect(x, y, width, height);
                 }
+
+                // If user presses escape key, cancel the selection
+                private void handleEscapeKey() {
+                    width = 0;
+                    height = 0;
+                    target.repaint();
+                }
+
+                // Register the Escape key stroke
+                {
+                    InputMap inputMap = target.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+                    ActionMap actionMap = target.getActionMap();
+                    KeyStroke escapeKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
+                    inputMap.put(escapeKeyStroke, "escape");
+                    actionMap.put("escape", new AbstractAction() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            handleEscapeKey();
+                        }
+                    });
+
+                }
             });
         }
     }

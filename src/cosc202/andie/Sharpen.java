@@ -50,64 +50,20 @@ public class Sharpen implements ImageOperation, java.io.Serializable {
         // Make a 3x3 kernel
         Kernel kernel = new Kernel(3, 3, array);
 
-        // Asking user if they want to account for negative numbers
-        boolean userNegatives;
-        int userSelection = JOptionPane.showConfirmDialog(null,
-                "Do you wish to account for negative numbers?",
-                "Negative Numbers", JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
-        if (userSelection == JOptionPane.YES_OPTION) {
-            userNegatives = true;
-        } else {
-            userNegatives = false;
-        }
+        int width = input.getWidth();
+        int height = input.getHeight();
+        BufferedImage paddedInput = new BufferedImage(width + 2, height + 2, input.getType());
+        Graphics2D g = paddedInput.createGraphics();
+        g.drawImage(input, 1, 1, null);
+        g.dispose();
 
-        if (userNegatives) {
-            int width = input.getWidth();
-            int height = input.getHeight();
-            BufferedImage paddedInput = new BufferedImage(width + 2, height + 2, input.getType());
-            Graphics2D g = paddedInput.createGraphics();
-            g.drawImage(input, 1, 1, null);
-            g.dispose();
+        // Apply the ConvolveOp to the padded image
+        BufferedImage output = customConvolution(kernel, paddedInput);
 
-            // Apply the ConvolveOp to the padded image
-            BufferedImage output = customConvolution(kernel, paddedInput);
+        // Crop the image to its original size
+        output = output.getSubimage(1, 1, width, height);
 
-            // Crop the image to its original size
-            output = output.getSubimage(1, 1, width, height);
-
-            return output;
-
-        } else {
-
-            ConvolveOp convOp = new ConvolveOp(kernel, ConvolveOp.EDGE_NO_OP, null);
-
-            // Pad the image with zeros
-            int width = input.getWidth();
-            int height = input.getHeight();
-            BufferedImage paddedInput = new BufferedImage(width + 2, height + 2, input.getType());
-            Graphics2D g = paddedInput.createGraphics();
-            g.drawImage(input, 1, 1, null);
-            g.dispose();
-
-            // Apply the ConvolveOp to the padded image
-            BufferedImage output = convOp.filter(paddedInput, null);
-
-            // Crop the image to its original size
-            output = output.getSubimage(1, 1, width, height);
-
-            return output;
-        }
-
-        // for (int y = 0; y < input.getHeight(); y++) {
-        // for (int x = 0; x < input.getWidth(); x++) {
-        // int imageVal = input.getRGB(x, y);
-        // int red = (imageVal >> 16) & 0xFF;
-        // int green = (imageVal >> 8) & 0xFF;
-        // int blue = imageVal & 0xFF;
-        // System.out.println("R: " + red + " G: " + green + " B: " + blue);
-        // }
-        // }
+        return output;
     }
 
     /**
