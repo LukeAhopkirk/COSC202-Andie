@@ -3,8 +3,6 @@ package cosc202.andie;
 import java.awt.Graphics2D;
 import java.awt.image.*;
 
-import javax.swing.JOptionPane;
-
 /**
  * <p>
  * ImageOperation to apply a Sobel filter.
@@ -18,12 +16,15 @@ import javax.swing.JOptionPane;
  */
 public class Sobel implements ImageOperation, java.io.Serializable {
 
+    private boolean horizontal;
+
     /**
      * <p>
      * Default constructor
      * </p>
      */
-    Sobel() {
+    Sobel(boolean horizontal) {
+        this.horizontal = horizontal;
     }
 
     /**
@@ -63,15 +64,17 @@ public class Sobel implements ImageOperation, java.io.Serializable {
         g.dispose();
 
         // Apply the ConvolveOp to the padded image
-        BufferedImage output = customConvolution(kernelH, paddedInput);
-        output = customConvolution(kernelV, paddedInput);
+        BufferedImage output;
+        if (horizontal) {
+            output = customConvolution(kernelH, paddedInput);
+        } else {
+            output = customConvolution(kernelV, paddedInput);
+        }
 
         // Crop the image to its original size
         output = output.getSubimage(1, 1, width, height);
 
         return output;
-
-        // User selects No
     }
 
     /**

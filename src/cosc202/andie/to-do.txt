@@ -44,12 +44,10 @@ COMPLETED (Jasper) - Toolbar for common operations
 
 COMPLETED (Richard) - Keyboard shortcuts
 ALMOST (Richard) - Macros for record and replay of operations (Brightness, contrast, saturation does not work for some reason)
-(Richard) - Crop to selection
 
-(Luke) - Mouse selection of rectangular regions
+COMPLTED (Luke) - Crop to selection
 
-(Jasper) Drawing functions – rectangle, ellipse, line
-
-
+COMPLETED (Jasper) - Mouse selection of rectangular regions
+COMPLETED (Jasper) Drawing functions – rectangle, ellipse, line
 COMPLETED (Jasper) - Show us something. . . Coloursplash (user chooses colour, all others turn B&W) & Satuartion filter
 

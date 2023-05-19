@@ -3,8 +3,6 @@ package cosc202.andie;
 import java.awt.Graphics2D;
 import java.awt.image.*;
 
-import javax.swing.JOptionPane;
-
 /**
  * <p>
  * ImageOperation to apply an Emboss filter.
@@ -23,12 +21,15 @@ import javax.swing.JOptionPane;
  */
 public class Emboss implements ImageOperation, java.io.Serializable {
 
+    private boolean[] numbersTrue;
+
     /**
      * <p>
      * Default constructor
      * </p>
      */
-    Emboss() {
+    Emboss(boolean[] numbersTrue) {
+        this.numbersTrue = numbersTrue;
     }
 
     /**
@@ -95,20 +96,35 @@ public class Emboss implements ImageOperation, java.io.Serializable {
         g.dispose();
 
         // Apply the ConvolveOp to the padded image
-        BufferedImage output = customConvolution(kernel1, paddedInput);
-        output = customConvolution(kernel2, paddedInput);
-        output = customConvolution(kernel3, paddedInput);
-        output = customConvolution(kernel4, paddedInput);
-        output = customConvolution(kernel5, paddedInput);
-        output = customConvolution(kernel6, paddedInput);
-        output = customConvolution(kernel7, paddedInput);
-        output = customConvolution(kernel8, paddedInput);
+        BufferedImage output;
+        if (numbersTrue[0] == true) {
+            output = customConvolution(kernel1, paddedInput);
+        }
+        if (numbersTrue[1] == true) {
+            output = customConvolution(kernel2, paddedInput);
+        }
+        if (numbersTrue[2] == true) {
+            output = customConvolution(kernel3, paddedInput);
+        }
+        if (numbersTrue[3] == true) {
+            output = customConvolution(kernel4, paddedInput);
+        }
+        if (numbersTrue[4] == true) {
+            output = customConvolution(kernel5, paddedInput);
+        }
+        if (numbersTrue[5] == true) {
+            output = customConvolution(kernel6, paddedInput);
+        }
+        if (numbersTrue[6] == true) {
+            output = customConvolution(kernel7, paddedInput);
+        } else {
+            output = customConvolution(kernel8, paddedInput);
+        }
 
         // Crop the image to its original size
         output = output.getSubimage(1, 1, width, height);
 
         return output;
-
     }
 
     /**
