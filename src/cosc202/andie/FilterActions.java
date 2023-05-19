@@ -373,11 +373,31 @@ public class FilterActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
-            // Create and apply the filter
-            target.getImage().apply(new Sobel());
+
+            boolean horizontal;
+
+            // Create an array of options for the confirmation dialog
+            String[] options = { "Horizontal", "Vertical", "Cancel" };
+
+            // Show the confirmation dialog
+            int result = JOptionPane.showOptionDialog(target, "Select an option", "Sobel Filter",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+
+            // Check the selected option
+            if (result == 0) {
+                horizontal = true;
+                target.getImage().apply(new Sobel(horizontal)); // Horizontal option selected
+            } else if (result == 1) {
+                horizontal = false;
+                target.getImage().apply(new Sobel(horizontal)); // Vertical option selected
+            } else {
+                return;
+            }
+
             target.repaint();
             target.getParent().revalidate();
         }
+
     }
 
     /**
@@ -412,8 +432,32 @@ public class FilterActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
+            // Determine the number - ask the user.
+            int number = 1;
+            boolean[] embossNumber = new boolean[8];
+
+            // Pop-up dialog box to ask for a value
+            int min = 1;
+            int max = 8;
+            int initialValue = 1;
+            DefaultBoundedRangeModel radiusModel = new DefaultBoundedRangeModel(initialValue, 0, min, max);
+            JSlider Slider = new JSlider(radiusModel);
+            Slider.setMajorTickSpacing(1);
+            Slider.setPaintTicks(true);
+            Slider.setPaintLabels(true);
+            int option = JOptionPane.showOptionDialog(null, Slider, "Choose a emboss filter number",
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+            // Check the return value from the dialog box.
+            if (option == JOptionPane.CANCEL_OPTION) {
+                return;
+            } else if (option == JOptionPane.OK_OPTION) {
+                number = radiusModel.getValue();
+                embossNumber[number - 1] = true;
+            }
+
             // Create and apply the filter
-            target.getImage().apply(new Emboss());
+            target.getImage().apply(new Emboss(embossNumber));
             target.repaint();
             target.getParent().revalidate();
         }
