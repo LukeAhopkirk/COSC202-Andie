@@ -43,8 +43,8 @@ public class DrawActions {
     private static boolean isColorPickerRunning = false;
 
     // Shape x,y,height,width
-    private static int[][] shapeXY = new int[1][4];
-    // private static int[][] shapeXYRectangle = new int[1][4];
+    private static int[][] shapeXYCircle = new int[1][4];
+    private static int[][] shapeXYRectangle = new int[1][4];
     // private static int counterCircle = 0;
     // private static int counterRectangle = 0;
 
@@ -218,13 +218,29 @@ public class DrawActions {
             target.addMouseListener(new MouseAdapter() {
                 int startX, startY, endX, endY;
 
+                 // Register the Escape key stroke
+            {
+            InputMap inputMap = target.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+            ActionMap actionMap = target.getActionMap();
+            KeyStroke escapeKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
+            inputMap.put(escapeKeyStroke, "escape");
+            actionMap.put("escape", new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // Cancel the circle drawing
+                    handleEscapeKey();
+                }
+            });
+        }
+            
+        
                 @Override
                 public void mousePressed(MouseEvent e) {
                     startX = e.getX();
                     startY = e.getY();
                     target.addMouseMotionListener(this);
                 }
-
+        
                 @Override
                 public void mouseReleased(MouseEvent e) {
                     endX = e.getX();
@@ -236,10 +252,10 @@ public class DrawActions {
                     int diameter = Math.min(width, height);
                     target.getImage().apply(new Circle(getMyColour(), x, y, diameter, diameter, false));
                     changeLastNumbers(x, y, diameter, diameter, true);
-                    shapeXY[0][0] = x;
-                    shapeXY[0][1] = y;
-                    shapeXY[0][2] = height;
-                    shapeXY[0][3] = width;
+                    shapeXYCircle[0][0] = x;
+                    shapeXYCircle[0][1] = y;
+                    shapeXYCircle[0][2] = height;
+                    shapeXYCircle[0][3] = width;
                     // counterCircle++;
                     target.repaint();
                     target.getParent().revalidate();
@@ -247,7 +263,7 @@ public class DrawActions {
                     target.removeMouseMotionListener(this);
                     isCircleRunning = false;
                 }
-
+        
                 @Override
                 public void mouseDragged(MouseEvent e) {
                     endX = e.getX();
@@ -263,9 +279,17 @@ public class DrawActions {
                     g2d.setColor(getMyColour());
                     g2d.drawOval(x, y, diameter, diameter);
                 }
-            });
-        }
 
+                // If user presses escape key, cancel the rectangle drawing
+                private void handleEscapeKey() {
+                    isCircleRunning = false;
+                    target.removeMouseListener(this);
+                    target.removeMouseMotionListener(this);
+                    target.repaint();
+                }
+            });
+        
+        }
     }
 
     /**
@@ -319,6 +343,20 @@ public class DrawActions {
             target.addMouseListener(new MouseAdapter() {
                 int startX, startY, endX, endY;
 
+                // Register the Escape key stroke
+                {
+                    InputMap inputMap = target.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+                    ActionMap actionMap = target.getActionMap();
+                    KeyStroke escapeKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
+                    inputMap.put(escapeKeyStroke, "escape");
+                    actionMap.put("escape", new AbstractAction() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            handleEscapeKey();
+                        }
+                    });
+                }
+
                 @Override
                 public void mousePressed(MouseEvent e) {
                     startX = e.getX();
@@ -336,10 +374,10 @@ public class DrawActions {
                     int y = Math.min(startY, endY);
                     target.getImage().apply(new Rectangle(getMyColour(), x, y, width, height, false));
                     changeLastNumbers(x, y, width, height, false);
-                    shapeXY[0][0] = x;
-                    shapeXY[0][1] = y;
-                    shapeXY[0][2] = height;
-                    shapeXY[0][3] = width;
+                    shapeXYRectangle[0][0] = x;
+                    shapeXYRectangle[0][1] = y;
+                    shapeXYRectangle[0][2] = height;
+                    shapeXYRectangle[0][3] = width;
                     // counterRectangle++;
                     target.repaint();
                     target.getParent().revalidate();
@@ -361,6 +399,14 @@ public class DrawActions {
                     g2d.setStroke(new BasicStroke(4));
                     g2d.setColor(getMyColour());
                     g2d.drawRect(x, y, width, height);
+                }
+
+                // If user presses escape key, cancel the rectangle drawing
+                private void handleEscapeKey() {
+                    isRectangleRunning = false;
+                    target.removeMouseListener(this);
+                    target.removeMouseMotionListener(this);
+                    target.repaint();
                 }
             });
         }
@@ -417,6 +463,20 @@ public class DrawActions {
             target.addMouseListener(new MouseAdapter() {
                 int startX, startY, endX, endY;
 
+                // Register the Escape key stroke
+                {
+                    InputMap inputMap = target.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+                    ActionMap actionMap = target.getActionMap();
+                    KeyStroke escapeKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
+                    inputMap.put(escapeKeyStroke, "escape");
+                    actionMap.put("escape", new AbstractAction() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            handleEscapeKey();
+                        }
+                    });
+                }
+
                 @Override
                 public void mousePressed(MouseEvent e) {
                     startX = e.getX();
@@ -444,6 +504,14 @@ public class DrawActions {
                     g2d.setStroke(new BasicStroke(4));
                     g2d.setColor(getMyColour());
                     g2d.drawLine(startX, startY, endX, endY);
+                }
+
+                // If user presses escape key, cancel the rectangle drawing
+                private void handleEscapeKey() {
+                    isLineRunning = false;
+                    target.removeMouseListener(this);
+                    target.removeMouseMotionListener(this);
+                    target.repaint();
                 }
             });
         }
@@ -579,17 +647,17 @@ public class DrawActions {
                         int pixelX = e.getX();
                         int pixelY = e.getY();
 
-                        // Checking if user click lies within the last drawn shape
-                        for (int i = 0; i < shapeXY.length; i++) {
-                            if (shapeXY[i][0] == 0 && shapeXY[i][1] == 0 &&
-                                    shapeXY[i][2] == 0 && shapeXY[i][3] == 0) {
+                        // Checking if user click lies within the last rectangle
+                        for (int i = 0; i < shapeXYRectangle.length; i++) {
+                            if (shapeXYRectangle[i][0] == 0 && shapeXYRectangle[i][1] == 0 &&
+                                    shapeXYRectangle[i][2] == 0 && shapeXYRectangle[i][3] == 0) {
                                 break;
                             }
 
-                            int rectX = shapeXY[i][0];
-                            int rectY = shapeXY[i][1];
-                            int rectWidth = shapeXY[i][3];
-                            int rectHeight = shapeXY[i][2];
+                            int rectX = shapeXYRectangle[i][0];
+                            int rectY = shapeXYRectangle[i][1];
+                            int rectWidth = shapeXYRectangle[i][3];
+                            int rectHeight = shapeXYRectangle[i][2];
 
                             if (pixelX >= rectX && pixelX <= rectX + rectWidth &&
                                     pixelY >= rectY && pixelY <= rectY + rectHeight) {
@@ -598,24 +666,24 @@ public class DrawActions {
                             }
                         }
 
-                        // // Checking if user click lies within any circles
-                        // for (int j = 0; j < shapeXY.length; j++) {
-                        // if (shapeXY[j][0] == 0 && shapeXY[j][1] == 0 && shapeXY[j][2] == 0
-                        // && shapeXY[j][3] == 0) {
-                        // break;
-                        // }
+                        // Checking if user click lies within any circles
+                        for (int j = 0; j < shapeXYCircle.length; j++) {
+                            if (shapeXYCircle[j][0] == 0 && shapeXYCircle[j][1] == 0 && shapeXYCircle[j][2] == 0
+                                    && shapeXYCircle[j][3] == 0) {
+                                break;
+                            }
 
-                        // int circX = shapeXY[j][0];
-                        // int circY = shapeXY[j][1];
-                        // int circWidth = shapeXY[j][3];
-                        // int circHeight = shapeXY[j][2];
+                            int circX = shapeXYCircle[j][0];
+                            int circY = shapeXYCircle[j][1];
+                            int circWidth = shapeXYCircle[j][3];
+                            int circHeight = shapeXYCircle[j][2];
 
-                        // if (pixelX >= circX && pixelX <= circX + circWidth &&
-                        // pixelY >= circY && pixelY <= circY + circHeight) {
-                        // target.getImage().apply(new Circle(getMyColour(), circX, circY,
-                        // Math.min(circWidth, circHeight), Math.min(circWidth, circHeight), true));
-                        // }
-                        // }
+                            if (pixelX >= circX && pixelX <= circX + circWidth &&
+                                    pixelY >= circY && pixelY <= circY + circHeight) {
+                                target.getImage().apply(new Circle(getMyColour(), circX, circY,
+                                        Math.min(circWidth, circHeight), Math.min(circWidth, circHeight), true));
+                            }
+                        }
 
                         target.removeMouseListener(this);
 
@@ -707,6 +775,21 @@ public class DrawActions {
                     isColorPickerRunning = false;
 
                     target.removeMouseListener(this);
+                }
+            });
+
+            // Register the Escape key stroke
+            InputMap inputMap = target.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+            ActionMap actionMap = target.getActionMap();
+            KeyStroke escapeKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
+            inputMap.put(escapeKeyStroke, "escape");
+            actionMap.put("escape", new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // Cancel the color picking
+                    target.setCursor(Cursor.getDefaultCursor());
+                    isColorPickerRunning = false;
+                    target.removeMouseListener(target.getMouseListeners()[target.getMouseListeners().length - 1]);
                 }
             });
         }
