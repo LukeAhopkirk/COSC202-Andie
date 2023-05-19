@@ -1,0 +1,8 @@
+Selection preview doesnt work on mac.
+Selection be drawn outside image.
+
+Resize then apply sobel filter or emboss filter image doesnt get repainted 
+Rotate then applying sobel or emboss image goes blank
+
+Brightness, contrast and saturation dont work for the macros 
+
