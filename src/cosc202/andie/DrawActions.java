@@ -43,10 +43,10 @@ public class DrawActions {
     private static boolean isColorPickerRunning = false;
 
     // Shape x,y,height,width
-    private static int[][] shapeXYCircle = new int[100][4];
-    private static int[][] shapeXYRectangle = new int[100][4];
-    private static int counterCircle = 0;
-    private static int counterRectangle = 0;
+    private static int[][] shapeXY = new int[1][4];
+    // private static int[][] shapeXYRectangle = new int[1][4];
+    // private static int counterCircle = 0;
+    // private static int counterRectangle = 0;
 
     /**
      * <p>
@@ -236,11 +236,11 @@ public class DrawActions {
                     int diameter = Math.min(width, height);
                     target.getImage().apply(new Circle(getMyColour(), x, y, diameter, diameter, false));
                     changeLastNumbers(x, y, diameter, diameter, true);
-                    shapeXYCircle[counterCircle][0] = x;
-                    shapeXYCircle[counterCircle][1] = y;
-                    shapeXYCircle[counterCircle][2] = height;
-                    shapeXYCircle[counterCircle][3] = width;
-                    counterCircle++;
+                    shapeXY[0][0] = x;
+                    shapeXY[0][1] = y;
+                    shapeXY[0][2] = height;
+                    shapeXY[0][3] = width;
+                    // counterCircle++;
                     target.repaint();
                     target.getParent().revalidate();
                     target.removeMouseListener(this);
@@ -336,11 +336,11 @@ public class DrawActions {
                     int y = Math.min(startY, endY);
                     target.getImage().apply(new Rectangle(getMyColour(), x, y, width, height, false));
                     changeLastNumbers(x, y, width, height, false);
-                    shapeXYRectangle[counterRectangle][0] = x;
-                    shapeXYRectangle[counterRectangle][1] = y;
-                    shapeXYRectangle[counterRectangle][2] = height;
-                    shapeXYRectangle[counterRectangle][3] = width;
-                    counterRectangle++;
+                    shapeXY[0][0] = x;
+                    shapeXY[0][1] = y;
+                    shapeXY[0][2] = height;
+                    shapeXY[0][3] = width;
+                    // counterRectangle++;
                     target.repaint();
                     target.getParent().revalidate();
                     target.removeMouseListener(this);
@@ -579,17 +579,17 @@ public class DrawActions {
                         int pixelX = e.getX();
                         int pixelY = e.getY();
 
-                        // Checking if user click lies within any rectangles
-                        for (int i = 0; i < shapeXYRectangle.length; i++) {
-                            if (shapeXYRectangle[i][0] == 0 && shapeXYRectangle[i][1] == 0 &&
-                                    shapeXYRectangle[i][2] == 0 && shapeXYRectangle[i][3] == 0) {
+                        // Checking if user click lies within the last drawn shape
+                        for (int i = 0; i < shapeXY.length; i++) {
+                            if (shapeXY[i][0] == 0 && shapeXY[i][1] == 0 &&
+                                    shapeXY[i][2] == 0 && shapeXY[i][3] == 0) {
                                 break;
                             }
 
-                            int rectX = shapeXYRectangle[i][0];
-                            int rectY = shapeXYRectangle[i][1];
-                            int rectWidth = shapeXYRectangle[i][3];
-                            int rectHeight = shapeXYRectangle[i][2];
+                            int rectX = shapeXY[i][0];
+                            int rectY = shapeXY[i][1];
+                            int rectWidth = shapeXY[i][3];
+                            int rectHeight = shapeXY[i][2];
 
                             if (pixelX >= rectX && pixelX <= rectX + rectWidth &&
                                     pixelY >= rectY && pixelY <= rectY + rectHeight) {
@@ -598,24 +598,24 @@ public class DrawActions {
                             }
                         }
 
-                        // Checking if user click lies within any circles
-                        for (int j = 0; j < shapeXYCircle.length; j++) {
-                            if (shapeXYCircle[j][0] == 0 && shapeXYCircle[j][1] == 0 && shapeXYCircle[j][2] == 0
-                                    && shapeXYCircle[j][3] == 0) {
-                                break;
-                            }
+                        // // Checking if user click lies within any circles
+                        // for (int j = 0; j < shapeXY.length; j++) {
+                        // if (shapeXY[j][0] == 0 && shapeXY[j][1] == 0 && shapeXY[j][2] == 0
+                        // && shapeXY[j][3] == 0) {
+                        // break;
+                        // }
 
-                            int circX = shapeXYCircle[j][0];
-                            int circY = shapeXYCircle[j][1];
-                            int circWidth = shapeXYCircle[j][3];
-                            int circHeight = shapeXYCircle[j][2];
+                        // int circX = shapeXY[j][0];
+                        // int circY = shapeXY[j][1];
+                        // int circWidth = shapeXY[j][3];
+                        // int circHeight = shapeXY[j][2];
 
-                            if (pixelX >= circX && pixelX <= circX + circWidth &&
-                                    pixelY >= circY && pixelY <= circY + circHeight) {
-                                target.getImage().apply(new Circle(getMyColour(), circX, circY,
-                                        Math.min(circWidth, circHeight), Math.min(circWidth, circHeight), true));
-                            }
-                        }
+                        // if (pixelX >= circX && pixelX <= circX + circWidth &&
+                        // pixelY >= circY && pixelY <= circY + circHeight) {
+                        // target.getImage().apply(new Circle(getMyColour(), circX, circY,
+                        // Math.min(circWidth, circHeight), Math.min(circWidth, circHeight), true));
+                        // }
+                        // }
 
                         target.removeMouseListener(this);
 
