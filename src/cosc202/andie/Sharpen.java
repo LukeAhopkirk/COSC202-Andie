@@ -3,8 +3,6 @@ package cosc202.andie;
 import java.awt.Graphics2D;
 import java.awt.image.*;
 
-import javax.swing.JOptionPane;
-
 /**
  * <p>
  * ImageOperation to apply a Sharpen filter.
