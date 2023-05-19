@@ -37,21 +37,22 @@ public class EditActions {
      */
     public EditActions() {
         actions = new ArrayList<Action>();
-        actions.add(new UndoAction(bundle.getString("Undo"), null, bundle.getString("UndoDesc"),
-                Integer.valueOf(KeyEvent.VK_U)));
+        actions.add(new UndoAction(bundle.getString("Undo"), null, bundle.getString("UndoDesc"), Integer.valueOf(KeyEvent.VK_U)));
         actions.get(0).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_DOWN_MASK));
-        actions.add(new RedoAction(bundle.getString("Redo"), null, bundle.getString("RedoDesc"),
-                Integer.valueOf(KeyEvent.VK_R)));
+        actions.add(new RedoAction(bundle.getString("Redo"), null, bundle.getString("RedoDesc"),Integer.valueOf(KeyEvent.VK_R)));
         actions.get(1).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl shift pressed Z"));
 
         actions.add(new MacroSAction("Start Macro", null, "Starts macro", Integer.valueOf(KeyEvent.VK_R)));
+        actions.get(2).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl pressed M"));
         // actions.get(2).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl
         // shift pressed S"));
         actions.add(new MacroFAction("Stop Macro", null, "Stops and saves macro", Integer.valueOf(KeyEvent.VK_R)));
+        actions.get(3).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl shift pressed M"));
         // actions.get(3).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl
         // shift pressed F"));
 
         actions.add(new MacroOpenAction("Open Macro", null, "Open saved macro", Integer.valueOf(KeyEvent.VK_R)));
+        actions.get(4).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl shift pressed O"));
         // actions.get(3).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl
         // shift pressed F"));
 
