@@ -200,6 +200,9 @@ public class DrawActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
+            if (target.getImage().hasImage() == false) {
+                return;
+            }
             if (isLineRunning) {
                 JOptionPane.showMessageDialog(null, "Please finish drawing the line first");
                 return;
@@ -218,29 +221,28 @@ public class DrawActions {
             target.addMouseListener(new MouseAdapter() {
                 int startX, startY, endX, endY;
 
-                 // Register the Escape key stroke
-            {
-            InputMap inputMap = target.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-            ActionMap actionMap = target.getActionMap();
-            KeyStroke escapeKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
-            inputMap.put(escapeKeyStroke, "escape");
-            actionMap.put("escape", new AbstractAction() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    // Cancel the circle drawing
-                    handleEscapeKey();
+                // Register the Escape key stroke
+                {
+                    InputMap inputMap = target.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+                    ActionMap actionMap = target.getActionMap();
+                    KeyStroke escapeKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
+                    inputMap.put(escapeKeyStroke, "escape");
+                    actionMap.put("escape", new AbstractAction() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            // Cancel the circle drawing
+                            handleEscapeKey();
+                        }
+                    });
                 }
-            });
-        }
-            
-        
+
                 @Override
                 public void mousePressed(MouseEvent e) {
                     startX = e.getX();
                     startY = e.getY();
                     target.addMouseMotionListener(this);
                 }
-        
+
                 @Override
                 public void mouseReleased(MouseEvent e) {
                     endX = e.getX();
@@ -263,7 +265,7 @@ public class DrawActions {
                     target.removeMouseMotionListener(this);
                     isCircleRunning = false;
                 }
-        
+
                 @Override
                 public void mouseDragged(MouseEvent e) {
                     endX = e.getX();
@@ -288,7 +290,7 @@ public class DrawActions {
                     target.repaint();
                 }
             });
-        
+
         }
     }
 
@@ -325,6 +327,9 @@ public class DrawActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
+            if (target.getImage().hasImage() == false) {
+                return;
+            }
             if (isLineRunning) {
                 JOptionPane.showMessageDialog(null, "Please finish drawing the line first");
                 return;
@@ -445,6 +450,9 @@ public class DrawActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
+            if (target.getImage().hasImage() == false) {
+                return;
+            }
             if (isRectangleRunning) {
                 JOptionPane.showMessageDialog(null, "Please finish drawing the rectangle shape first");
                 return;
@@ -599,6 +607,9 @@ public class DrawActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
+            if (target.getImage().hasImage() == false) {
+                return;
+            }
             if (isRectangleRunning) {
                 JOptionPane.showMessageDialog(null, "Please finish drawing the rectangle shape first");
                 return;

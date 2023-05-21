@@ -75,15 +75,40 @@ public class SelectActions {
 
     /**
      * <p>
-     * Action to draw a circle on an image.
+     * Action to crop a selected area of an image.
      * </p>
      */
     public class CropAction extends ImageAction {
+
+        /**
+         * <p>
+         * Create a new crop action.
+         * </p>
+         * 
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
         CropAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
             super(name, icon, desc, mnemonic);
         }
 
+        /**
+         * <p>
+         * Callback for when the crop action is triggered.
+         * </p>
+         * 
+         * <p>
+         * This method is called whenever the crop event is triggered.
+         * </p>
+         * 
+         * @param e The event triggering this callback.
+         */
         public void actionPerformed(ActionEvent e) {
+            if (target.getImage().hasImage() == false) {
+                return;
+            }
             target.getImage().apply(new Crop(getX(), getY(), getWidth(), getHeight()));
             target.repaint();
             target.getParent().revalidate();
@@ -91,11 +116,16 @@ public class SelectActions {
 
     }
 
+    /**
+     * <p>
+     * Action to select an area of an image.
+     * </p>
+     */
     public class SelectAreaAction extends ImageAction {
 
         /**
          * <p>
-         * Create a new drawrectangle action.
+         * Create a new selectarea action.
          * </p>
          * 
          * @param name     The name of the action (ignored if null).
@@ -109,16 +139,19 @@ public class SelectActions {
 
         /**
          * <p>
-         * Callback for when the drawrectangle action is triggered.
+         * Callback for when the selectarea action is triggered.
          * </p>
          * 
          * <p>
-         * This method is called whenever the drawRectangle is triggered.
+         * This method is called whenever the selectarea is triggered.
          * </p>
          * 
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
+            if (target.getImage().hasImage() == false) {
+                return;
+            }
             target.addMouseListener(new MouseAdapter() {
                 int startX, startY, endX, endY;
 
