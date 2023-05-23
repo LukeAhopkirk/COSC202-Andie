@@ -5,6 +5,8 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.*;
+import java.awt.image.RasterFormatException;
+
 import javax.swing.*;
 
 /**
@@ -115,9 +117,16 @@ public class SelectActions {
             if (target.getImage().hasImage() == false) {
                 return;
             }
-            target.getImage().apply(new Crop(getX(), getY(), getWidth(), getHeight()));
-            target.repaint();
-            target.getParent().revalidate();
+            try{
+                target.getImage().apply(new Crop(getX(), getY(), getWidth(), getHeight()));
+                target.repaint();
+                target.getParent().revalidate();
+            } catch (RasterFormatException e1) {
+                if (x <= 0 || y <= 0) {
+                    JOptionPane.showMessageDialog(target, "Please elect an area to crop!  ", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                    
+            }
         }
 
     }
