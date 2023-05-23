@@ -48,7 +48,7 @@ public class DrawActions {
     // Shape x,y,height,width
     private static int[][] shapeXYCircle = new int[1][4];
     private static int[][] shapeXYRectangle = new int[1][4];
-    private static int[][] shapeXYOval = new int [1][4];
+    private static int[][] shapeXYOval = new int[1][4];
     // private static int counterCircle = 0;
     // private static int counterRectangle = 0;
 
@@ -142,7 +142,8 @@ public class DrawActions {
         // shift pressed EQUALS"));
         actions.add(new DrawRectangleAction(bundle.getString("Rectangle"), null, bundle.getString("RectangleDesc"),
                 Integer.valueOf(KeyEvent.VK_R)));
-        actions.add(new DrawOvalAction(bundle.getString("Oval"), null, bundle.getString("Oval"),  Integer.valueOf(KeyEvent.VK_O)));
+        actions.add(new DrawOvalAction(bundle.getString("Oval"), null, bundle.getString("Oval"),
+                Integer.valueOf(KeyEvent.VK_O)));
         actions.add(new DrawLineAction(bundle.getString("Line"), null, bundle.getString("LineDesc"),
                 Integer.valueOf(KeyEvent.VK_L)));
         // actions.get(1).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl
@@ -267,6 +268,10 @@ public class DrawActions {
                     shapeXYRectangle[0][1] = 0;
                     shapeXYRectangle[0][2] = 0;
                     shapeXYRectangle[0][3] = 0;
+                    shapeXYOval[0][0] = 0;
+                    shapeXYOval[0][1] = 0;
+                    shapeXYOval[0][2] = 0;
+                    shapeXYOval[0][3] = 0;
                     // counterCircle++;
                     target.repaint();
                     target.getParent().revalidate();
@@ -396,6 +401,10 @@ public class DrawActions {
                     shapeXYCircle[0][1] = 0;
                     shapeXYCircle[0][2] = 0;
                     shapeXYCircle[0][3] = 0;
+                    shapeXYOval[0][0] = 0;
+                    shapeXYOval[0][1] = 0;
+                    shapeXYOval[0][2] = 0;
+                    shapeXYOval[0][3] = 0;
                     // counterRectangle++;
                     target.repaint();
                     target.getParent().revalidate();
@@ -432,121 +441,128 @@ public class DrawActions {
 
     public class DrawOvalAction extends ImageAction {
 
-    /**
-     * <p>
-     * Create a new drawoval action.
-     * </p>
-     *
-     * @param name     The name of the action (ignored if null).
-     * @param icon     An icon to use to represent the action (ignored if null).
-     * @param desc     A brief description of the action (ignored if null).
-     * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
-     */
-    DrawOvalAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
-        super(name, icon, desc, mnemonic);
+        /**
+         * <p>
+         * Create a new drawoval action.
+         * </p>
+         *
+         * @param name     The name of the action (ignored if null).
+         * @param icon     An icon to use to represent the action (ignored if null).
+         * @param desc     A brief description of the action (ignored if null).
+         * @param mnemonic A mnemonic key to use as a shortcut (ignored if null).
+         */
+        DrawOvalAction(String name, ImageIcon icon, String desc, Integer mnemonic) {
+            super(name, icon, desc, mnemonic);
+        }
+
+        /**
+         * <p>
+         * Callback for when the drawoval action is triggered.
+         * </p>
+         *
+         * <p>
+         * This method is called whenever the drawOval is triggered.
+         * </p>
+         *
+         * @param e The event triggering this callback.
+         */
+        public void actionPerformed(ActionEvent e) {
+            if (target.getImage().hasImage() == false) {
+                return;
+            }
+            if (isLineRunning) {
+                JOptionPane.showMessageDialog(null, "Please finish drawing the line first");
+                return;
+            }
+            if (isCircleRunning) {
+                JOptionPane.showMessageDialog(null, "Please finish drawing the circle first");
+                return;
+            }
+            if (isFillRunning || isColorPickerRunning) {
+                // Restore the default cursor
+                target.setCursor(Cursor.getDefaultCursor());
+                isFillRunning = false;
+                isColorPickerRunning = false;
+            }
+            isOvalRunning = true;
+            target.addMouseListener(new MouseAdapter() {
+                int startX, startY, endX, endY;
+
+                // Register the Escape key stroke
+                {
+                    InputMap inputMap = target.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+                    ActionMap actionMap = target.getActionMap();
+                    KeyStroke escapeKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
+                    inputMap.put(escapeKeyStroke, "escape");
+                    actionMap.put("escape", new AbstractAction() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            handleEscapeKey();
+                        }
+                    });
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    startX = e.getX();
+                    startY = e.getY();
+                    target.addMouseMotionListener(this);
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                    endX = e.getX();
+                    endY = e.getY();
+                    int width = Math.abs(endX - startX);
+                    int height = Math.abs(endY - startY);
+                    int x = Math.min(startX, endX);
+                    int y = Math.min(startY, endY);
+                    target.getImage().apply(new Oval(getMyColour(), x, y, width, height, false));
+                    changeLastNumbers(x, y, width, height, false);
+                    shapeXYOval[0][0] = x;
+                    shapeXYOval[0][1] = y;
+                    shapeXYOval[0][2] = height;
+                    shapeXYOval[0][3] = width;
+                    shapeXYCircle[0][0] = 0;
+                    shapeXYCircle[0][1] = 0;
+                    shapeXYCircle[0][2] = 0;
+                    shapeXYCircle[0][3] = 0;
+                    shapeXYRectangle[0][0] = 0;
+                    shapeXYRectangle[0][1] = 0;
+                    shapeXYRectangle[0][2] = 0;
+                    shapeXYRectangle[0][3] = 0;
+                    target.repaint();
+                    target.getParent().revalidate();
+                    target.removeMouseListener(this);
+                    target.removeMouseMotionListener(this);
+                    isOvalRunning = false;
+                }
+
+                @Override
+                public void mouseDragged(MouseEvent e) {
+                    endX = e.getX();
+                    endY = e.getY();
+                    int width = Math.abs(endX - startX);
+                    int height = Math.abs(endY - startY);
+                    int x = Math.min(startX, endX);
+                    int y = Math.min(startY, endY);
+                    target.repaint();
+                    Graphics2D g2d = (Graphics2D) target.getGraphics();
+                    g2d.setStroke(new BasicStroke(4));
+                    g2d.setColor(getMyColour());
+                    g2d.drawOval(x, y, width, height);
+                }
+
+                // If user presses escape key, cancel the ovel drawing
+                private void handleEscapeKey() {
+                    isRectangleRunning = false;
+                    target.removeMouseListener(this);
+                    target.removeMouseMotionListener(this);
+                    target.repaint();
+                }
+            });
+        }
     }
-
-    /**
-     * <p>
-     * Callback for when the drawoval action is triggered.
-     * </p>
-     *
-     * <p>
-     * This method is called whenever the drawOval is triggered.
-     * </p>
-     *
-     * @param e The event triggering this callback.
-     */
-    public void actionPerformed(ActionEvent e) {
-        if (target.getImage().hasImage() == false) {
-            return;
-        }
-        if (isLineRunning) {
-            JOptionPane.showMessageDialog(null, "Please finish drawing the line first");
-            return;
-        }
-        if (isCircleRunning) {
-            JOptionPane.showMessageDialog(null, "Please finish drawing the circle first");
-            return;
-        }
-        if (isFillRunning || isColorPickerRunning) {
-            // Restore the default cursor
-            target.setCursor(Cursor.getDefaultCursor());
-            isFillRunning = false;
-            isColorPickerRunning = false;
-        }
-        isOvalRunning = true;
-        target.addMouseListener(new MouseAdapter() {
-            int startX, startY, endX, endY;
-
-            // Register the Escape key stroke
-            {
-                InputMap inputMap = target.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-                ActionMap actionMap = target.getActionMap();
-                KeyStroke escapeKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
-                inputMap.put(escapeKeyStroke, "escape");
-                actionMap.put("escape", new AbstractAction() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        handleEscapeKey();
-                    }
-                });
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                startX = e.getX();
-                startY = e.getY();
-                target.addMouseMotionListener(this);
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                endX = e.getX();
-                endY = e.getY();
-                int width = Math.abs(endX - startX);
-                int height = Math.abs(endY - startY);
-                int x = Math.min(startX, endX);
-                int y = Math.min(startY, endY);
-                target.getImage().apply(new Oval(getMyColour(), x, y, width, height, false));
-                changeLastNumbers(x, y, width, height, false);
-                shapeXYOval[0][0] = x;
-                shapeXYOval[0][1] = y;
-                shapeXYOval[0][2] = height;
-                shapeXYOval[0][3] = width;
-                // counterOval++;
-                target.repaint();
-                target.getParent().revalidate();
-                target.removeMouseListener(this);
-                target.removeMouseMotionListener(this);
-                isOvalRunning = false;
-            }
-
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                endX = e.getX();
-                endY = e.getY();
-                int width = Math.abs(endX - startX);
-                int height = Math.abs(endY - startY);
-                int x = Math.min(startX, endX);
-                int y = Math.min(startY, endY);
-                target.repaint();
-                Graphics2D g2d = (Graphics2D) target.getGraphics();
-                g2d.setStroke(new BasicStroke(4));
-                g2d.setColor(getMyColour());
-                g2d.drawOval(x, y, width, height);
-            }
-
-            // If user presses escape key, cancel the rectangle drawing
-            private void handleEscapeKey() {
-                isRectangleRunning = false;
-                target.removeMouseListener(this);
-                target.removeMouseMotionListener(this);
-                target.repaint();
-            }
-        });
-    }
-}
 
     /**
      * <p>
@@ -757,7 +773,7 @@ public class DrawActions {
                 JOptionPane.showMessageDialog(null, "Please pick a colour first");
                 return;
             }
-            if (isOvalRunning){
+            if (isOvalRunning) {
                 JOptionPane.showMessageDialog(null, "Please finish drawing the oval first");
                 return;
             }
@@ -829,7 +845,7 @@ public class DrawActions {
                                         Math.min(circWidth, circHeight), Math.min(circWidth, circHeight), true));
                             }
                         }
-                        
+
                         for (int j = 0; j < shapeXYOval.length; j++) {
                             if (shapeXYOval[j][0] == 0 && shapeXYOval[j][1] == 0 && shapeXYOval[j][2] == 0
                                     && shapeXYOval[j][3] == 0) {
@@ -847,7 +863,7 @@ public class DrawActions {
                                         .apply(new Oval(getMyColour(), ovalX, ovalY, ovalWidth, ovalHeight, true));
                             }
                         }
-                        
+
                         target.removeMouseListener(this);
 
                         // Restore the default cursor
