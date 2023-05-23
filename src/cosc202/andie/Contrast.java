@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
  * ImageOperation to increase the Contrast of an image
  * </p>
  */
-public class Contrast implements ImageOperation {
+public class Contrast implements ImageOperation, java.io.Serializable {
     private int multiplier = 1;
 
     /**

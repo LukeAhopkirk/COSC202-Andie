@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
  * ImageOperation to change the Saturation of an image
  * </p>
  */
-public class Saturation implements ImageOperation {
+public class Saturation implements ImageOperation, java.io.Serializable {
     private int multiplier = -1;
 
     /**

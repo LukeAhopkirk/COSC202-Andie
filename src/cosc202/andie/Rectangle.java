@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
  * </p>
  * 
  */
-public class Rectangle implements ImageOperation {
+public class Rectangle implements ImageOperation, java.io.Serializable {
 
     private static Color currColour;
     private static int x;

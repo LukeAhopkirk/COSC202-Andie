@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
  * </p>
  * 
  */
-public class Rotate90Right implements ImageOperation {
+public class Rotate90Right implements ImageOperation, java.io.Serializable {
     /**
      * <p>
      * Default Constructor

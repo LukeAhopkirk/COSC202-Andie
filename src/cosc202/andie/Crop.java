@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
  * </p>
  * 
  */
-public class Crop implements ImageOperation {
+public class Crop implements ImageOperation, java.io.Serializable {
     static int x, y, width, height;
 
     /**

@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
  * </p>
  * 
  */
-public class FlipV implements ImageOperation {
+public class FlipV implements ImageOperation, java.io.Serializable {
 
     /**
      * <p>

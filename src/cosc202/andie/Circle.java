@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
  * </p>
  * 
  */
-public class Circle implements ImageOperation {
+public class Circle implements ImageOperation, java.io.Serializable {
 
     private static Color currColour;
     private static int x;

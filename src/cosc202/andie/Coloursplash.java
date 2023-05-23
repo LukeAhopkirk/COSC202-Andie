@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
  * ImageOperation to change the Saturation of an image
  * </p>
  */
-public class Coloursplash implements ImageOperation {
+public class Coloursplash implements ImageOperation, java.io.Serializable {
     private int x, y;;
 
     /**

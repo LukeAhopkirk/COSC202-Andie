@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
  * </p>
  * 
  */
-public class ColourUserPick implements ImageOperation {
+public class ColourUserPick implements ImageOperation, java.io.Serializable {
 
     private int x;
     private int y;

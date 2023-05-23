@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
  * </p>
  * 
  */
-public class Resize implements ImageOperation {
+public class Resize implements ImageOperation, java.io.Serializable {
 
     private double multiplier = 100;
 

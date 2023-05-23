@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
  * </p>
  * 
  */
-public class FlipH implements ImageOperation {
+public class FlipH implements ImageOperation, java.io.Serializable {
 
     /**
      * <p>

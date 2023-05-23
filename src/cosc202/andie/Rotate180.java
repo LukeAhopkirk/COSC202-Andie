@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
  * 
  */
 
-public class Rotate180 implements ImageOperation {
+public class Rotate180 implements ImageOperation, java.io.Serializable {
 
      /**
      * <p>

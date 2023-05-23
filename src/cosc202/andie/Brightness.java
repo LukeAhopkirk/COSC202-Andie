@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
  * </p>
  * 
  */
-public class Brightness implements ImageOperation {
+public class Brightness implements ImageOperation, java.io.Serializable {
 
     private int multiplier = 1;
 

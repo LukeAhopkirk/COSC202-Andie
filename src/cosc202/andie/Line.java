@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
  * </p>
  * 
  */
-public class Line implements ImageOperation {
+public class Line implements ImageOperation, java.io.Serializable {
 
     private static Color currColour;
     private static int x1;
