@@ -1,6 +1,7 @@
 package cosc202.andie;
 
 import java.awt.image.BufferedImage;
+import javax.swing.JOptionPane;
 
 /**
  * <p>
@@ -40,6 +41,18 @@ public class Crop implements ImageOperation, java.io.Serializable {
      * @return The resulting (flipped) image
      */
     public BufferedImage apply(BufferedImage input) {
+        int initialWidth = input.getWidth();
+        int initialHeight = input.getHeight();
+        if (x + width > initialWidth) {
+            width = initialWidth - x;
+        }
+        if (y + height > initialHeight) {
+            height = initialHeight - y;
+        }
+        if(y > initialHeight || x > initialWidth){
+            JOptionPane.showMessageDialog(null, "Please Select and area inside the image!");
+            return input;
+        }
         BufferedImage output = input.getSubimage(x, y, width, height);
         return output;
     }
