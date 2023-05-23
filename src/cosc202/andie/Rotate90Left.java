@@ -40,7 +40,7 @@ public class Rotate90Left implements ImageOperation, java.io.Serializable {
         int width = input.getWidth();
         int height = input.getHeight();
 
-        BufferedImage output = new BufferedImage(height, width, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage output = new BufferedImage(height, width, input.getType());
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
