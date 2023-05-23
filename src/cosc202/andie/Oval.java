@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 
 /**
  * <p>
- * ImageOperation to draw a circle on an image
+ * ImageOperation to draw an oval on an image
  * </p>
  * 
  */
@@ -22,8 +22,16 @@ public class Oval implements ImageOperation, java.io.Serializable {
 
     /**
      * <p>
-     * Default Constructor
+     * Constructor for oval class
      * </p>
+     * 
+     * @param currColour The colour to be used for drawing
+     * @param x          The x coordinate of the oval
+     * @param y          The y coordinate of the oval
+     * @param width      The width of the oval
+     * @param height     The height of the oval
+     * @param fill       Whether the oval should be filled or not
+     *                   </p>
      */
     Oval(Color currColour, int x, int y, int width, int height, boolean fill) {
         Oval.currColour = currColour;
@@ -36,11 +44,13 @@ public class Oval implements ImageOperation, java.io.Serializable {
 
     /**
      * <p>
-     * Apply a circle drawing to an image.
+     * Apply a oval drawing to an image.
      * </p>
      * 
      * <p>
-     * Write how it works here
+     * Draws a oval on the image using the current colour and co-oridnates,
+     * and returns the resulting image. If the fill flag is set, the oval
+     * will be filled, otherwise it will be drawn as a border.
      * </p>
      * 
      * @param input The image to be drawn on
@@ -51,7 +61,7 @@ public class Oval implements ImageOperation, java.io.Serializable {
             Graphics2D g2d = input.createGraphics();
             g2d.setColor(Oval.currColour);
             g2d.setStroke(new BasicStroke(1));
-          
+
             int offsetX = 2; // Adjust the offset to control the size reduction
             int offsetY = 2;
             int smallerWidth = Oval.width - (2 * offsetX);

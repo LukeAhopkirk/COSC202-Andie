@@ -296,7 +296,7 @@ public class DrawActions {
                     g2d.drawOval(x, y, diameter, diameter);
                 }
 
-                // If user presses escape key, cancel the rectangle drawing
+                // If user presses escape key, cancel the circle drawing
                 private void handleEscapeKey() {
                     isCircleRunning = false;
                     target.removeMouseListener(this);
@@ -661,7 +661,7 @@ public class DrawActions {
                     g2d.drawLine(startX, startY, endX, endY);
                 }
 
-                // If user presses escape key, cancel the rectangle drawing
+                // If user presses escape key, cancel the line drawing
                 private void handleEscapeKey() {
                     isLineRunning = false;
                     target.removeMouseListener(this);
@@ -721,12 +721,10 @@ public class DrawActions {
 
     /**
      * <p>
-     * Action to fill the last shape
+     * Action to fill the last drawn shape
      * </p>
      */
     public class FillShapeAction extends ImageAction {
-
-        // private Color innerClassColor;
 
         /**
          * <p>

@@ -22,8 +22,15 @@ public class Rectangle implements ImageOperation, java.io.Serializable {
 
     /**
      * <p>
-     * Default Constructor
+     * Constructor for rectangle class
      * </p>
+     * 
+     * @param currColour The colour to be used for drawing
+     * @param x          The x coordinate of the rectangle
+     * @param y          The y coordinate of the rectangle
+     * @param width      The width of the rectangle
+     * @param height     The height of the rectangle
+     *                   </p>
      */
     Rectangle(Color currColour, int x, int y, int width, int height, boolean fill) {
         Rectangle.currColour = currColour;
@@ -40,7 +47,9 @@ public class Rectangle implements ImageOperation, java.io.Serializable {
      * </p>
      * 
      * <p>
-     * Write how it works here
+     * Draws a rectangle on the image using the current colour and co-oridnates,
+     * and returns the resulting image. If the fill flag is set, the rectangle
+     * will be filled, otherwise it will be drawn as a border.
      * </p>
      * 
      * @param input The image to be drawn on

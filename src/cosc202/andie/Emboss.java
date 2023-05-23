@@ -10,12 +10,11 @@ import java.awt.image.*;
  * 
  * <p>
  * Type of image filter that produces a 3D effect by detecting edges in the
- * image and
- * highlighting them using a lighting effect. The filter calculates the
- * difference between
- * neighboring pixel values and uses this information to create a raised or
- * lowered appearance,
- * giving the illusion of depth to the image.
+ * image and highlighting them using a lighting effect. The filter calculates
+ * the
+ * difference between neighboring pixel values and uses this information to
+ * create
+ * a raised or lowered appearance, giving the illusion of depth to the image.
  * </p>
  * 
  */
@@ -25,8 +24,10 @@ public class Emboss implements ImageOperation, java.io.Serializable {
 
     /**
      * <p>
-     * Default constructor
+     * Constructor for emboss class
      * </p>
+     * 
+     * @param numbersTrue The array of booleans to determine which kernel to use
      */
     Emboss(boolean[] numbersTrue) {
         this.numbersTrue = numbersTrue;
@@ -39,7 +40,7 @@ public class Emboss implements ImageOperation, java.io.Serializable {
      * 
      * <p>
      * Uses 9 different kernels for different edge directions,
-     * all of which are applied to 1 image
+     * one of which are applied to 1 image
      * </p>
      * 
      * @param input The image to apply the Emboss filter to.

@@ -20,8 +20,11 @@ public class Sobel implements ImageOperation, java.io.Serializable {
 
     /**
      * <p>
-     * Default constructor
+     * Constructor for sobel class
      * </p>
+     * 
+     * @param horizontal Whether the horizontal or vertical kernel should be used
+     *                   </p>
      */
     Sobel(boolean horizontal) {
         this.horizontal = horizontal;
@@ -35,9 +38,8 @@ public class Sobel implements ImageOperation, java.io.Serializable {
      * <p>
      * Uses two 3x3 convolution kernels to calculate gradients of the image
      * intensity.
-     * The first kernel detects vertical edges, and the second detects horizontal
-     * edges.
-     * The filter is applied to each pixel in the image.
+     * One kernel detects vertical edges, and the other detects horizontal
+     * edgess.
      * </p>
      * 
      * @param input The image to apply the Sobel filter to.

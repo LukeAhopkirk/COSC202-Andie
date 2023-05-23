@@ -61,7 +61,7 @@ public class SelectActions {
         } else {
             actions.get(1).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl pressed C"));
         }
-        
+
     }
 
     /**
@@ -117,15 +117,16 @@ public class SelectActions {
             if (target.getImage().hasImage() == false) {
                 return;
             }
-            try{
+            try {
                 target.getImage().apply(new Crop(getX(), getY(), getWidth(), getHeight()));
                 target.repaint();
                 target.getParent().revalidate();
             } catch (RasterFormatException e1) {
                 if (x <= 0 || y <= 0) {
-                    JOptionPane.showMessageDialog(target, "Please elect an area to crop!  ", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(target, "Please elect an area to crop!  ", "Error",
+                            JOptionPane.ERROR_MESSAGE);
                 }
-                    
+
             }
         }
 

@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 
 /**
  * <p>
- * ImageOperation to flip an image horizontally.
+ * ImageOperation to crop an image.
  * </p>
  * 
  */
@@ -14,8 +14,13 @@ public class Crop implements ImageOperation, java.io.Serializable {
 
     /**
      * <p>
-     * Default Constructor
+     * Constructor for crop class
      * </p>
+     * 
+     * @param x      The x coordinate of the top left corner of the crop
+     * @param y      The y coordinate of the top left corner of the crop
+     * @param width  The width of the crop
+     * @param height The height of the crop
      */
     Crop(int x, int y, int width, int height) {
         Crop.x = x;
@@ -27,18 +32,17 @@ public class Crop implements ImageOperation, java.io.Serializable {
 
     /**
      * <p>
-     * Apply a horizontal flip to an image.
+     * Apply a crop to an image.
      * </p>
      * 
      * <p>
-     * Uses a nested loop iterating over the pixels of an image.
-     * Horizontally (from left to right) and vertically (from top to bottom).
-     * For each pixel, the code swaps its color value with the color value of the
-     * pixel on the opposite side of the image along the horizontal axis.
+     * Crops the image to the specified dimensions, and returns the resulting
+     * image. If the crop is outside the bounds of the image, the crop is
+     * adjusted to fit within the image.
      * </p>
      * 
-     * @param input The image to flip horizontally.
-     * @return The resulting (flipped) image
+     * @param input The image to be cropped
+     * @return The resulting (cropped) image
      */
     public BufferedImage apply(BufferedImage input) {
         int initialWidth = input.getWidth();
@@ -49,7 +53,7 @@ public class Crop implements ImageOperation, java.io.Serializable {
         if (y + height > initialHeight) {
             height = initialHeight - y;
         }
-        if(y > initialHeight || x > initialWidth){
+        if (y > initialHeight || x > initialWidth) {
             JOptionPane.showMessageDialog(null, "Please Select and area inside the image!");
             return input;
         }

@@ -21,8 +21,14 @@ public class Line implements ImageOperation, java.io.Serializable {
 
     /**
      * <p>
-     * Default Constructor
-     * </p>
+     * Constructor
+     * 
+     * @param currColour The colour to be used for drawing
+     * @param x1         The x coordinate of the start of the line
+     * @param y1         The y coordinate of the start of the line
+     * @param x2         The x coordinate of the end of the line
+     * @param y2         The y coordinate of the end of the line
+     *                   </p>
      */
     Line(Color currColour, int x1, int y1, int x2, int y2) {
         Line.currColour = currColour;
@@ -38,7 +44,8 @@ public class Line implements ImageOperation, java.io.Serializable {
      * </p>
      * 
      * <p>
-     * Write how it works here
+     * Draws a line on the image using the current colour and co-oridnates,
+     * and returns the resulting image.
      * </p>
      * 
      * @param input The image to be drawn on

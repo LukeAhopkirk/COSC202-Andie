@@ -24,6 +24,13 @@ public class Circle implements ImageOperation, java.io.Serializable {
      * <p>
      * Default Constructor
      * </p>
+     * 
+     * @param currColour The colour to be used for drawing
+     * @param x          The x coordinate of the circle
+     * @param y          The y coordinate of the circle
+     * @param width      The width of the circle
+     * @param height     The height of the circle
+     * @param fill       Whether the circle should be filled or not
      */
     Circle(Color currColour, int x, int y, int width, int height, boolean fill) {
         Circle.currColour = currColour;
@@ -40,7 +47,9 @@ public class Circle implements ImageOperation, java.io.Serializable {
      * </p>
      * 
      * <p>
-     * Write how it works here
+     * Draws a circle on the image using the current colour and co-oridnates,
+     * and returns the resulting image. If the fill flag is set, the circle
+     * will be filled, otherwise it will be drawn as a border.
      * </p>
      * 
      * @param input The image to be drawn on

@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 /**
  * <p>
- * ImageOperation to draw a circle on an image
+ * Changing the desired colour to be used by the user.
  * </p>
  * 
  */
@@ -16,8 +16,11 @@ public class ColourUserPick implements ImageOperation, java.io.Serializable {
 
     /**
      * <p>
-     * Default Constructor
+     * Constructor refering to a specific pixel.
      * </p>
+     * 
+     * @param x The x coordinate of the selected pixel
+     * @param y The y corrdinate of the selected pixel
      */
     ColourUserPick(int x, int y) {
         this.x = x;
@@ -25,16 +28,14 @@ public class ColourUserPick implements ImageOperation, java.io.Serializable {
     }
 
     /**
-     * <p>
-     * Apply a circle drawing to an image.
-     * </p>
      * 
      * <p>
-     * Write how it works here
+     * Is passed in co-ordinates of a pixel and sets the colour
+     * to be used for drawing operations.
      * </p>
      * 
      * @param input The image to be drawn on
-     * @return The resulting (drawn on) image
+     * @return The image.
      */
     public BufferedImage apply(BufferedImage input) {
         int pixel = input.getRGB(x, y);

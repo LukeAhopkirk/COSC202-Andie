@@ -5,7 +5,8 @@ import java.awt.image.BufferedImage;
 
 /**
  * <p>
- * ImageOperation to change the Saturation of an image
+ * ImageOperation to change all the pixels grey in an image,
+ * besides a selected colour chosen by the user.
  * </p>
  */
 public class Coloursplash implements ImageOperation, java.io.Serializable {
@@ -21,15 +22,11 @@ public class Coloursplash implements ImageOperation, java.io.Serializable {
 
     /**
      * <p>
-     * Construct a Contrast filter with the given multiplier.
+     * Constructor refering to a specific pixel.
      * </p>
      * 
-     * <p>
-     * Higher multiplier produces an image with more contrast.
-     * Lower multiplier produces an image with less contrast.
-     * </p>
-     * 
-     * @param multiplier Strength of the contrast filter.
+     * @param x The x coordinate of the selected pixel
+     * @param y The y corrdinate of the selected pixel
      */
     Coloursplash(int x, int y) {
         this.x = x;
@@ -38,16 +35,17 @@ public class Coloursplash implements ImageOperation, java.io.Serializable {
 
     /**
      * <p>
-     * Apply saturation to an image.
+     * Apply coloursplash to an image.
      * </p>
      * 
      * <p>
-     * Iterates over each pixes and changes the
-     * values to saturate
+     * Iterates over each pixes and checks if the colour is
+     * within a certian threshold of the selected colour, if not
+     * the pixel is grescaled.
      * </p>
      * 
-     * @param input The image to change saturation
-     * @return The resulting image (with altered saturation).
+     * @param input The image to coloursplashed
+     * @return The resulting image (with all other colours greyscaled).
      */
     public BufferedImage apply(BufferedImage input) {
         int width = input.getWidth();

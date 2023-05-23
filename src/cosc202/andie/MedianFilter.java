@@ -23,7 +23,9 @@ public class MedianFilter implements ImageOperation, java.io.Serializable {
      * </p>
      * 
      * <p>
-     * Higher kernelsizes produce more noise reduction
+     * The kernel size must be an odd number, and greater than or equal to 3.
+     * A higher kernel size will result in more noise reduction, but will also
+     * result in a more blurred image.
      * </p>
      * 
      * @param kernelSize Size of the square matrix used to perform convolution on
