@@ -142,7 +142,7 @@ public class DrawActions {
         // shift pressed EQUALS"));
         actions.add(new DrawRectangleAction(bundle.getString("Rectangle"), null, bundle.getString("RectangleDesc"),
                 Integer.valueOf(KeyEvent.VK_R)));
-        actions.add(new DrawOvalAction(bundle.getString("Oval"), null, bundle.getString("Oval"),
+        actions.add(new DrawOvalAction(bundle.getString("Oval"), null, bundle.getString("OvalDesc"),
                 Integer.valueOf(KeyEvent.VK_O)));
         actions.add(new DrawLineAction(bundle.getString("Line"), null, bundle.getString("LineDesc"),
                 Integer.valueOf(KeyEvent.VK_L)));
