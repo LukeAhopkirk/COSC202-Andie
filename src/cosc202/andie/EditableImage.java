@@ -255,6 +255,10 @@ class EditableImage {
         }
     }
 
+    public boolean macroActive(){
+        return macroB;
+    }
+
     public void macroOpen(String inputName) throws Exception {
         imageFilename = inputName;
         macroName = imageFilename + ".ops";
@@ -339,6 +343,10 @@ class EditableImage {
      * </p>
      */
     public void undo() {
+        if(ops.empty()){
+            JOptionPane.showMessageDialog(null, "No more actions to undo!");
+            return;
+        }
         redoOps.push(ops.pop());
         if (macroB) {
             macroOps.pop();
@@ -352,6 +360,10 @@ class EditableImage {
      * </p>
      */
     public void redo() {
+        if(redoOps.empty()){
+            JOptionPane.showMessageDialog(null, "No more actions to redo!");
+            return;
+        }
         apply(redoOps.pop());
     }
 

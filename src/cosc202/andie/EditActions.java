@@ -201,12 +201,22 @@ public class EditActions {
 
         public void actionPerformed(ActionEvent e) {
 
+            if(target.getImage().macroActive()==false){
+                JOptionPane.showMessageDialog(null, "No active macro has been found.");
+                return;
+            }
+
             JFileChooser fileChooser = new JFileChooser();
             int result = fileChooser.showSaveDialog(target);
             if (result == JFileChooser.APPROVE_OPTION) {
                 try {
-                    String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
-                    target.getImage().macroF(imageFilepath);
+                    
+                    
+                        String imageFilepath = fileChooser.getSelectedFile().getCanonicalPath();
+                        target.getImage().macroF(imageFilepath);
+
+                        
+                    
                 } catch (Exception e1) {
                     JOptionPane.showMessageDialog(null, "Operation macro saving error.");
                 }
