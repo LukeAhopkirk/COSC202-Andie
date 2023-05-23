@@ -920,7 +920,7 @@ public class DrawActions {
                     .getImage(Andie.class.getClassLoader().getResource("COLORPICKER.png"));
 
             // Create a temporary BufferedImage to get the image's height
-            BufferedImage tempImage = new BufferedImage(30, 30, BufferedImage.TYPE_INT_ARGB);
+            BufferedImage tempImage = new BufferedImage(15, 15, BufferedImage.TYPE_INT_ARGB);
             Graphics2D g = tempImage.createGraphics();
             g.drawImage(cursorImage, 0, 0, null);
             g.dispose();
