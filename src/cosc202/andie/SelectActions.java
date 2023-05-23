@@ -54,6 +54,7 @@ public class SelectActions {
                 Integer.valueOf(KeyEvent.VK_C)));
         actions.add(new CropAction(bundle.getString("Crop"), null, bundle.getString("CropDesc"),
                 Integer.valueOf(KeyEvent.VK_C)));
+        actions.get(1).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl pressed C"));
     }
 
     /**

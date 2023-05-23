@@ -43,7 +43,7 @@ COMPLETED (Jasper) - Emboss and edge detection filters = Issue with Resize
 COMPLETED (Jasper) - Toolbar for common operations
 
 COMPLETED (Richard) - Keyboard shortcuts
-ALMOST (Richard) - Macros for record and replay of operations (Brightness, contrast, saturation does not work for some reason)
+COMPLETED (Richard) - Macros for record and replay of operations (Brightness, contrast, saturation does not work for some reason)
 
 COMPLTED (Luke) - Crop to selection
 
