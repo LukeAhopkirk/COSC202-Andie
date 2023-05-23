@@ -64,7 +64,7 @@ public class Resize implements ImageOperation, java.io.Serializable {
         int newH = (int) (input.getHeight() * (multiplier / 100));
 
         // Create a new BufferedImage with the desired dimensions and ARGB type
-        BufferedImage output = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage output = new BufferedImage(newW, newH, input.getType());
 
         // Create a Graphics2D object for drawing on the output image
         Graphics2D g2d = output.createGraphics();

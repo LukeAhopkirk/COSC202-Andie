@@ -263,6 +263,10 @@ public class DrawActions {
                     shapeXYCircle[0][1] = y;
                     shapeXYCircle[0][2] = height;
                     shapeXYCircle[0][3] = width;
+                    shapeXYRectangle[0][0] = 0;
+                    shapeXYRectangle[0][1] = 0;
+                    shapeXYRectangle[0][2] = 0;
+                    shapeXYRectangle[0][3] = 0;
                     // counterCircle++;
                     target.repaint();
                     target.getParent().revalidate();
@@ -388,6 +392,10 @@ public class DrawActions {
                     shapeXYRectangle[0][1] = y;
                     shapeXYRectangle[0][2] = height;
                     shapeXYRectangle[0][3] = width;
+                    shapeXYCircle[0][0] = 0;
+                    shapeXYCircle[0][1] = 0;
+                    shapeXYCircle[0][2] = 0;
+                    shapeXYCircle[0][3] = 0;
                     // counterRectangle++;
                     target.repaint();
                     target.getParent().revalidate();
@@ -888,6 +896,9 @@ public class DrawActions {
          * @param e The event triggering this callback.
          */
         public void actionPerformed(ActionEvent e) {
+            if (target.getImage().hasImage() == false) {
+                return;
+            }
             if (isRectangleRunning) {
                 JOptionPane.showMessageDialog(null, "Please finish drawing the rectangle shape first");
                 return;
@@ -909,7 +920,7 @@ public class DrawActions {
                     .getImage(Andie.class.getClassLoader().getResource("COLORPICKER.png"));
 
             // Create a temporary BufferedImage to get the image's height
-            BufferedImage tempImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+            BufferedImage tempImage = new BufferedImage(30, 30, BufferedImage.TYPE_INT_ARGB);
             Graphics2D g = tempImage.createGraphics();
             g.drawImage(cursorImage, 0, 0, null);
             g.dispose();
