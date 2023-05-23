@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
  * </p>
  */
 public class Saturation implements ImageOperation, java.io.Serializable {
-    private int multiplier = -1;
+    private int multiplier = 0;
 
     /**
      * <p>

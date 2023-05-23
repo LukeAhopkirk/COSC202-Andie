@@ -100,6 +100,7 @@ public class Sharpen implements ImageOperation, java.io.Serializable {
             }
         }
         int midValue = (minPixelValue + maxPixelValue) / 2;
+        System.out.println("Min: " + minPixelValue + ", Max: " + maxPixelValue + ", Mid: " + midValue);
 
         // Loop through each pixel
         for (int y = 0; y < height; y++) {

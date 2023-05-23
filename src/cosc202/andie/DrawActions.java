@@ -9,6 +9,8 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+
 import javax.swing.*;
 
 /**
@@ -761,14 +763,20 @@ public class DrawActions {
                 return;
             }
             isColorPickerRunning = true;
-            // Load the custom cursor image
             Image cursorImage = Toolkit.getDefaultToolkit()
                     .getImage(Andie.class.getClassLoader().getResource("COLORPICKER.png"));
 
-            // Create a custom cursor from the image
-            Cursor customCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImage, new Point(0, 0),
-                    "Custom Cursor");
+            // Create a temporary BufferedImage to get the image's height
+            BufferedImage tempImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+            Graphics2D g = tempImage.createGraphics();
+            g.drawImage(cursorImage, 0, 0, null);
+            g.dispose();
 
+            int cursorImageHeight = tempImage.getHeight();
+
+            // Create the custom cursor with the bottom-left hot spot
+            Cursor customCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImage,
+                    new Point(0, cursorImageHeight - 1), "Custom Cursor");
             // Set the custom cursor
             target.setCursor(customCursor);
 

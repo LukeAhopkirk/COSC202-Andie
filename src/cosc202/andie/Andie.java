@@ -100,7 +100,7 @@ public class Andie {
                 FilterActions filterActions = new FilterActions();
                 menuBar.add(filterActions.createMenu());
 
-                // Actions that affect the representation of colour in the image
+                // Actions that affect the representation of colour in the 5image
                 ColourActions colourActions = new ColourActions();
                 menuBar.add(colourActions.createMenu());
 

@@ -5,6 +5,6 @@ Resize then apply sobel filter or emboss filter image doesnt get repainted
 Rotate then applying sobel or emboss image goes blank
 Rotate the applying sharpen also doesnt work.
 
-Brightness, contrast and saturation dont work for the macros 
+FIXED : Brightness, contrast and saturation dont work for the macros 
 
 
