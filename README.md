@@ -31,4 +31,5 @@ Extended filters:
 
 In order to apply filters all the way to the edge pixels we padded the image with zeros, enlarged the image by one pixel, applied convolution to the enlarged image then finally cropped the image to its original size. There are cases where this may create a 'halo effect' around the borders, but again as a result of our issues, that is what we settled on. 
 
- 
+Keyboard shortcuts:
+For keyboard shortcuts, we decided to only add to those that are frequenctly used, this is because having more shortcuts for filters, colour operations etc may cause confusion for the user.
