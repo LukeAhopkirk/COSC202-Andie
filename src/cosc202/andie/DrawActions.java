@@ -260,6 +260,10 @@ public class DrawActions {
                     shapeXYCircle[0][1] = y;
                     shapeXYCircle[0][2] = height;
                     shapeXYCircle[0][3] = width;
+                    shapeXYRectangle[0][0] = 0;
+                    shapeXYRectangle[0][1] = 0;
+                    shapeXYRectangle[0][2] = 0;
+                    shapeXYRectangle[0][3] = 0;
                     // counterCircle++;
                     target.repaint();
                     target.getParent().revalidate();
@@ -385,6 +389,10 @@ public class DrawActions {
                     shapeXYRectangle[0][1] = y;
                     shapeXYRectangle[0][2] = height;
                     shapeXYRectangle[0][3] = width;
+                    shapeXYCircle[0][0] = 0;
+                    shapeXYCircle[0][1] = 0;
+                    shapeXYCircle[0][2] = 0;
+                    shapeXYCircle[0][3] = 0;
                     // counterRectangle++;
                     target.repaint();
                     target.getParent().revalidate();

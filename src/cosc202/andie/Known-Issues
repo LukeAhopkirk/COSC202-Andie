@@ -1,9 +1,9 @@
 Selection preview doesnt work on mac.
-Selection be drawn outside image.
+FIXED : Selection be drawn outside image.
 
-Resize then apply sobel filter or emboss filter image doesnt get repainted 
-Rotate then applying sobel or emboss image goes blank
-Rotate the applying sharpen also doesnt work.
+FIXED : Resize then apply sobel filter or emboss filter image doesnt get repainted 
+FIXED : Rotate then applying sobel or emboss image goes blank
+FIXED : Rotate the applying sharpen also doesnt work.
 
 FIXED : Brightness, contrast and saturation dont work for the macros 
 
