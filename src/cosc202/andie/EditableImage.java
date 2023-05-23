@@ -330,6 +330,10 @@ class EditableImage {
      * @param clearRect The operation to apply.
      */
     public void apply(ImageOperation op) {
+        if(current == null){
+            JOptionPane.showMessageDialog(null, "No image to apply operations on!");
+            return;
+        }
         current = op.apply(current);
         ops.add(op);
         if (macroB) {
