@@ -6,18 +6,16 @@ package cosc202.andie;
 // Windows -> windows
 // Any other OS -> other
 public class OperatingSystem {
-    private static String OS;
     protected OperatingSystem(){}
     public static String getOS(){
         String os = System.getProperty("os.name");
         if(os.startsWith("Windows")){
-            OS = "windows";
+            return "windows";
         }else if(os.startsWith("Mac")){
-            OS = "mac";
+            return "mac";
         }else{
-            OS = "other";
+            return "other";
         }
-        return OS;
     }
     
 }

@@ -36,11 +36,27 @@ public class ViewActions {
     public ViewActions() {
         actions = new ArrayList<Action>();
         actions.add(new ZoomInAction(bundle.getString("ZoomI"), null, bundle.getString("ZoomIDesc"), Integer.valueOf(KeyEvent.VK_PLUS)));
-        actions.get(0).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl shift pressed EQUALS"));
+        if (OperatingSystem.getOS().equals("mac")) {
+            actions.get(0).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("meta shift pressed EQUALS"));
+        } else {
+            actions.get(0).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl shift pressed EQUALS"));
+        }
+        
+
         actions.add(new ZoomOutAction(bundle.getString("ZoomO"), null, bundle.getString("ZoomODesc"), Integer.valueOf(KeyEvent.VK_MINUS)));
-        actions.get(1).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl pressed MINUS"));
+        if (OperatingSystem.getOS().equals("mac")) {
+            actions.get(1).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("meta pressed MINUS"));
+        } else {
+            actions.get(1).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl pressed MINUS"));
+        }
+
         actions.add(new ZoomFullAction(bundle.getString("ZoomF"), null, bundle.getString("ZoomFDesc"), Integer.valueOf(KeyEvent.VK_1)));
-        actions.get(2).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl pressed EQUALS"));
+        if (OperatingSystem.getOS().equals("mac")) {
+            actions.get(2).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("meta pressed EQUALS"));
+        } else {
+            actions.get(2).putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl pressed EQUALS"));
+        }
+        
     }
 
     /**
