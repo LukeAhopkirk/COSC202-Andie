@@ -237,13 +237,13 @@ public class Toolbar extends Andie {
 
                 // Add draw circle icon & event
                 ImageIcon icon7 = new ImageIcon(Andie.class.getClassLoader().getResource("CIRCLE.png"));
-                JButton drawCircleButton = Toolbar.crateButton(icon7, "Draw circle");
+                JButton drawCircleButton = Toolbar.crateButton(icon7, "Draw oval");
                 addButtonColourList(drawCircleButton);
                 DrawActions drawActions1 = new DrawActions(); // Create a new viewActions instance
                 // Create a new DrawActions.DrawCircleAction instance
-                DrawActions.DrawCircleAction drawCircleAction = drawActions1.new DrawCircleAction(
-                                bundle.getString("Circle"),
-                                null, bundle.getString("CircleDesc"), Integer.valueOf(KeyEvent.VK_C));
+                DrawActions.DrawOvalAction drawCircleAction = drawActions1.new DrawOvalAction(
+                                bundle.getString("Oval"),
+                                null, bundle.getString("OvalDesc"), Integer.valueOf(KeyEvent.VK_O));
                 // Add the zoomInAction as an ActionListener to the zoomIn
                 drawCircleButton.addActionListener(drawCircleAction);
 
