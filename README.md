@@ -65,7 +65,7 @@ COMPLETED (Richard) - Macros for record and replay of operations
 
 COMPLTED (Luke) - Crop to selection
 
-COMPLETED (Jasper) - Mouse selection of rectangular regions
+COMPLETED (Luke/Jasper) - Mouse selection of rectangular regions
 COMPLETED (Jasper) Drawing functions – rectangle, ellipse, line
 COMPLETED (Jasper) - Show us something. . . Coloursplash (user chooses colour, all other colours turn B&W) & Satuartion filter
 
