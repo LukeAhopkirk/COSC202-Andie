@@ -32,4 +32,45 @@ Extended filters:
 In order to apply filters all the way to the edge pixels we padded the image with zeros, enlarged the image by one pixel, applied convolution to the enlarged image then finally cropped the image to its original size. There are cases where this may create a 'halo effect' around the borders, but again as a result of our issues, that is what we settled on. 
 
 Keyboard shortcuts:
+
 For keyboard shortcuts, we decided to only add to those that are frequenctly used, this is because having more shortcuts for filters, colour operations etc may cause confusion for the user.
+
+## Contributions to the project
+
+Part one requirements:
+
+COMPLETED (Richard) - Image resize
+COMPLETED (Luke) - Image rotations: 90◦, left; 90◦, right; 180◦
+COMPLETED (Richard) - Image flip: Horizontal; Vertical
+
+COMPLETED (Richard) - Brightness adjustment
+COMPLETED (Richard) - Contrast adjustment
+
+COMPLETED (Richard) - Image export
+PARTIALLY COMPLETED (Aidan) - Multilingual support
+
+COMPLETED (Jasper) - Sharpen filter
+COMPLETED (Jasper) - Gaussian blur filter
+COMPLETED (Jasper) - Median filter
+
+Part two requirements:
+
+COMPLETED (Jasper) - Extended filters
+COMPLETED (Jasper) - Filters with negative results 
+COMPLETED (Jasper) - Emboss and edge detection filters 
+COMPLETED (Jasper) - Toolbar for common operations
+
+COMPLETED (Richard) - Keyboard shortcuts
+COMPLETED (Richard) - Macros for record and replay of operations 
+
+COMPLTED (Luke) - Crop to selection
+
+COMPLETED (Jasper) - Mouse selection of rectangular regions
+COMPLETED (Jasper) Drawing functions – rectangle, ellipse, line
+COMPLETED (Jasper) - Show us something. . . Coloursplash (user chooses colour, all other colours turn B&W) & Satuartion filter
+
+General Requirements:
+
+Exception handling (Jasper)
+Other error avoidance/prevention (Jasper/Luke/Richard)
+Unit Tests (Jasper/Luke)
