@@ -1,5 +1,5 @@
 ## Tests:
-The code was tested by Jasper and all the test files are named ___Test.java. Tests have been done for Brightness, Contrast, Resize and ImagePanel. Examples include checking that exceptions are thrown for out of bounds inputs, constructors work as expected, null image files throw a NullPointerException, default values are consistent etc. Additionally, we handed over our ANDIE to someone who was not particularly computer savy, giving them the goal to essentially try and break the program. This worked out great for both part 1 and part 2 as it highlighted some bugs, as well as usability work ons. There were many problems that simply went over our head such as prompting the user to save their current image, weird cases of combining input that did not work (such as Resize -> Emboss / Sobel), numerous problems with the drawing functions and separating the drawing functions into their own ToolBar portion. 
+The code was tested by Jasper and Luke, all the test files are named ___Test.java. Tests have been done for Brightness, Contrast, Resize ImagePanel, Rotate and Crop. Examples include checking that exceptions are thrown for out of bounds inputs, constructors work as expected, null image files throw a NullPointerException, default values are consistent etc. Additionally, we handed over our ANDIE to someone who was not particularly computer savy, giving them the goal to essentially try and break the program. This worked out great for both part 1 and part 2 as it highlighted some bugs, as well as usability work ons. There were many problems that simply went over our head such as prompting the user to save their current image, weird cases of combining input that did not work (such as Resize -> Emboss / Sobel), numerous problems with the drawing functions and separating the drawing functions into their own ToolBar portion. 
 
 ## Description: 
 
@@ -66,7 +66,7 @@ COMPLETED (Richard) - Macros for record and replay of operations
 COMPLTED (Luke) - Crop to selection
 
 COMPLETED (Luke/Jasper) - Mouse selection of rectangular regions
-COMPLETED (Jasper) Drawing functions – rectangle, ellipse, line
+COMPLETED (Jasper) - Drawing functions – rectangle, ellipse, line
 COMPLETED (Jasper) - Show us something. . . Coloursplash (user chooses colour, all other colours turn B&W) & Satuartion filter
 
 General Requirements:
